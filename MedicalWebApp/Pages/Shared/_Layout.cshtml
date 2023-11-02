@@ -3,52 +3,45 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - MedicalWebApp</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <title>@ViewData["Title"] - Team 12 Medical Clinic</title>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/MedicalWebApp.styles.css" asp-append-version="true" />
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">MedicalWebApp</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                    <partial name="_LoginPartial" />
-                </div>
-            </div>
-        </nav>
-    </header>
+    <nav class="navbar">
+        <span>Team 12 Medical Clinic</span>
+        <button class="navbar-toggler" type="button" onclick="if (document.querySelector('.navbar').classList.contains('show-menu')) { document.querySelector('.navbar').classList.remove('show-menu'); } else { document.querySelector('.navbar').classList.add('show-menu'); }">
+            ☰
+        </button>
+
+        <div class="navbar-menu">
+            <a asp-page="/Index">Home</a>
+            <a asp-page="/AboutUs">About Us</a>
+            <a class="nav-link" asp-area="Identity" asp-page="/Account/Login">Login</a>
+            <a class="nav-link" asp-area="Identity" asp-page="/Account/Register">Register</a>
+            <a asp-page="/Privacy">Privacy</a>
+        </div>
+
+
+    </nav>
+    @RenderSection("Scripts", required: false)
+
+
     <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+        @RenderBody()
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - MedicalWebApp - <a asp-area="" asp-page="/Privacy">Privacy</a>
+    <footer class="site-footer">
+        <div class="contact-info">
+            <ul>
+                <li><strong>Email:</strong> <a href="mailto:smirsha2@cougarnet.uh.edu">smirsha2@cougarnet.uh.edu</a></li>
+                <li><strong>Phone:</strong> <a href="tel:+18327101760">(832) 710-1760</a></li>
+            </ul>
         </div>
+        <div class="copyright">
+            <p>Medical Clinic © Team 12 - 2023. All rights reserved.</p>
+        </div>
+        
     </footer>
-
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-
-    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
