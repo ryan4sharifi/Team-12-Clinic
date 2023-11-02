@@ -17,8 +17,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>()
 
 builder.Services.Configure<IdentityOptions>(options =>
 {
-    // Add your Identity options here
-    options.SignIn.RequireConfirmedAccount = true;
+    options.SignIn.RequireConfirmedAccount = false;
 });
 
 builder.Services.AddRazorPages();
@@ -61,3 +60,5 @@ app.UseAuthorization();
 app.MapRazorPages();
 
 app.Run();
+
+

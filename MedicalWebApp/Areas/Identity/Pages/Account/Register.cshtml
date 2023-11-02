@@ -52,10 +52,12 @@
         <input name="DoctorDoB" type="date" />
         <label>Phone</label>
         <input name="DoctorPhone" />
-        <label for="DoctorSpecialtyId">Specialty</label>
-        <select asp-for="DoctorSpecialtyId" asp-items="@(new SelectList((IEnumerable<SelectListItem>)ViewData["SpecialtyItems"], "Value", "Text"))">
-            <option value="">Select Specialty</option>
-        </select>
+        <label>Specialty</label>
+        <select name="DoctorSpecialtyId" asp-items="Model.SpecialityItems"></select>
+        
+
+
+
     </div>
 
     <!-- Nurse Fields -->

@@ -20,7 +20,7 @@ public class RegisterModel : PageModel
     [BindProperty]
     public int DoctorSpecialtyId { get; set; }
 
-
+    public List<SelectListItem> SpecialityItems { get; set; }
 
 
     public RegisterModel(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, team12MainContext context)
@@ -57,17 +57,14 @@ public class RegisterModel : PageModel
     {
         PopulateRoles();
 
-        var specialties = _context.Specialities.ToList(); 
+        SpecialityItems = _context.Specialities
+            .Select(s => new SelectListItem
+            {
+                Value = s.SpecialityId.ToString(),
+                Text = s.Classification
+            }).ToList();
 
-        var specialtyItems = specialties.Select(s => new SelectListItem
-        {
-            Value = s.SpecialityId.ToString(),
-            Text = s.Classification
-        }).ToList();
 
-        ViewData["SpecialtyItems"] = specialtyItems;
-
-      
     }
 
 
@@ -85,25 +82,6 @@ public class RegisterModel : PageModel
             {
                 switch (Role)
                 {
-                    case "Admin":
-                        var adminFirstName = Request.Form["AdminFirstName"];
-                        var adminLastName = Request.Form["AdminLastName"];
-                        var adminMiddleInitial = Request.Form["AdminMiddleInitial"];
-                        var adminOffice = Request.Form["AdminOffice"];
-                        var adminDoB = DateTime.TryParse(Request.Form["AdminDoB"], out DateTime adminParsedDate) ? adminParsedDate : DateTime.MinValue;
-                        var adminPhone = Request.Form["AdminPhone"];
-                        _context.Admins.Add(new Admin
-                        {
-                            IdentityUserId = user.Id,
-                            FirstName = adminFirstName,
-                            MiddleInitial = adminMiddleInitial,
-                            LastName = adminLastName,
-                            Email = Input.Email,
-                            Office = adminOffice,
-                            DoB = adminDoB,
-                            Phone = adminPhone
-                        });
-                        break;
 
                     case "Doctor":
                         var doctorFirstName = Request.Form["DoctorFirstName"];
@@ -126,6 +104,27 @@ public class RegisterModel : PageModel
                             SpecialtyId = doctorSpecialtyId
                         });
                         break;
+
+                    case "Admin":
+                        var adminFirstName = Request.Form["AdminFirstName"];
+                        var adminLastName = Request.Form["AdminLastName"];
+                        var adminMiddleInitial = Request.Form["AdminMiddleInitial"];
+                        var adminOffice = Request.Form["AdminOffice"];
+                        var adminDoB = DateTime.TryParse(Request.Form["AdminDoB"], out DateTime adminParsedDate) ? adminParsedDate : DateTime.MinValue;
+                        var adminPhone = Request.Form["AdminPhone"];
+                        _context.Admins.Add(new Admin
+                        {
+                            IdentityUserId = user.Id,
+                            FirstName = adminFirstName,
+                            MiddleInitial = adminMiddleInitial,
+                            LastName = adminLastName,
+                            Email = Input.Email,
+                            Office = adminOffice,
+                            DoB = adminDoB,
+                            Phone = adminPhone
+                        });
+                        break;
+
 
                     case "Nurse":
                         var nurseFirstName = Request.Form["NurseFirstName"];
