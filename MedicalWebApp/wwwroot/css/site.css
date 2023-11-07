@@ -14,12 +14,13 @@ body {
     padding: 20px;
 }
 
-
+/* Headings */
 h1, h2, h3 {
     text-align: center;
     color: #C8102E;
 }
 
+/* Reusable classes */
 .centered {
     max-width: 800px;
     margin: auto;
@@ -29,7 +30,7 @@ h1, h2, h3 {
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-
+/* Forms and Buttons */
 label, input, select, button, span {
     display: block;
     margin-bottom: 20px;
@@ -53,7 +54,7 @@ button {
         background-color: #b03200;
     }
 
-
+/* List styles */
 ul {
     list-style: none;
     padding-left: 20px;
@@ -62,13 +63,13 @@ ul {
 li {
     background: #C8102E;
     color: #fff;
-    display: inline-block;
+    display: grid;
     margin: 5px;
     padding: 5px 10px;
     border-radius: 10%;
 }
 
-
+/* Footer */
 footer {
     background-color: #333;
     color: white;
@@ -76,57 +77,9 @@ footer {
     padding: 10px 0;
 }
 
-
+/* Responsive typography */
 @media (min-width: 768px) {
     h1, h2, h3 {
         font-size: 2rem;
     }
 }
-
-
-section {
-    background-color: #fff; 
-    padding: 20px; 
-    margin-bottom: 20px; 
-}
-
-    
-    section h2 {
-        color: #C8102E; 
-        margin-bottom: 10px; 
-    }
-
-    
-    section.expertise ul {
-        list-style: none; 
-        padding: 0; 
-    }
-
-    section.expertise li {
-        padding-left: 15px; 
-        position: relative; 
-        margin-bottom: 5px; 
-    }
-
-        section.expertise li::before {
-            content: '•'; 
-            position: absolute; 
-            left: 0; 
-            color: #C8102E; 
-            font-size: 1em; 
-            line-height: 1.2;
-        }
-
-    
-    section p {
-        margin-bottom: 10px; 
-    }
-
-
-@media (max-width: 768px) {
-    section {
-        padding: 15px; 
-        margin-bottom: 15px; 
-    }
-}
-

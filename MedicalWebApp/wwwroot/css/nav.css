@@ -1,4 +1,9 @@
 /* Navigation Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 nav {
     background-color: #C8102E; /* University of Houston's red */
     color: white;
@@ -93,6 +98,7 @@ nav {
 
     .nav-toggle {
         display: block;
+        cursor: pointer;
         position: absolute;
         right: 20px;
         top: 10px;
@@ -116,6 +122,6 @@ nav {
 }
 
 /* Show the navigation when nav-toggle is clicked */
-nav.active .navigation {
+.navigation.active {
     display: flex;
 }
