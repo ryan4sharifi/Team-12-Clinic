@@ -1,0 +1,121 @@
+/* Navigation Styles */
+nav {
+    background-color: #C8102E; /* University of Houston's red */
+    color: white;
+    padding: 10px 20px;
+}
+
+    nav .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    nav .brand {
+        text-decoration: none;
+        color: white;
+        font-size: 1.5em; /* Adjust size as needed */
+    }
+
+    nav .navigation {
+        display: flex;
+    }
+
+        nav .navigation ul {
+            list-style-type: none;
+            display: flex;
+            margin-left: auto; /* Aligns the navigation to the right */
+        }
+
+        nav .navigation li {
+            padding: 0 15px; /* Space between navigation items */
+        }
+
+        nav .navigation a {
+            text-decoration: none;
+            color: white;
+            transition: color 0.3s ease-in-out;
+        }
+
+            nav .navigation a:hover {
+                color: #ffd700; /* University of Houston's secondary color for hover effect */
+            }
+
+/* Mobile menu toggle */
+.nav-toggle {
+    display: none;
+    cursor: pointer;
+}
+
+    /* Style for mobile menu toggle icon */
+    .nav-toggle div {
+        width: 25px;
+        height: 3px;
+        background-color: white;
+        margin: 5px 0;
+        transition: all 0.3s;
+    }
+
+/* Responsive Navigation */
+@media (max-width: 768px) {
+    nav .container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    nav .navigation {
+        width: 100%;
+        flex-direction: column;
+        display: none; /* Hide the menu initially */
+    }
+
+        nav .navigation ul {
+            width: 100%;
+            flex-direction: column;
+        }
+
+        nav .navigation li {
+            text-align: left;
+            padding: 10px 0; /* More vertical padding for touch targets */
+        }
+
+            nav .navigation li:not(:last-child) {
+                border-bottom: 1px solid white; /* Separators for the menu items */
+            }
+
+        nav .navigation a {
+            padding: 10px 20px; /* Larger tap area */
+            display: block;
+            color: white;
+            text-align: left;
+        }
+
+    .nav-toggle {
+        display: block;
+        position: absolute;
+        right: 20px;
+        top: 10px;
+    }
+
+        .nav-toggle.active .bar1 {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .nav-toggle.active .bar2 {
+            opacity: 0;
+        }
+
+        .nav-toggle.active .bar3 {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        .nav-toggle div {
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+}
+
+/* Show the navigation when nav-toggle is clicked */
+nav.active .navigation {
+    display: flex;
+}
