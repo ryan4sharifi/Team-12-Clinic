@@ -8,9 +8,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using MedicalWebApp.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-
-
-
 [Area("Identity")]
 public class RegisterModel : PageModel
 {

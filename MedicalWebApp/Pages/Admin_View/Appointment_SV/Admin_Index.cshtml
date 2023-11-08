@@ -1,0 +1,86 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+
+<style>
+    .square-container {
+        position: relative;
+        display: inline-block;
+    }
+
+    .square-container {
+        position: relative;
+        display: inline-block;
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        background-color: #cfe2f3;
+        display: flex;
+        justify-content: flex-start; /* Change the alignment to shift contents to the left */
+        align-items: center;
+        
+    }
+
+    .square {
+        height: 200px; /* Adjust the dimensions as needed */
+        width: 0px; /* Adjust the dimensions as needed */
+
+  
+        position: relative;
+    }
+
+    .buttons-container button {
+        width: 200px; /* Set the width of the buttons to match the square */
+        margin: 5px; /* Add margin between buttons */
+        display: flex;
+        justify-content: center;
+    }
+
+    .header {
+        background-color: #238cff; /* Dark background color */
+        color: #fff; /* White text color */
+        padding: 20px; /* Add padding for better readability */
+        text-align: center; /* Center the text */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Add a shadow for depth */
+    }
+
+    .buttons-container h3 {
+        color: black; /* Set the text color for the header */
+        font-weight: normal;
+    }
+
+    .custom-button {
+        background-color: #0067d7; /* Set the background color */
+        color: #fff; /* Change the text color for better visibility */
+        /* Additional styling if needed */
+    }
+
+</style>
+
+
+
+<div class="header">
+    <header> Office Admin View </header>
+</div>
+
+
+<div class="container">
+    
+    <main role="main">
+        <div class="square-container">
+            <div class="buttons-container">
+                <h3> Navigation </h3>
+                <button onclick="location.href='/Appointments'" type="button" class="custom-button">Appointments</button>
+                <button onclick="location.href='/Providers'" type="button" class="custom-button">Providers</button>
+                <button onclick="location.href='/Patients'" type="button" class="custom-button">Patients</button>
+            </div>
+            <div class="square"></div>
+        </div>
+    </main>
+</div>

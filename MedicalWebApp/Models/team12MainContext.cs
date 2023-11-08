@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using med_test8.Models;
 
 namespace MedicalWebApp.Models
 {
@@ -573,5 +574,7 @@ namespace MedicalWebApp.Models
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+        public DbSet<med_test8.Models.Appointment_SV>? Appointment_SV { get; set; }
     }
 }

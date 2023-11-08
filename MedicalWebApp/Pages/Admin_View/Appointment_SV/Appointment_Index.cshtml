@@ -1,0 +1,54 @@
+﻿@page
+@model IEnumerable<med_test8.Models.Appointment_SV>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h3 class="less-bold">Scheduled Appointments</h3>
+
+<p>
+    <a asp-action="Create">Schedule New Appointment</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.appointment_id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DoctorName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PatientName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.date_appointment)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.appointment_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DoctorName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PatientName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.date_appointment)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.appointment_id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.appointment_id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.appointment_id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -83,3 +83,12 @@ footer {
         font-size: 2rem;
     }
 }
+
+footer {
+    position: absolute;
+    bottom: 0px;
+    color: white;
+    width: 100%;
+    height: 45px; /* Adjust the height according to your footer's actual height */
+    text-align: center; /* Adjust text alignment as needed */
+}
