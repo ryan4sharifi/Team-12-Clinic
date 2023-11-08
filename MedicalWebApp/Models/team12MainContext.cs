@@ -167,11 +167,11 @@ namespace MedicalWebApp.Models
                     .IsUnicode(false)
                     .HasColumnName("phone");
 
-                entity.Property(e => e.SpecialtyId).HasColumnName("specialty_id");
+                entity.Property(e => e.SpecialityId).HasColumnName("speciality_id");
 
                 entity.HasOne(d => d.Specialty)
                     .WithMany(p => p.Doctors)
-                    .HasForeignKey(d => d.SpecialtyId)
+                    .HasForeignKey(d => d.SpecialityId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__Doctors__special__5EBF139D");
 
@@ -475,7 +475,7 @@ namespace MedicalWebApp.Models
 
                 entity.Property(e => e.SpecialistDoctorId).HasColumnName("specialist_doctor_id");
 
-                entity.Property(e => e.SpecialtyId).HasColumnName("specialty_id");
+                entity.Property(e => e.SpecialityId).HasColumnName("speciality_id");
 
                 entity.HasOne(d => d.Patient)
                     .WithMany(p => p.Referrals)
@@ -497,7 +497,7 @@ namespace MedicalWebApp.Models
 
                 entity.HasOne(d => d.Specialty)
                     .WithMany(p => p.Referrals)
-                    .HasForeignKey(d => d.SpecialtyId)
+                    .HasForeignKey(d => d.SpecialityId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__Referrals__speci__72C60C4A");
             });

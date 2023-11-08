@@ -4,6 +4,7 @@ using MedicalWebApp.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MedicalWebApp.Migrations
 {
     [DbContext(typeof(team12MainContext))]
-    partial class team12MainContextModelSnapshot : ModelSnapshot
+    [Migration("20231107213457_Doctor")]
+    partial class Doctor
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -179,7 +181,7 @@ namespace MedicalWebApp.Migrations
 
                     b.Property<int>("SpecialityId")
                         .HasColumnType("int")
-                        .HasColumnName("speciality_id");
+                        .HasColumnName("specialty_id");
 
                     b.HasKey("DoctorId");
 
@@ -597,9 +599,9 @@ namespace MedicalWebApp.Migrations
                         .HasColumnType("int")
                         .HasColumnName("specialist_doctor_id");
 
-                    b.Property<int>("SpecialityId")
+                    b.Property<int>("SpecialtyId")
                         .HasColumnType("int")
-                        .HasColumnName("speciality_id");
+                        .HasColumnName("specialty_id");
 
                     b.HasKey("ReferralId");
 
@@ -609,7 +611,7 @@ namespace MedicalWebApp.Migrations
 
                     b.HasIndex("SpecialistDoctorId");
 
-                    b.HasIndex("SpecialityId");
+                    b.HasIndex("SpecialtyId");
 
                     b.ToTable("Referrals");
                 });
@@ -742,28 +744,28 @@ namespace MedicalWebApp.Migrations
                         new
                         {
                             Id = "1",
-                            ConcurrencyStamp = "db1a3190-5bf9-49cf-a087-9bcb13a8b29a",
+                            ConcurrencyStamp = "cbb13889-11e2-4a50-b6f8-6d03f4f5ca4e",
                             Name = "Doctor",
                             NormalizedName = "DOCTOR"
                         },
                         new
                         {
                             Id = "2",
-                            ConcurrencyStamp = "4df8abfc-c777-4e4d-8b51-cd7dde908316",
+                            ConcurrencyStamp = "91375cec-9928-4bb2-8f3d-e81238393b8f",
                             Name = "Patient",
                             NormalizedName = "PATIENT"
                         },
                         new
                         {
                             Id = "3",
-                            ConcurrencyStamp = "abb26ad7-844d-4d47-ae7f-2f82f24c17b8",
+                            ConcurrencyStamp = "d76e06e3-ac74-4dc5-bad2-6b3b22d60274",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "4",
-                            ConcurrencyStamp = "132f794f-c67a-4bfd-bf20-3a22402fc70d",
+                            ConcurrencyStamp = "dd140a1c-f448-4235-a1c2-2d24b4014d4d",
                             Name = "Nurse",
                             NormalizedName = "NURSE"
                         });
@@ -1127,7 +1129,7 @@ namespace MedicalWebApp.Migrations
 
                     b.HasOne("MedicalWebApp.Models.Speciality", "Specialty")
                         .WithMany("Referrals")
-                        .HasForeignKey("SpecialityId")
+                        .HasForeignKey("SpecialtyId")
                         .IsRequired()
                         .HasConstraintName("FK__Referrals__speci__72C60C4A");
 

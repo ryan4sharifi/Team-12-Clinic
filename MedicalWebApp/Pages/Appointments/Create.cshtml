@@ -1,0 +1,67 @@
+﻿@page
+@model CreateAppointmentModel
+
+@{
+    Layout = "_Layout"; // Set the layout page if you have one
+}
+
+<h2>Schedule an Appointment</h2>
+
+@if (!string.IsNullOrEmpty(Model.PatientName))
+{
+    <div class="alert alert-success" role="alert">
+        Appointment for @Model.PatientName
+    </div>
+}
+
+<form method="post" class="needs-validation" novalidate>
+    <input asp-for="Appointment.PatientId" type="hidden" />
+
+    <div class="form-group">
+        <label asp-for="Appointment.DoctorId">Doctor</label>
+        <select asp-for="Appointment.DoctorId" asp-items="Model.DoctorList" class="form-control" required>
+            <option value="">Select a doctor</option>
+        </select>
+        <span asp-validation-for="Appointment.DoctorId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Appointment.DateAppointment">Date</label>
+        <input asp-for="Appointment.DateAppointment" class="form-control" type="date" required />
+        <span asp-validation-for="Appointment.DateAppointment" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Appointment.Time">Time</label>
+        <input asp-for="Appointment.Time" class="form-control" type="time" required />
+        <span asp-validation-for="Appointment.Time" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Schedule Appointment</button>
+</form>
+
+@section Scripts {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+    <script>
+        // Example JavaScript for Bootstrap form validation
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
+}

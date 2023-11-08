@@ -20,7 +20,7 @@ namespace MedicalWebApp.Models
         public string FirstName { get; set; } = null!;
         public string? MiddleInitial { get; set; }
         public string LastName { get; set; } = null!;
-        public int SpecialtyId { get; set; }
+        public int SpecialityId { get; set; }
         public string? Office { get; set; }
         public DateTime DoB { get; set; }
         public string Phone { get; set; } = null!;

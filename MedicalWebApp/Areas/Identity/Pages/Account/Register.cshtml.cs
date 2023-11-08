@@ -101,7 +101,7 @@ public class RegisterModel : PageModel
                             Office = doctorOffice,
                             DoB = doctorDoB,
                             Phone = doctorPhone,
-                            SpecialtyId = doctorSpecialtyId
+                            SpecialityId = doctorSpecialtyId
                         });
                         break;
 

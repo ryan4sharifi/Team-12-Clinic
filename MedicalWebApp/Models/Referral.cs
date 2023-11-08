@@ -8,7 +8,7 @@ namespace MedicalWebApp.Models
         public int ReferralId { get; set; }
         public int PrimaryDoctorId { get; set; }
         public int SpecialistDoctorId { get; set; }
-        public int SpecialtyId { get; set; }
+        public int SpecialityId { get; set; }
         public DateTime ReferralDate { get; set; }
         public int PatientId { get; set; }
 
