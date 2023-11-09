@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace MedicalWebApp.Data
+namespace med_test8.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
@@ -10,10 +10,10 @@ namespace MedicalWebApp.Data
         {
         }
 
-        public DbSet<MedicalWebApp.Models.Appointment_SV> Appointment_SV { get; set; } = default!;
-        public DbSet<MedicalWebApp.Models.Appointments> Appointments { get; set; } = default!;
-        public DbSet<MedicalWebApp.Models.Patients>? Patients { get; set; }
-        public DbSet<MedicalWebApp.Models.Doctor_List>? Doctor_List { get; set; }
-        public DbSet<MedicalWebApp.Models.Doctor_Details>? Doctor_Details { get; set; }
+        public DbSet<med_test8.Models.Appointment_SV> Appointment_SV { get; set; } = default!;
+        public DbSet<med_test8.Models.Appointments> Appointments { get; set; } = default!;
+        public DbSet<med_test8.Models.Patients>? Patients { get; set; }
+        public DbSet<med_test8.Models.Doctor_List>? Doctor_List { get; set; }
+        public DbSet<med_test8.Models.Doctor_Details>? Doctor_Details { get; set; }
     }
 }

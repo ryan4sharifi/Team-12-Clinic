@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Numerics;
 using System.Security.Principal;
 
-namespace MedicalWebApp.Models
+namespace med_test8.Models
 {
     public class Appointment_SV
     {
