@@ -1,22 +1,19 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
+[Area("Identity")]
 public class LoginModel : PageModel
 {
     private readonly SignInManager<IdentityUser> _signInManager;
     private readonly UserManager<IdentityUser> _userManager;
 
-    public LoginModel(SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager)
-    {
-        _signInManager = signInManager;
-        _userManager = userManager;
-    }
-
     [BindProperty]
     public InputModel Input { get; set; }
+
+    public string ErrorMessage { get; set; }
 
     public class InputModel
     {
@@ -29,15 +26,25 @@ public class LoginModel : PageModel
         public string Password { get; set; }
     }
 
-    public async Task<IActionResult> OnPostAsync(string returnUrl = null)
+    public LoginModel(SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager)
     {
-        returnUrl ??= Url.Content("~/");
+        _signInManager = signInManager;
+        _userManager = userManager;
+    }
 
+    public void OnGet()
+    {
+        // Any initialization code can go here
+    }
+
+    public async Task<IActionResult> OnPostAsync()
+    {
         if (ModelState.IsValid)
         {
             var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, false, lockoutOnFailure: false);
             if (result.Succeeded)
             {
+                // Redirect the user to the appropriate dashboard based on their role.
                 var user = await _userManager.FindByEmailAsync(Input.Email);
                 var roles = await _userManager.GetRolesAsync(user);
 
@@ -49,17 +56,27 @@ public class LoginModel : PageModel
                 {
                     return RedirectToPage("/Dashboards/DoctorDashboard");
                 }
-                // Add other roles here
-
-                return LocalRedirect(returnUrl);
+                else if (roles.Contains("Nurse"))
+                {
+                    return RedirectToPage("/Dashboards/NurseDashboard");
+                }
+                else if (roles.Contains("Patient"))
+                {
+                    return RedirectToPage("/Dashboards/PatientDashboard");
+                }
+                else
+                {
+                    // If the user role is not recognized, redirect to the homepage or a generic post-login page.
+                    return RedirectToPage("/Index");
+                }
             }
             else
             {
                 ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                return Page();
             }
         }
 
+        // If we got this far, something failed, redisplay form
         return Page();
     }
 }
