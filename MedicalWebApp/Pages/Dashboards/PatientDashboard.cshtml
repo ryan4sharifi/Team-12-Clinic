@@ -1,5 +1,68 @@
 ﻿@page
 @model PatientDashboardModel
 
-<h2>Welcome, Patient!</h2>
-<p>This is your dashboard. View your medical records, upcoming appointments, and more.</p>
+<head>
+    <meta charset="UTF-8">
+    <title>Patient Homepage</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+        }
+        .container {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome, [Patient's Name]</h1>
+    </header>
+
+    <div class="container">
+        <h2>Your Primary Physician</h2>
+        <p>Your primary physician is: [Physician's Name]</p>
+
+        <h2>Upcoming Appointments</h2>
+        <ul>
+            <li>Appointment on [Date and Time]</li>
+            <li>Appointment on [Date and Time]</li>
+            <!-- Add more appointments here -->
+        </ul>
+
+        <h2>Prescription Needs</h2>
+        <ul>
+            <li>[Prescription 1]</</li>
+            <li>[Prescription 2]</</li>
+            <!-- Add more prescription needs here -->
+        </ul>
+
+        <h2>Your Account Balance</h2>
+        <p>Your current account balance: $[Balance Amount]</p>
+
+        <h2>Schedule an Appointment</h2>
+        <form action="schedule-appointment.php" method="post">
+            <label for="appointmentDate">Select Appointment Date (MM-DD-YEAR):</label>
+            <input type="text" id="appointmentDate" name="appointmentDate" placeholder="MM-DD-YEAR" required>
+
+            <label for="appointmentTime">Select Appointment Time:</label>
+            <select id="appointmentTime" name="appointmentTime" required>
+                <option value="08:00 AM">08:00 AM</option>
+                <option value="08:15 AM">08:15 AM</option>
+                <option value="08:30 AM">08:30 AM</option>
+                <!-- Add more time slots with 15-minute intervals -->
+            </select>
+
+            <button type="submit">Schedule Appointment</button>
+        </form>
+    </div>
+</body>
+</html>
+
