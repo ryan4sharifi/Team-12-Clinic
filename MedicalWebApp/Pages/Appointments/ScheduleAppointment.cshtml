@@ -1,0 +1,102 @@
+@page
+@model ScheduleAppointmentModel
+
+<h2>Schedule an Appointment</h2>
+
+@if (!User.Identity.IsAuthenticated)
+{
+    <form method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        
+        <h3>New Patient Information</h3>
+        <div>
+            <label asp-for="NewPatient.Email">Email</label>
+            <input asp-for="NewPatient.Email" class="form-control" />
+            <span asp-validation-for="NewPatient.Email" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="NewPatient.Password">Password</label>
+            <input asp-for="NewPatient.Password" type="password" class="form-control" />
+            <span asp-validation-for="NewPatient.Password" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="NewPatient.FirstName"></label>
+            <input asp-for="NewPatient.FirstName" class="form-control" />
+            <span asp-validation-for="NewPatient.FirstName" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="NewPatient.MiddleInitial"></label>
+            <input asp-for="NewPatient.MiddleInitial" class="form-control" />
+            <span asp-validation-for="NewPatient.MiddleInitial"></span>
+        </div>
+
+        <div>
+            <label asp-for="NewPatient.LastName"></label>
+            <input asp-for="NewPatient.LastName" class="form-control" />
+            <span asp-validation-for="NewPatient.LastName" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="NewPatient.Address"></label>
+            <input asp-for="NewPatient.Address" class="form-control" />
+            <span asp-validation-for="NewPatient.Address" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="NewPatient.Phone"></label>
+            <input asp-for="NewPatient.Phone" class="form-control" />
+            <span asp-validation-for="NewPatient.Phone" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="NewPatient.Gender"></label>
+            <select asp-for="NewPatient.Gender" class="form-control">
+                <option value="">Select gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <!-- Add more gender options as appropriate -->
+            </select>
+            <span asp-validation-for="NewPatient.Gender" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="NewPatient.DoB"></label>
+            <input asp-for="NewPatient.DoB" class="form-control" type="date" />
+            <span asp-validation-for="NewPatient.DoB" class="text-danger"></span>
+        </div>
+
+        <!-- Appointment Scheduling Fields -->
+        <h3>Appointment Details</h3>
+        <div>
+            <label asp-for="Appointment.DoctorId">Doctor</label>
+            <select asp-for="Appointment.DoctorId" asp-items="Model.DoctorList" class="form-control" required>
+                <option value="">Select a doctor</option>
+            </select>
+            <span asp-validation-for="Appointment.DoctorId" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="Appointment.DateAppointment">Date</label>
+            <input asp-for="Appointment.DateAppointment" class="form-control" type="date" required />
+            <span asp-validation-for="Appointment.DateAppointment" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="Appointment.Time">Time</label>
+            <input asp-for="Appointment.Time" class="form-control" type="time" required />
+            <span asp-validation-for="Appointment.Time" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Register and Schedule</button>
+    </form>
+}
+else
+{
+    <p>You are already logged in. Please proceed to the <a asp-page="/PatientDashboard">Patient Dashboard</a> to schedule an appointment.</p>
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
