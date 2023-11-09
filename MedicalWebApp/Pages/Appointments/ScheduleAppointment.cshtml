@@ -2,6 +2,12 @@
 @model ScheduleAppointmentModel
 
 <h2>Schedule an Appointment</h2>
+<div style="display: flex; justify-content: center; align-items: center; height: 10vh;">
+    <a href="/Identity/Account/Login" style="padding: 10px 20px; background-color: #C8102E; color: white; text-align: center; border-radius: 5px; text-decoration: none; display: inline-block;">
+        Returning Patient? Login and Schedule your Appointment Today!
+    </a>
+</div>
+
 
 @if (!User.Identity.IsAuthenticated)
 {
