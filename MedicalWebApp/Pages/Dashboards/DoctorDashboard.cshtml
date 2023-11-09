@@ -1,60 +1,138 @@
-@page "/Dashboards/DoctorDashboard"
-@model DoctorDashboardModel
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using MedicalWebApp.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using MedicalWebApp.Migrations;
 
-<h2>Welcome, Doctor!</h2>
-<p>This is your dashboard. View patient appointments, medical records, and more.</p>
+namespace MedicalWebApp.Pages.Dashboards
+{
+    [Authorize(Roles = "Doctor")]
+    public class DoctorDashboardModel : PageModel
+    {
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly team12MainContext _context;
 
-<!-- Custom Reports Section -->
-<div>
-    <h3>Generate Custom Report</h3>
-    <!-- Form for custom report parameters -->
-    <!-- Implement this part based on the specific requirements for your reports -->
-</div>
+        [BindProperty]
+        public string ReportType { get; set; }
+        [BindProperty]
+        public DateTime StartDate { get; set; }
+        [BindProperty]
+        public DateTime EndDate { get; set; }
 
-<!-- Upcoming Appointments Section -->
-<div>
-    <h3>Upcoming Appointments</h3>
-    <table>
-        <thead>
-            <tr>
-                <th>Patient Name</th>
-                <th>Date</th>
-                <th>Time</th>
-                <!-- Add more columns as needed -->
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var appointment in Model.UpcomingAppointments)
-            {
-                <tr>
-                    <td>@appointment.PatientName</td>
-                    <td>@appointment.Date.ToShortDateString()</td>
-                    <td>@appointment.FormattedTime</td>
-                    <!-- Add more data as needed -->
-                </tr>
-            }
-        </tbody>
-    </table>
-</div>
+        public object GeneratedReport { get; set; }
+        public List<AppointmentViewModel> UpcomingAppointments { get; set; }
 
-<!-- Patient Management Section -->
-<div>
-    <h3>Patient Management</h3>
-    <input type="search" id="patientSearch" placeholder="Search patients..." />
-    <button type="button" onclick="searchPatients()">Search</button>
-
-    <!-- Dynamic patient list will be populated here -->
-    <div id="patientList">
-        <!-- The patient list will be populated with AJAX -->
-    </div>
-</div>
-
-@section Scripts {
-    <script>
-        function searchPatients() {
-            // AJAX call to search and update the patient list
+        public DoctorDashboardModel(UserManager<IdentityUser> userManager, team12MainContext context)
+        {
+            _userManager = userManager;
+            _context = context;
         }
-    </script>
-    <partial name="_ValidationScriptsPartial" />
+
+        public async Task OnGetAsync()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user != null)
+            {
+                var doctor = _context.Doctors.FirstOrDefault(d => d.IdentityUserId == user.Id);
+                if (doctor != null)
+                {
+                    UpcomingAppointments = _context.Appointments
+                        .Where(a => a.DoctorId == doctor.DoctorId && a.DateAppointment >= System.DateTime.Today)
+                        .OrderBy(a => a.DateAppointment)
+                        .ThenBy(a => a.Time)
+                        .Select(a => new AppointmentViewModel
+                        {
+                            PatientName = a.Patient.FirstName + " " + a.Patient.LastName,
+                            Date = a.DateAppointment,
+                            Time = a.Time
+                        }).ToList();
+                }
+            }
+            // Handle user not found or not logged in
+        }
+
+        public async Task OnPostAsync()
+        {
+            await OnGetAsync(); // To ensure upcoming appointments are also fetched
+
+            var user = await _userManager.GetUserAsync(User);
+            if (user != null)
+            {
+                var doctor = _context.Doctors.FirstOrDefault(d => d.IdentityUserId == user.Id);
+                if (doctor != null)
+                {
+                    switch (ReportType)
+                    {
+                        case "appointmentHistory":
+                            GeneratedReport = GenerateAppointmentHistoryReport(StartDate, EndDate, doctor.DoctorId);
+                            break;
+                        case "patientMedicalHistory":
+                            GeneratedReport = GeneratePatientMedicalHistoryReport(StartDate, EndDate, doctor.DoctorId);
+                            break;
+                            // Handle other report types
+                    }
+                }
+                else
+                {
+                    // Handle the scenario where the doctor is not found
+                }
+            }
+            else
+            {
+                // Handle the scenario where the user is not found or not logged in
+            }
+        }
+
+
+        private List<AppointmentHistoryViewModel> GenerateAppointmentHistoryReport(DateTime startDate, DateTime endDate, int doctorId)
+        {
+            return _context.Appointments
+                .Where(a => a.DoctorId == doctorId && a.DateAppointment >= startDate && a.DateAppointment <= endDate)
+                .Select(a => new AppointmentHistoryViewModel
+                {
+                    PatientName = $"{a.Patient.FirstName} {a.Patient.LastName}",
+                    Date = a.DateAppointment,
+                    Time = a.Time
+                }).ToList();
+        }
+
+        private List<PatientMedicalHistoryViewModel> GeneratePatientMedicalHistoryReport(DateTime startDate, DateTime endDate, int doctorId)
+        {
+            var reports = _context.MedicalHistories
+                          .Where(mh => mh.Patient.Appointments.Any(a => a.DoctorId == doctorId && a.DateAppointment >= startDate && a.DateAppointment <= endDate))
+                          .Select(mh => new PatientMedicalHistoryViewModel
+                          {
+                              PatientName = $"{mh.Patient.FirstName} {mh.Patient.LastName}",
+                              DiagnosisInfo = mh.DiagnosisInfo
+                              // Map other necessary properties from MedicalHistory
+                          }).ToList();
+            return reports;
+        }
+
+        public class AppointmentViewModel
+        {
+            public string PatientName { get; set; }
+            public DateTime Date { get; set; }
+            public TimeSpan Time { get; set; }
+            public string FormattedTime => Time.ToString(@"hh\:mm");
+        }
+
+        public class AppointmentHistoryViewModel
+        {
+            public string PatientName { get; set; }
+            public DateTime Date { get; set; }
+            public TimeSpan Time { get; set; }
+        }
+
+        public class PatientMedicalHistoryViewModel
+        {
+            public string PatientName { get; set; }
+            public string DiagnosisInfo { get; set; }
+        }
+    }
 }
-</p>
