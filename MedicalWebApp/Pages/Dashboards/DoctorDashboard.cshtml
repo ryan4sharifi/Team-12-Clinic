@@ -1,5 +1,60 @@
-﻿@page
+@page "/Dashboards/DoctorDashboard"
 @model DoctorDashboardModel
 
 <h2>Welcome, Doctor!</h2>
 <p>This is your dashboard. View patient appointments, medical records, and more.</p>
+
+<!-- Custom Reports Section -->
+<div>
+    <h3>Generate Custom Report</h3>
+    <!-- Form for custom report parameters -->
+    <!-- Implement this part based on the specific requirements for your reports -->
+</div>
+
+<!-- Upcoming Appointments Section -->
+<div>
+    <h3>Upcoming Appointments</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Patient Name</th>
+                <th>Date</th>
+                <th>Time</th>
+                <!-- Add more columns as needed -->
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var appointment in Model.UpcomingAppointments)
+            {
+                <tr>
+                    <td>@appointment.PatientName</td>
+                    <td>@appointment.Date.ToShortDateString()</td>
+                    <td>@appointment.FormattedTime</td>
+                    <!-- Add more data as needed -->
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<!-- Patient Management Section -->
+<div>
+    <h3>Patient Management</h3>
+    <input type="search" id="patientSearch" placeholder="Search patients..." />
+    <button type="button" onclick="searchPatients()">Search</button>
+
+    <!-- Dynamic patient list will be populated here -->
+    <div id="patientList">
+        <!-- The patient list will be populated with AJAX -->
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function searchPatients() {
+            // AJAX call to search and update the patient list
+        }
+    </script>
+    <partial name="_ValidationScriptsPartial" />
+}
+</p>
