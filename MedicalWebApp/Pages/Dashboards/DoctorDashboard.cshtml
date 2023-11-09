@@ -1,14 +1,37 @@
 @page "/Dashboards/DoctorDashboard"
-@model DoctorDashboardModel
+@model MedicalWebApp.Pages.Dashboards.DoctorDashboardModel
 
 <h2>Welcome, Doctor!</h2>
 <p>This is your dashboard. View patient appointments, medical records, and more.</p>
 
-<!-- Custom Reports Section -->
+<!-- Report Generation Section -->
 <div>
-    <h3>Generate Custom Report</h3>
-    <!-- Form for custom report parameters -->
-    <!-- Implement this part based on the specific requirements for your reports -->
+    <h3>Generate Report</h3>
+    <form method="post">
+        <label for="reportType">Report Type:</label>
+        <select id="reportType" name="ReportType">
+            <option value="appointmentHistory">Appointment History</option>
+            <option value="patientMedicalHistory">Patient Medical History</option>
+            <!-- Add other report types as needed -->
+        </select>
+
+        <label for="startDate">Start Date:</label>
+        <input type="date" id="startDate" name="StartDate">
+
+        <label for="endDate">End Date:</label>
+        <input type="date" id="endDate" name="EndDate">
+
+        <button type="submit">Generate Report</button>
+    </form>
+
+    <!-- Display generated report here -->
+    <div>
+        @if (Model.GeneratedReport != null)
+        {
+            <h4>Report</h4>
+            <!-- Render the report in a table or other format -->
+        }
+    </div>
 </div>
 
 <!-- Upcoming Appointments Section -->
@@ -50,11 +73,8 @@
 </div>
 
 @section Scripts {
-    <script>
-        function searchPatients() {
+    <script>function searchPatients() {
             // AJAX call to search and update the patient list
-        }
-    </script>
+        }</script>
     <partial name="_ValidationScriptsPartial" />
 }
-</p>

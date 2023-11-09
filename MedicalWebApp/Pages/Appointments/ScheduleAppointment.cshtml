@@ -3,97 +3,78 @@
 
 <h2>Schedule an Appointment</h2>
 
+<!-- Section for existing patients to log in -->
 @if (!User.Identity.IsAuthenticated)
 {
-    <form method="post">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <p>If you are an existing patient, please <a href="/Identity/Account/Login">log in</a> to schedule your appointment.</p>
 
-        
+    <!-- Appointment Form for Guest Patients -->
+    <form method="post">
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        <!-- New Patient Details -->
         <h3>New Patient Information</h3>
         <div>
-            <label asp-for="NewPatient.Email">Email</label>
-            <input asp-for="NewPatient.Email" class="form-control" />
-            <span asp-validation-for="NewPatient.Email" class="text-danger"></span>
+            <label asp-for="NewPatientAppointment.FirstName">First Name</label>
+            <input asp-for="NewPatientAppointment.FirstName" class="form-control" />
+            <span asp-validation-for="NewPatientAppointment.FirstName" class="text-danger"></span>
         </div>
         <div>
-            <label asp-for="NewPatient.Password">Password</label>
-            <input asp-for="NewPatient.Password" type="password" class="form-control" />
-            <span asp-validation-for="NewPatient.Password" class="text-danger"></span>
+            <label asp-for="NewPatientAppointment.LastName">Last Name</label>
+            <input asp-for="NewPatientAppointment.LastName" class="form-control" />
+            <span asp-validation-for="NewPatientAppointment.LastName" class="text-danger"></span>
         </div>
         <div>
-            <label asp-for="NewPatient.FirstName"></label>
-            <input asp-for="NewPatient.FirstName" class="form-control" />
-            <span asp-validation-for="NewPatient.FirstName" class="text-danger"></span>
+            <label asp-for="NewPatientAppointment.Email">Email</label>
+            <input asp-for="NewPatientAppointment.Email" class="form-control" />
+            <span asp-validation-for="NewPatientAppointment.Email" class="text-danger"></span>
         </div>
-
         <div>
-            <label asp-for="NewPatient.MiddleInitial"></label>
-            <input asp-for="NewPatient.MiddleInitial" class="form-control" />
-            <span asp-validation-for="NewPatient.MiddleInitial"></span>
+            <label asp-for="NewPatientAppointment.Phone">Phone</label>
+            <input asp-for="NewPatientAppointment.Phone" class="form-control" />
+            <span asp-validation-for="NewPatientAppointment.Phone" class="text-danger"></span>
         </div>
-
         <div>
-            <label asp-for="NewPatient.LastName"></label>
-            <input asp-for="NewPatient.LastName" class="form-control" />
-            <span asp-validation-for="NewPatient.LastName" class="text-danger"></span>
+            <label asp-for="NewPatientAppointment.Address">Address</label>
+            <input asp-for="NewPatientAppointment.Address" class="form-control" />
+            <span asp-validation-for="NewPatientAppointment.Address" class="text-danger"></span>
         </div>
-
         <div>
-            <label asp-for="NewPatient.Address"></label>
-            <input asp-for="NewPatient.Address" class="form-control" />
-            <span asp-validation-for="NewPatient.Address" class="text-danger"></span>
-        </div>
-
-        <div>
-            <label asp-for="NewPatient.Phone"></label>
-            <input asp-for="NewPatient.Phone" class="form-control" />
-            <span asp-validation-for="NewPatient.Phone" class="text-danger"></span>
-        </div>
-
-        <div>
-            <label asp-for="NewPatient.Gender"></label>
-            <select asp-for="NewPatient.Gender" class="form-control">
+            <label asp-for="NewPatientAppointment.Gender">Gender</label>
+            <select asp-for="NewPatientAppointment.Gender" class="form-control">
                 <option value="">Select gender</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
-                <!-- Add more gender options as appropriate -->
+                <!-- Add more gender options as needed -->
             </select>
-            <span asp-validation-for="NewPatient.Gender" class="text-danger"></span>
+            <span asp-validation-for="NewPatientAppointment.Gender" class="text-danger"></span>
         </div>
-
         <div>
-            <label asp-for="NewPatient.DoB"></label>
-            <input asp-for="NewPatient.DoB" class="form-control" type="date" />
-            <span asp-validation-for="NewPatient.DoB" class="text-danger"></span>
+            <label asp-for="NewPatientAppointment.DoB">Date of Birth</label>
+            <input asp-for="NewPatientAppointment.DoB" class="form-control" type="date" />
+            <span asp-validation-for="NewPatientAppointment.DoB" class="text-danger"></span>
         </div>
 
-        <!-- Appointment Scheduling Fields -->
+        <!-- Appointment Details -->
         <h3>Appointment Details</h3>
         <div>
-            <label asp-for="Appointment.DoctorId">Doctor</label>
-            <select asp-for="Appointment.DoctorId" asp-items="Model.DoctorList" class="form-control" required>
-                <option value="">Select a doctor</option>
-            </select>
-            <span asp-validation-for="Appointment.DoctorId" class="text-danger"></span>
+            <label asp-for="NewPatientAppointment.DateAppointment">Date</label>
+            <input asp-for="NewPatientAppointment.DateAppointment" type="date" class="form-control" />
+            <span asp-validation-for="NewPatientAppointment.DateAppointment" class="text-danger"></span>
         </div>
-
         <div>
-            <label asp-for="Appointment.DateAppointment">Date</label>
-            <input asp-for="Appointment.DateAppointment" class="form-control" type="date" required />
-            <span asp-validation-for="Appointment.DateAppointment" class="text-danger"></span>
+            <label asp-for="NewPatientAppointment.Time">Time</label>
+            <input asp-for="NewPatientAppointment.Time" type="time" class="form-control" />
+            <span asp-validation-for="NewPatientAppointment.Time" class="text-danger"></span>
         </div>
+        <!-- Add other necessary fields for the appointment -->
 
-        <div>
-            <label asp-for="Appointment.Time">Time</label>
-            <input asp-for="Appointment.Time" class="form-control" type="time" required />
-            <span asp-validation-for="Appointment.Time" class="text-danger"></span>
-        </div>
-
-        <button type="submit" class="btn btn-primary">Register and Schedule</button>
+        <button type="submit" class="btn btn-primary">Schedule Appointment</button>
     </form>
 }
 else
 {
+    <!-- Message for logged-in users -->
     <p>You are already logged in. Please proceed to the <a asp-page="/PatientDashboard">Patient Dashboard</a> to schedule an appointment.</p>
 }
 

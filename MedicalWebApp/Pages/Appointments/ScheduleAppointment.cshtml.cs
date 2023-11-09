@@ -3,10 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MedicalWebApp.Models;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
 
 public class ScheduleAppointmentModel : PageModel
 {
@@ -22,51 +22,44 @@ public class ScheduleAppointmentModel : PageModel
     }
 
     [BindProperty]
-    public Appointment Appointment { get; set; }
+    public NewPatientAppointmentModel NewPatientAppointment { get; set; }
 
-    [BindProperty]
-    public NewPatientRegistrationModel NewPatient { get; set; }
-
-    public SelectList DoctorList { get; set; }
-
-    public class NewPatientRegistrationModel
+    public class NewPatientAppointmentModel
     {
         [Required]
-        [EmailAddress]
-        public string Email { get; set; }
-
-        [Required]
-        [DataType(DataType.Password)]
-        public string Password { get; set; }
-
-        [Required]
         public string FirstName { get; set; }
-
-        public string MiddleInitial { get; set; }
 
         [Required]
         public string LastName { get; set; }
 
         [Required]
-        public string Address { get; set; }
+        [EmailAddress]
+        public string Email { get; set; }
 
         [Required]
         [Phone]
         public string Phone { get; set; }
 
         [Required]
-        [StringLength(10)]
+        public string Address { get; set; }
+
+        [Required]
         public string Gender { get; set; }
 
         [Required]
         public DateTime DoB { get; set; }
+
+        [Required]
+        public DateTime DateAppointment { get; set; }
+
+        [Required]
+        public TimeSpan Time { get; set; }
+        // Add other properties as needed for the appointment
     }
 
     public async Task<IActionResult> OnGetAsync()
     {
-        DoctorList = new SelectList(await _context.Doctors.Select(d =>
-            new { d.DoctorId, DoctorName = d.FirstName + " " + d.LastName })
-            .ToListAsync(), "DoctorId", "DoctorName");
+        // Load necessary data for the form, e.g., doctor list
         return Page();
     }
 
@@ -74,70 +67,53 @@ public class ScheduleAppointmentModel : PageModel
     {
         if (!ModelState.IsValid)
         {
-            DoctorList = new SelectList(await _context.Doctors.Select(d =>
-                new { d.DoctorId, DoctorName = d.FirstName + " " + d.LastName })
-                .ToListAsync(), "DoctorId", "DoctorName");
+            // Reload necessary data
             return Page();
         }
 
         if (!User.Identity.IsAuthenticated)
         {
-            // Register the new patient
-            var user = new IdentityUser { UserName = NewPatient.Email, Email = NewPatient.Email };
-            var result = await _userManager.CreateAsync(user, NewPatient.Password);
-
-            if (result.Succeeded)
+            // Check if email exists in the database
+            var existingUser = await _userManager.FindByEmailAsync(NewPatientAppointment.Email);
+            if (existingUser != null)
             {
-                // Add to 'Patient' role
-                await _userManager.AddToRoleAsync(user, "Patient");
-
-                // Create new patient record
-                var patient = new Patient
-                {
-                    FirstName = NewPatient.FirstName,
-                    MiddleInitial = NewPatient.MiddleInitial,
-                    LastName = NewPatient.LastName,
-                    Address = NewPatient.Address,
-                    Email = NewPatient.Email,
-                    Phone = NewPatient.Phone,
-                    Gender = NewPatient.Gender,
-                    DoB = NewPatient.DoB,
-                    IdentityUserId = user.Id
-                };
-                _context.Patients.Add(patient);
-                await _context.SaveChangesAsync();
-
-                // Create appointment
-                Appointment.PatientId = patient.PatientId;
-                _context.Appointments.Add(Appointment);
-                await _context.SaveChangesAsync();
-
-                // Sign in the patient
-                await _signInManager.SignInAsync(user, isPersistent: false);
-                return RedirectToPage("AppointmentConfirmation", new { id = Appointment.AppointmentId });
+                ModelState.AddModelError("", "An account with this email already exists. Please log in.");
+                return Page();
             }
-            foreach (var error in result.Errors)
+
+            // Create new patient and appointment logic here
+            var patient = new Patient
             {
-                ModelState.AddModelError(string.Empty, error.Description);
-            }
+                FirstName = NewPatientAppointment.FirstName,
+                LastName = NewPatientAppointment.LastName,
+                Email = NewPatientAppointment.Email,
+                Phone = NewPatientAppointment.Phone,
+                Address = NewPatientAppointment.Address,
+                Gender = NewPatientAppointment.Gender,
+                DoB = NewPatientAppointment.DoB,
+                // Additional patient details initialization
+            };
+            _context.Patients.Add(patient);
+            await _context.SaveChangesAsync();
+
+            var appointment = new Appointment
+            {
+                PatientId = patient.PatientId,
+                DateAppointment = NewPatientAppointment.DateAppointment,
+                Time = NewPatientAppointment.Time,
+                // Additional appointment details initialization
+            };
+            _context.Appointments.Add(appointment);
+            await _context.SaveChangesAsync();
+
+            // Redirect to a confirmation page or display a success message
+            return RedirectToPage("AppointmentConfirmation", new { id = appointment.AppointmentId });
         }
-        else
-        {
-            var userId = _userManager.GetUserId(User);
-            var patient = await _context.Patients.FirstOrDefaultAsync(p => p.IdentityUserId == userId);
-            if (patient != null)
-            {
-                Appointment.PatientId = patient.PatientId;
-                _context.Appointments.Add(Appointment);
-                await _context.SaveChangesAsync();
-                return RedirectToPage("AppointmentConfirmation", new { id = Appointment.AppointmentId });
-            }
-            else
-            {
-                ModelState.AddModelError(string.Empty, "Patient not found.");
-            }
-        }
+
+        // Logic for handling authenticated users (existing patients)
+        // ...
 
         return Page();
     }
 }
+
