@@ -69,13 +69,22 @@ li {
     border-radius: 10%;
 }
 
-/* Footer */
-footer {
+main {
+    flex: 1;
+}
+
+/*footer {
     background-color: #333;
     color: white;
     text-align: center;
     padding: 10px 0;
-}
+    flex-shrink: 0;
+} */  
+
+/* Commenting out footer because it's annoying and keeps moving everywhere */
+/* Feel free to add it back if you can fix it */
+
+
 
 /* Responsive typography */
 @media (min-width: 768px) {
@@ -84,11 +93,12 @@ footer {
     }
 }
 
-footer {
-    position: absolute;
-    bottom: 0px;
-    color: white;
-    width: 100%;
-    height: 45px; /* Adjust the height according to your footer's actual height */
-    text-align: center; /* Adjust text alignment as needed */
+.blueHeader {
+    background-color: #238cff; /* Dark background color */
+    color: #fff; /* White text color */
+    padding: 20px; /* Add padding for better readability */
+    text-align: center; /* Center the text */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Add a shadow for depth */
 }
+
+

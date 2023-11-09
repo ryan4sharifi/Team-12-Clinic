@@ -575,6 +575,5 @@ namespace MedicalWebApp.Models
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 
-        public DbSet<med_test8.Models.Appointment_SV>? Appointment_SV { get; set; }
     }
 }

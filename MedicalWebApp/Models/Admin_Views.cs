@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Numerics;
 using System.Security.Principal;
 
-namespace med_test8.Models
+namespace MedicalWebApp.Models
 {
     public class Appointment_SV
     {
@@ -71,15 +71,6 @@ namespace med_test8.Models
         public string phone { get; set; }
         public string email { get; set; }
         public string classification { get; set; }
-    }
-
-    public class Speciality
-    {
-        [Key]
-        public int speciality_id { get; set; }
-        public string classification { get; set; }
-
-        //public ICollection<Doctor> Doctors { get; set; }
     }
 
     public class Doctor_List
