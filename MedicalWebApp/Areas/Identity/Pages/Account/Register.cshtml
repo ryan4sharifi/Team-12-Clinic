@@ -1,107 +1,136 @@
 ﻿@page
 @model RegisterModel
 
-<h2>Registration Page</h2>
+<style>
+    .center {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        width: 80%;
+        max-width: 300px;
+        max-height: calc(100% - 200px); /* Adjust the maximum height as needed */
+    }
 
-<form method="post">
-    <div>
-        <label>Email</label>
-        <input asp-for="Input.Email" />
-        <span asp-validation-for="Input.Email"></span>
-    </div>
-    <div>
-        <label>Password</label>
-        <input asp-for="Input.Password" type="password" />
-        <span asp-validation-for="Input.Password"></span>
-    </div>
-    <div>
-        <label for="Role">Role</label>
-        <select asp-for="Role" asp-items="@(new SelectList((List<string>)ViewData["Roles"]))" onchange="displayRoleSpecificFields(this.value)">
-        </select>
-    </div>
+    .form-container {
+        max-width: 600px; /* Adjust the maximum width as needed */
+        max-height: 100%; /* Set maximum height to 100% of the parent container */
+        margin: auto; /* Center the container */
+        padding: 20px; /* Add some padding to the container */
+        border-radius: 8px; /* Add border radius for rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+        overflow: auto; /* Add overflow:auto to enable scrolling if content exceeds the container height */
+    }
 
-    <!-- Admin Fields -->
-    <div id="AdminFields" style="display:none">
-        <h3>Admin Details</h3>
-        <label>First Name</label>
-        <input name="AdminFirstName" />
-        <label>Middle Initial</label>
-        <input name="AdminMiddleInitial" maxlength="1" />
-        <label>Last Name</label>
-        <input name="AdminLastName" />
-        <label>Office</label>
-        <input name="AdminOffice" />
-        <label>Date of Birth</label>
-        <input name="AdminDoB" type="date" />
-        <label>Phone</label>
-        <input name="AdminPhone" />
-    </div>
+</style>
 
-    <!-- Doctor Fields -->
-    <div id="DoctorFields" style="display:none">
-        <h3>Doctor Details</h3>
-        <label>First Name</label>
-        <input name="DoctorFirstName" />
-        <label>Middle Initial</label>
-        <input name="DoctorMiddleInitial" maxlength="1" />
-        <label>Last Name</label>
-        <input name="DoctorLastName" />
-        <label>Office</label>
-        <input name="DoctorOffice" />
-        <label>Date of Birth</label>
-        <input name="DoctorDoB" type="date" />
-        <label>Phone</label>
-        <input name="DoctorPhone" />
-        <label>Specialty</label>
-        <select name="DoctorSpecialtyId" asp-items="Model.SpecialityItems"></select>
+<div class="center">
+    <div class="login-form-container">
+    <h2>Registration Page</h2>
+
+    <form method="post">
+        <div>
+            <label>Email</label>
+            <input asp-for="Input.Email" />
+            <span asp-validation-for="Input.Email"></span>
+        </div>
+        <div>
+            <label>Password</label>
+            <input asp-for="Input.Password" type="password" />
+            <span asp-validation-for="Input.Password"></span>
+        </div>
+        <div>
+            <label for="Role">Role</label>
+            <select asp-for="Role" asp-items="@(new SelectList((List<string>)ViewData["Roles"]))" onchange="displayRoleSpecificFields(this.value)">
+            </select>
+        </div>
+
+        <!-- Admin Fields -->
+        <div id="AdminFields" style="display:none">
+            <h3>Admin Details</h3>
+            <label>First Name</label>
+            <input name="AdminFirstName" />
+            <label>Middle Initial</label>
+            <input name="AdminMiddleInitial" maxlength="1" />
+            <label>Last Name</label>
+            <input name="AdminLastName" />
+            <label>Office</label>
+            <input name="AdminOffice" />
+            <label>Date of Birth</label>
+            <input name="AdminDoB" type="date" />
+            <label>Phone</label>
+            <input name="AdminPhone" />
+        </div>
+
+        <!-- Doctor Fields -->
+        <div id="DoctorFields" style="display:none">
+            <h3>Doctor Details</h3>
+            <label>First Name</label>
+            <input name="DoctorFirstName" />
+            <label>Middle Initial</label>
+            <input name="DoctorMiddleInitial" maxlength="1" />
+            <label>Last Name</label>
+            <input name="DoctorLastName" />
+            <label>Office</label>
+            <input name="DoctorOffice" />
+            <label>Date of Birth</label>
+            <input name="DoctorDoB" type="date" />
+            <label>Phone</label>
+            <input name="DoctorPhone" />
+            <label>Specialty</label>
+            <select name="DoctorSpecialtyId" asp-items="Model.SpecialityItems"></select>
         
 
 
 
-    </div>
+        </div>
 
-    <!-- Nurse Fields -->
-    <div id="NurseFields" style="display:none">
-        <h3>Nurse Details</h3>
-        <label>First Name</label>
-        <input name="NurseFirstName" />
-        <label>Middle Initial</label>
-        <input name="NurseMiddleInitial" maxlength="1" />
-        <label>Last Name</label>
-        <input name="NurseLastName" />
-        <label>Office</label>
-        <input name="NurseOffice" />
-        <label>Date of Birth</label>
-        <input name="NurseDoB" type="date" />
-        <label>Phone</label>
-        <input name="NursePhone" />
-    </div>
+        <!-- Nurse Fields -->
+        <div id="NurseFields" style="display:none">
+            <h3>Nurse Details</h3>
+            <label>First Name</label>
+            <input name="NurseFirstName" />
+            <label>Middle Initial</label>
+            <input name="NurseMiddleInitial" maxlength="1" />
+            <label>Last Name</label>
+            <input name="NurseLastName" />
+            <label>Office</label>
+            <input name="NurseOffice" />
+            <label>Date of Birth</label>
+            <input name="NurseDoB" type="date" />
+            <label>Phone</label>
+            <input name="NursePhone" />
+        </div>
 
-    <!-- Patient Fields -->
-    <div id="PatientFields" style="display:none">
-        <h3>Patient Details</h3>
-        <label>First Name</label>
-        <input name="PatientFirstName" />
-        <label>Last Name</label>
-        <input name="PatientLastName" />
-        <label>Address</label>
-        <input name="PatientAddress" />
-        <label>Phone</label>
-        <input name="PatientPhone" />
-        <label>Gender</label>
-        <select name="PatientGender">
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <!-- ... -->
-        </select>
-        <label>Date of Birth</label>
-        <input name="PatientDoB" type="date" />
-        <label>Balance</label>
-        <input name="PatientBalance" type="number" step="0.01" />
-    </div>
+        <!-- Patient Fields -->
+        <div id="PatientFields" style="display:none">
+            <h3>Patient Details</h3>
+            <label>First Name</label>
+            <input name="PatientFirstName" />
+            <label>Last Name</label>
+            <input name="PatientLastName" />
+            <label>Address</label>
+            <input name="PatientAddress" />
+            <label>Phone</label>
+            <input name="PatientPhone" />
+            <label>Gender</label>
+            <select name="PatientGender">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <!-- ... -->
+            </select>
+            <label>Date of Birth</label>
+            <input name="PatientDoB" type="date" />
+            <label>Balance</label>
+            <input name="PatientBalance" type="number" step="0.01" />
+        </div>
 
-    <button type="submit">Register</button>
-</form>
+        <button type="submit">Register</button>
+    </form>
+    </div>
+</div>
 
 @section Scripts {
     <script>

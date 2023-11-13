@@ -10,7 +10,7 @@ body {
     font-family: 'Open Sans', sans-serif;
     line-height: 1.6;
     color: #333;
-    background-color: #f4f4f4;
+    background-color: #f0f0f0;
     padding: 20px;
 }
 
@@ -103,4 +103,22 @@ main {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Add a shadow for depth */
 }
 
+.shadowed-site-container {
+    max-width: 900px; /* Adjust the maximum width as needed */
+    max-height: 100%; /* Set maximum height to 100% of the parent container */
+    margin: auto; /* Center the container */
+    padding: 20px; /* Add some padding to the container */
+    border-radius: 8px; /* Add border radius for rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+    background-color: #f7f7f7; /* Add a background color if desired */
+    overflow: auto; /* Add overflow:auto to enable scrolling if content exceeds the container height */
+}
 
+.login-form-container {
+    max-width: 600px; /* Adjust the maximum width as needed */
+    margin: auto; /* Center the container */
+    padding: 20px; /* Add some padding to the container */
+    border-radius: 8px; /* Add border radius for rounded corners */
+    background-color: #f7f7f7; /* Add a background color if desired */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+}
