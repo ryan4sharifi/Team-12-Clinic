@@ -4,77 +4,19 @@
 <h2>Welcome, Doctor!</h2>
 <p>This is your dashboard. View patient appointments, medical records, and more.</p>
 
-<!-- Report Generation Section -->
-<div>
-    <h3>Generate Report</h3>
-    <form method="post">
-        <label for="reportType">Report Type:</label>
-        <select id="reportType" name="ReportType">
-            <option value="appointmentHistory">Appointment History</option>
-            <option value="patientMedicalHistory">Patient Medical History</option>
-            <!-- Add other report types as needed -->
-        </select>
+<div class="container">
 
-        <label for="startDate">Start Date:</label>
-        <input type="date" id="startDate" name="StartDate">
+    <main role="main">
+        <div class="square-container">
+            <div class="buttons-container">
+                <h3> Navigation </h3>
+                <button onclick="location.href='/Doctor_View/Appointment_Index'" type="button" class="custom-button">Appointments</button>
 
-        <label for="endDate">End Date:</label>
-        <input type="date" id="endDate" name="EndDate">
+                
+                
 
-        <button type="submit">Generate Report</button>
-    </form>
-
-    <!-- Display generated report here -->
-    <div>
-        @if (Model.GeneratedReport != null)
-        {
-            <h4>Report</h4>
-            <!-- Render the report in a table or other format -->
-        }
-    </div>
+            </div>
+            <div class="square"></div>
+        </div>
+    </main>
 </div>
-
-<!-- Upcoming Appointments Section -->
-<div>
-    <h3>Upcoming Appointments</h3>
-    <table>
-        <thead>
-            <tr>
-                <th>Patient Name</th>
-                <th>Date</th>
-                <th>Time</th>
-                <!-- Add more columns as needed -->
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var appointment in Model.UpcomingAppointments)
-            {
-                <tr>
-                    <td>@appointment.PatientName</td>
-                    <td>@appointment.Date.ToShortDateString()</td>
-                    <td>@appointment.FormattedTime</td>
-                    <!-- Add more data as needed -->
-                </tr>
-            }
-        </tbody>
-    </table>
-</div>
-
-<!-- Patient Management Section -->
-<div>
-    <h3>Patient Management</h3>
-    <input type="search" id="patientSearch" placeholder="Search patients..." />
-    <button type="button" onclick="searchPatients()">Search</button>
-
-    <!-- Dynamic patient list will be populated here -->
-    <div id="patientList">
-        <!-- The patient list will be populated with AJAX -->
-    </div>
-</div>
-
-@section Scripts {
-    <script>function searchPatients() {
-            // AJAX call to search and update the patient list
-        }</script>
-    <partial name="_ValidationScriptsPartial" />
-}
