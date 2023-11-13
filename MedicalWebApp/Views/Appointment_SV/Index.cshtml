@@ -95,6 +95,7 @@
             <th>
                 <a asp-action="Index" asp-route-sortOrder="@ViewData["LastNameSortParam"]">
                     @Html.DisplayNameFor(model => model.PatientName) @if (ViewData["LastNameSortParam"].ToString() == "lastname_desc")
+                    @if (ViewData["LastNameSortParam"] != null && ViewData["LastNameSortParam"].ToString() == "lastname_desc")
                     {
                         <span>&darr;</span>
                     }
