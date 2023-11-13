@@ -4,10 +4,84 @@
     ViewData["Title"] = "Index";
 }
 
-<h3 class="less-bold">Scheduled Appointments</h3>
+
+<style>
+    .buttons {
+        max-width: 200px; /* Adjust the maximum width as needed */
+        margin: 0; /* Center the container */
+    }
+
+    .container {
+        position: relative;
+    }
+
+    .table {
+        width: 80%;
+        margin: 20px auto; /* Center the table horizontally and provide space at the top */
+        border-collapse: collapse;
+    }
+
+        .table th, .table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+            height: 40px;
+        }
+
+        .table th {
+            background-color: #f18383;
+            color: white;
+        }
+
+        .table tr:hover {
+            background-color: #fff2cc;
+        }
+
+        .table td {
+            background-color: #ffe7e7;
+        }
+
+        .table a span {
+            display: inline-block;
+            margin-left: 5px;
+            vertical-align: middle;
+        }
+
+            .table a span::before {
+                font-size: 10px;
+            }
+
+        .table a.desc span::before {
+            content: "\25bc";
+        }
+
+    .form-container {
+        max-width: 300px;
+        margin: 20px auto; /* Center the form horizontally */
+        display: flex;
+        justify-content: space-between; /* Adjust as needed */
+    }
+
+
+  
+</style>
+
+
+
+<div class="blueHeader">
+    <header> Office Admin View </header>
+</div>
+<div style="padding-bottom: 20px;"></div>
+
+<h3> Appointments </h3>
+
+
 
 <p>
-    <a asp-action="Create">Schedule New Appointment</a>
+    <div class="buttons">
+    <button onclick="location.href='@Url.Action("Create", "Appointment_SV")'" class="custom-button" type="button">Schedule New Appointment</button>
+    </div>
+
 </p>
 <table class="table">
     <thead>
@@ -19,35 +93,80 @@
                 @Html.DisplayNameFor(model => model.DoctorName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PatientName)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["LastNameSortParam"]">
+                    @Html.DisplayNameFor(model => model.PatientName) @if (ViewData["LastNameSortParam"].ToString() == "lastname_desc")
+                    {
+                        <span>&darr;</span>
+                    }
+                    else if (ViewData["LastNameSortParam"].ToString() == "")
+                    {
+                        <span>&uarr;</span>
+                    }
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.date_appointment)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParam"]">
+                    @Html.DisplayNameFor(model => model.date_appointment) @if (ViewData["DateSortParam"].ToString() == "date_desc")
+                    {
+                        <span>&darr;</span>
+                    }
+                    else if (ViewData["DateSortParam"].ToString() == "Date")
+                    {
+                        <span>&uarr;</span>
+                    }
+                </a>
             </th>
+
+           
+
             <th></th>
+            
+
+            
+            
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.appointment_id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DoctorName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PatientName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.date_appointment)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.appointment_id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.appointment_id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.appointment_id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.appointment_id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DoctorName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PatientName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.date_appointment)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.appointment_id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.appointment_id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.appointment_id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+<h4> Filters: </h4>
+
+<div class="form-container">
+    <form asp-action="Index" asp-controller="Appointment_SV" method="get" style="margin-right: 20px;">
+        <!-- <label for="doctorName">Enter Doctor's Name:</label> -->
+        <input type="text" name="doctorName" id="doctorName" placeholder="Doctor's Name">
+        <button type="submit">Filter</button>
+    </form>
+
+    
+
+    <form asp-action="Index" asp-controller="Appointment_SV" method="get">
+        <!-- <label for="doctorName">Enter Doctor's Name:</label> -->
+        <input type="text" name="patientName" id="patientName" placeholder="Patient's Name">
+        <button type="submit">Filter</button>
+    </form>
+
+</div>

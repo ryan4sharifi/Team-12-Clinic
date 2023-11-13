@@ -4,6 +4,21 @@
     ViewData["Title"] = "Details";
 }
 
+<style>
+    .buttons {
+        max-width: 200px; /* Adjust the maximum width as needed */
+        margin: 0; /* Center the container */
+
+    }
+
+
+</style>
+
+<div class="blueHeader">
+    <header> Office Admin View </header>
+</div>
+<div style="padding-bottom: 20px;"></div>
+
 <h1>Details</h1>
 
 <div>
@@ -30,7 +45,9 @@
         </dd>
     </dl>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.appointment_id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+
+<div style="padding-bottom: 50px;"></div>
+<div class="buttons">
+    <!-- edit button -->
+    <button onclick="location.href='@Url.Action("Index", "Appointment_SV")'" class="custom-button" type="button">Back to List</button>
 </div>

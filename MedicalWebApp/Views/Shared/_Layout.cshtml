@@ -3,37 +3,73 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Admin View</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <title>@ViewData["Title"] - Team 12 Clinic</title>
+    <!-- Removed Bootstrap CSS -->
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/med_test7.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/nav.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/MedicalWebApp.styles.css" asp-append-version="true" />
+    <!-- jQuery is still included, in case you use it for other scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
+
+
+
+
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light custom-navbar-color border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Admin View</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link custom-text-color" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link custom-text-color" asp-area="" asp-controller="Appointment_SV" asp-action="Index">Appointments</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link custom-text-color" asp-area="" asp-controller="Patients" asp-action="Index">Patients</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link custom-text-color" asp-area="" asp-controller="Doctor_List" asp-action="Index">Doctors</a>
-                        </li>
-                    </ul>
-                    <partial name="_LoginPartial" />
+        <nav>
+            <div class="container">
 
+                <a href="/" class="brand">Team 12 Clinic</a>
+                <div class="nav-toggle">
+                    <div class="bar1"></div>
+                    <div class="bar2"></div>
+                    <div class="bar3"></div>
+                </div>
+                <div class="navigation">
+
+                    <ul>
+                        <li>
+                            <a href="/Index">Home</a>
+                        </li>
+                        <li>
+                            <a href="/Privacy">Privacy</a>
+                        </li>
+                        <li>
+                            <a href="/Appointments/ScheduleAppointment">Make an Appointment</a>
+                        </li>
+
+                        <li>
+                            <a href="/Dashboards/AdminDashboard">Admin Home</a>
+                        </li>
+
+                    </ul>
+
+                    <!--
+                        <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link custom-text-color" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link custom-text-color" asp-area="" asp-controller="Appointment_SV" asp-action="Index">Appointments</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link custom-text-color" asp-area="" asp-controller="Patients" asp-action="Index">Patients</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link custom-text-color" asp-area="" asp-controller="Doctor_List" asp-action="Index">Doctors</a>
+                            </li>
+                        </ul>
+                        <partial name="_LoginPartial" />
+
+                    </div>
+
+
+
+
+
+                    -->
                 </div>
             </div>
         </nav>
@@ -44,11 +80,16 @@
         </main>
     </div>
 
+
+    <!--
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2023 - med_test8 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
+
     </footer>
+        -->
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

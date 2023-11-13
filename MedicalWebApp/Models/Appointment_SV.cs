@@ -1,7 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Numerics;
-using System.Security.Principal;
 
 namespace med_test8.Models
 {
@@ -73,6 +71,15 @@ namespace med_test8.Models
         public string classification { get; set; }
     }
 
+    public class Speciality
+    {
+        [Key]
+        public int speciality_id { get; set; }
+        public string classification { get; set; }
+
+        //public ICollection<Doctor> Doctors { get; set; }
+    }
+
     public class Doctor_List
     {
         [Key]
@@ -80,15 +87,17 @@ namespace med_test8.Models
         public string DoctorName { get; set; }
         public string Office { get; set; }
         public string classification { get; set; }
+
     }
 
-    public class Metadata {
+    public class Our_Providers
+    {
         [Key]
-        public int UserId { get; set; }
-        public int Username { get; set; }
-        public int Password { get; set; }
-        public int Email { get; set; } 
-        }
+        public int id { get; set; }
+        public string name { get; set; }
+        public string Office { get; set; }
+        public string classification { get; set; }
+    }
 }
 
 

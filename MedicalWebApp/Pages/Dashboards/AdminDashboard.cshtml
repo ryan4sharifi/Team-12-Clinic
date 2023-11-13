@@ -1,8 +1,4 @@
 ﻿@page
-@{
-    ViewData["Title"] = "Home page";
-}
-
 
 <style>
     .square-container {
@@ -28,8 +24,6 @@
     .square {
         height: 200px; /* Adjust the dimensions as needed */
         width: 0px; /* Adjust the dimensions as needed */
-
-
         position: relative;
     }
 
@@ -40,7 +34,7 @@
         justify-content: center;
     }
 
-    .header {
+    .blueHeader {
         background-color: #238cff; /* Dark background color */
         color: #fff; /* White text color */
         padding: 20px; /* Add padding for better readability */
@@ -63,9 +57,11 @@
 
 
 
-<div class="header">
+<div class="blueHeader">
     <header> Office Admin View </header>
 </div>
+
+<h2>Welcome, Admin!</h2>
 
 
 <div class="container">
@@ -74,9 +70,10 @@
         <div class="square-container">
             <div class="buttons-container">
                 <h3> Navigation </h3>
-                <button onclick="location.href='/Admin_View/Appointment_SV/Appointment_Index'" type="button" class="custom-button">Appointments</button>
-                <button onclick="location.href='/Admin_View/Appointment_SV/Provider_Index'" type="button" class="custom-button">Providers</button>
-                <button onclick="location.href='/Admin_View/Appointment_SV/Patient_Index'" type="button" class="custom-button">Patients</button>
+                <button onclick="location.href='@Url.Action("Index", "Appointment_SV")'" class="custom-button" type="button">Appointments</button>
+                <button onclick="location.href='@Url.Action("Index", "Our_Providers")'" class="custom-button" type="button">Find Providers</button>
+                <button onclick="window.location.href='/Dashboards/AdminDashboard'" class="custom-button">Patient Servicing</button>
+
             </div>
             <div class="square"></div>
         </div>

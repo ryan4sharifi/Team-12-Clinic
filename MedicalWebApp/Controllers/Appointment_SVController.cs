@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using med_test8.Data;
 using med_test8.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Net.Mail;
+using System.Net;
 
 namespace med_test8.Controllers
 {
@@ -22,15 +24,40 @@ namespace med_test8.Controllers
         }
 
         // GET: Appointment_SV
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder, string doctorName, string patientName)
         {
-            if (_context.Appointment_SV == null)
+            ViewData["LastNameSortParam"] = String.IsNullOrEmpty(sortOrder) ? "lastname_desc" : "";
+            ViewData["DateSortParam"] = sortOrder == "Date" ? "date_desc" : "Date";
+
+            var appointments = from a in _context.Appointment_SV select a;
+
+            if (!string.IsNullOrEmpty(doctorName))
             {
-                return Problem("Entity set 'med_test7Context.Appointment_SV' is null.");
+                appointments = appointments.Where(a => a.DoctorName.Contains(doctorName));
             }
 
-            var appointments = await _context.Appointment_SV.OrderBy(a => a.date_appointment).ToListAsync();
-            return View(appointments);
+            if (!string.IsNullOrEmpty(patientName))
+            {
+                appointments = appointments.Where(a => a.PatientName.Contains(patientName));
+            }
+
+            switch (sortOrder)
+            {
+                case "lastname_desc":
+                    appointments = appointments.OrderByDescending(a => a.PatientName);
+                    break;
+                case "Date":
+                    appointments = appointments.OrderBy(a => a.date_appointment);
+                    break;
+                case "date_desc":
+                    appointments = appointments.OrderByDescending(a => a.date_appointment);
+                    break;
+                default:
+                    appointments = appointments.OrderBy(a => a.PatientName);
+                    break;
+            }
+
+            return View(await appointments.ToListAsync());
         }
 
         // GET: Appointment_SV/Details/5
@@ -60,7 +87,7 @@ namespace med_test8.Controllers
         // POST: Appointment_SV/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("doctor_id,patient_id,date_appointment,office_id")] Appointments newAppointment)
+        public async Task<ActionResult> Create([Bind("doctor_id,patient_id,date_appointment,office_id")] Appointments newAppointment)
         {
             if (ModelState.IsValid)
             {
@@ -79,9 +106,39 @@ namespace med_test8.Controllers
 
                 _context.Add(newAppointment);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+                // Send email to the customer
+                await SendAppointmentConfirmationEmail(newAppointment);
+
+                return RedirectToAction("Index");
             }
+
             return View(newAppointment);
+        }
+
+
+        private async Task SendAppointmentConfirmationEmail(Appointments appointment)
+        {
+            // Replace these with your actual email settings
+            var smtpClient = new SmtpClient("smtp.gmail.com", 587)
+            {
+                Port = 587,
+                Credentials = new NetworkCredential("team12database@gmail.com", "vtzk ushh ggzb yeil"),
+                EnableSsl = true,
+            };
+
+            var patient = _context.Patients.Find(appointment.patient_id);
+
+            var mailMessage = new MailMessage
+            {
+                From = new MailAddress("team12database@gmail.com"),
+                Subject = "Appointment Confirmation",
+                Body = $"Hello, {patient.first_name}. Your appointment on {appointment.date_appointment} has been successfully scheduled."
+            };
+
+            mailMessage.To.Add("kijanac1@yahoo.com"); // Replace with the actual customer's email address
+
+            await smtpClient.SendMailAsync(mailMessage);
         }
 
 

@@ -1,0 +1,139 @@
+﻿@model IEnumerable<med_test8.Models.Our_Providers>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style>
+    .container {
+        position: relative;
+    }
+
+    .table {
+        width: 80%;
+        margin: 20px auto; /* Center the table horizontally and provide space at the top */
+        border-collapse: collapse;
+    }
+
+        .table th, .table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+            height: 40px;
+        }
+
+        .table th {
+            background-color: #f18383;
+            color: white;
+        }
+
+        .table tr:hover {
+            background-color: #fff2cc;
+        }
+
+        .table td {
+            background-color: #ffe7e7;
+        }
+
+        .table a span {
+            display: inline-block;
+            margin-left: 5px;
+            vertical-align: middle;
+        }
+
+            .table a span::before {
+                font-size: 10px;
+            }
+
+        .table a.desc span::before {
+            content: "\25bc";
+        }
+
+    .form-container {
+        max-width: 300px;
+        margin: 20px auto; /* Center the form horizontally */
+        display: flex;
+        justify-content: space-between; /* Adjust as needed */
+    }
+
+
+
+</style>
+
+<div class="container">
+    <h1>Our Providers</h1>
+
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Office)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.classification)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Office)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.classification)
+                    </td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.id">Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<h4> Filters:</h4>
+
+<div class="form-container">
+    <form asp-action="Index" asp-controller="Our_Providers" method="get">
+        <!-- <label for="officeLocation">Select Office Location:</label> -->
+        <select name="officeLocation" id="officeLocation">
+            <option value="">All Locations</option>
+            <option value="Houston">Houston</option>
+            <option value="Missouri City">Missouri City</option>
+            <option value="Pasadena">Pasadena</option>
+            <option value="Katy">Katy</option>
+        </select>
+        <button type="submit">Filter</button>
+    </form>
+
+    <form asp-action="Index" asp-controller="Our_Providers" method="get">
+        <!-- <label for="officeLocation">Select Office Location:</label> -->
+        <select name="classification" id="classification">
+            <option value="">All Classifications</option>
+            <option value="Cardiology">Cardiology</option>
+            <option value="Family Medicine">Family Medicine</option>
+            <option value="Neurology">Neurology</option>
+            <option value="Pediatrics">Pediatrics</option>
+            <option value="Orthopedics">Orthopedics</option>
+            <option value="Gastroenterology">Gastroenterology</option>
+            <option value="Radiology">Radiology</option>
+            <option value="Endocrinology">Endocrinology</option>
+            <option value="Oncology">Oncology</option>
+            <option value="Dermatology">Dermatology</option>
+            <option value="Nurse">Nurse</option>
+        </select>
+        <button type="submit">Filter</button>
+    </form>
+
+</div>
