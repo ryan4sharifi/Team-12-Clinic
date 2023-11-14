@@ -5,7 +5,7 @@
     box-sizing: border-box;
 }
 nav {
-    background-color: #C8102E; /* University of Houston's red */
+    background-color: #C8102E; 
     color: white;
     padding: 10px 20px;
 }
@@ -20,7 +20,7 @@ nav {
     nav .brand {
         text-decoration: none;
         color: white;
-        font-size: 1.5em; /* Adjust size as needed */
+        font-size: 1.5em; 
     }
 
     nav .navigation {
@@ -30,11 +30,11 @@ nav {
         nav .navigation ul {
             list-style-type: none;
             display: flex;
-            margin-left: auto; /* Aligns the navigation to the right */
+            margin-left: auto; 
         }
 
         nav .navigation li {
-            padding: 0 15px; /* Space between navigation items */
+            padding: 0 15px; 
         }
 
         nav .navigation a {
@@ -44,7 +44,7 @@ nav {
         }
 
             nav .navigation a:hover {
-                color: #ffd700; /* University of Houston's secondary color for hover effect */
+                color: #ffd700; 
             }
 
 /* Mobile menu toggle */
@@ -72,7 +72,7 @@ nav {
     nav .navigation {
         width: 100%;
         flex-direction: column;
-        display: none; /* Hide the menu initially */
+        display: none; 
     }
 
         nav .navigation ul {
@@ -82,15 +82,15 @@ nav {
 
         nav .navigation li {
             text-align: left;
-            padding: 10px 0; /* More vertical padding for touch targets */
+            padding: 10px 0;
         }
 
             nav .navigation li:not(:last-child) {
-                border-bottom: 1px solid white; /* Separators for the menu items */
+                border-bottom: 1px solid white; 
             }
 
         nav .navigation a {
-            padding: 10px 20px; /* Larger tap area */
+            padding: 10px 20px; 
             display: block;
             color: white;
             text-align: left;
