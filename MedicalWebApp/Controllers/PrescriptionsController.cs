@@ -22,9 +22,9 @@ namespace TrialRun.Controllers
         // GET: Prescriptions
         public async Task<IActionResult> Index()
         {
-              return _context.Prescriptions != null ? 
-                          View(await _context.Prescriptions.ToListAsync()) :
-                          Problem("Entity set 'TrialRunContext.Prescriptions'  is null.");
+            return _context.Prescriptions != null ?
+                        View(await _context.Prescriptions.ToListAsync()) :
+                        Problem("Entity set 'TrialRunContext.Prescriptions'  is null.");
         }
 
         // GET: Prescriptions/Details/5
@@ -150,14 +150,14 @@ namespace TrialRun.Controllers
             {
                 _context.Prescriptions.Remove(prescriptions);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool PrescriptionsExists(int id)
         {
-          return (_context.Prescriptions?.Any(e => e.prescription_id == id)).GetValueOrDefault();
+            return (_context.Prescriptions?.Any(e => e.prescription_id == id)).GetValueOrDefault();
         }
     }
 }

@@ -1,10 +1,33 @@
 ﻿@model IEnumerable<TrialRun.Models.PatientAppointmentII>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Scheduled Appointments";
 }
 
-<h1>Index</h1>
+<style>
+    th, td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    a {
+        color: #3498db;
+        text-decoration: none;
+        padding: 8px 16px;
+    }
+
+        a:hover {
+            background-color: #3498db;
+            color: #fff;
+        }
+</style>
+
+<h1>Scheduled Appointments<h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -31,29 +54,30 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.patient_id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PatientLastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DoctorId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DoctorLastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DoctorOffice)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.AppointmentId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.AppointmentId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.AppointmentId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.patient_id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PatientLastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DoctorId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DoctorLastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DoctorOffice)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.AppointmentId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.AppointmentId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.AppointmentId">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

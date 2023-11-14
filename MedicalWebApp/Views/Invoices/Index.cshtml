@@ -4,11 +4,50 @@
     ViewData["Title"] = "Index";
 }
 
+<style>
+    h1 {
+        color: #3498db;
+        margin-bottom: 20px;
+    }
+
+    p {
+        margin-bottom: 20px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+    th, td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    a {
+        color: #3498db;
+        text-decoration: none;
+        padding: 8px 16px;
+    }
+
+        a:hover {
+            background-color: #3498db;
+            color: #fff;
+        }
+</style>
+
 <h1>Outstanding Balances</h1>
 
 <p>
-    
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
 </p>
+
 <table class="table">
     <thead>
         <tr>
@@ -34,32 +73,33 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.patient_id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.balance)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.insurance_id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.insurance_deduction)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.copay)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.due_date)
-            </td>
-            <td>
-               
-                <a asp-action="Details" asp-route-id="@item.invoice_id">Details</a> |
-                
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.patient_id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.balance)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.insurance_id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.insurance_deduction)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.copay)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.due_date)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.invoice_id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.invoice_id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.invoice_id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
