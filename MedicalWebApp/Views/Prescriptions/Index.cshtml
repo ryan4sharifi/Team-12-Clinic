@@ -1,0 +1,65 @@
+﻿@model IEnumerable<TrialRun.Models.PatientView>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+   
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.doctor_id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.patient_id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.drug_name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dosage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.refills)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.date_prescription)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.doctor_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.patient_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.drug_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dosage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.refills)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.date_prescription)
+            </td>
+            <td>
+                
+                <a asp-action="Details" asp-route-id="@item.prescription_id">Details</a> |
+     
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
