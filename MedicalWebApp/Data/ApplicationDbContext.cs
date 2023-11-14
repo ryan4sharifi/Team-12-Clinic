@@ -17,5 +17,9 @@ namespace med_test8.Data
         public DbSet<med_test8.Models.Doctor_List>? Doctor_List { get; set; }
         public DbSet<med_test8.Models.Doctor_Details>? Doctor_Details { get; set; }
         public DbSet<med_test8.Models.Our_Providers>? Our_Providers { get; set; }
+
+        public DbSet<med_test8.Models.Provider_Info>? Provider_Info { get; set; }
+
+        
     }
 }

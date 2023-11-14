@@ -98,6 +98,17 @@ namespace med_test8.Models
         public string Office { get; set; }
         public string classification { get; set; }
     }
+
+    public class Provider_Info
+    {
+        [Key]
+        public int ID { get; set; }
+        public string FullName { get; set; }
+        public string Office { get; set; }
+        public string PhoneNumber { get; set; }
+        public string Email { get; set; }
+        public string Classification { get; set; }
+    }
 }
 
 
