@@ -151,7 +151,8 @@ public class RegisterModel : PageModel
                         var patientGender = Request.Form["PatientGender"];
                         var patientDoB = DateTime.TryParse(Request.Form["PatientDoB"], out DateTime parsedDate) ? parsedDate : DateTime.MinValue;
                         var patientBalance = decimal.TryParse(Request.Form["PatientBalance"], out decimal parsedBalance) ? parsedBalance : 0m;
-                        _context.Patients.Add(new Patient
+
+                        var newPatient = new Patient
                         {
                             IdentityUserId = user.Id,
                             FirstName = patientFirstName,
@@ -162,11 +163,17 @@ public class RegisterModel : PageModel
                             Gender = patientGender,
                             DoB = patientDoB,
                             Balance = patientBalance
-                        });
+                        };
+
+                        // Add the new patient to the Patients table
+                        _context.Patients.Add(newPatient);
+
+                        // Save changes to the database
+                        await _context.SaveChangesAsync();
+
                         break;
                 }
 
-                await _context.SaveChangesAsync();
                 await _userManager.AddToRoleAsync(user, Role);
                 await _signInManager.SignInAsync(user, isPersistent: false);
                 // After user is signed in, redirect based on role

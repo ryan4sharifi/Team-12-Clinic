@@ -83,7 +83,7 @@ namespace TrialRun.Models
         public decimal balance { get; set; }
 
     }
-public partial class Prescriptions
+public class Prescriptions
     {
         [Key]
         public int prescription_id { get; set; }
