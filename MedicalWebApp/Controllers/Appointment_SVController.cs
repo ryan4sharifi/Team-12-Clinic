@@ -31,15 +31,10 @@ namespace med_test8.Controllers
 
             var appointments = from a in _context.Appointment_SV select a;
 
-            if (!string.IsNullOrEmpty(doctorName))
-            {
-                appointments = appointments.Where(a => a.DoctorName.Contains(doctorName));
-            }
-
-            if (!string.IsNullOrEmpty(patientName))
-            {
-                appointments = appointments.Where(a => a.PatientName.Contains(patientName));
-            }
+            appointments = appointments.Where(a =>
+                (string.IsNullOrEmpty(doctorName) || a.DoctorName.Contains(doctorName)) &&
+                (string.IsNullOrEmpty(patientName) || a.PatientName.Contains(patientName))
+            );
 
             switch (sortOrder)
             {

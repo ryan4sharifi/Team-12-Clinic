@@ -24,15 +24,11 @@ namespace med_test8.Controllers
         {
             IQueryable<med_test8.Models.Our_Providers> providers = _context.Our_Providers;
 
-            if (!string.IsNullOrEmpty(officeLocation))
-            {
-                providers = providers.Where(p => p.Office == officeLocation);
-            }
-
-            if (!string.IsNullOrEmpty(classification))
-            {
-                providers = providers.Where(p => p.classification == classification);
-            }
+            providers = providers
+                .Where(p =>
+                    (string.IsNullOrEmpty(officeLocation) || p.Office == officeLocation) &&
+                    (string.IsNullOrEmpty(classification) || p.classification == classification)
+                );
 
             return View(await providers.ToListAsync());
         }

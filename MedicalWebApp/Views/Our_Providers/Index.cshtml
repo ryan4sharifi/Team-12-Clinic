@@ -60,6 +60,9 @@
 
 </style>
 
+<div style="padding-bottom: 20px;"></div>
+
+<div class="shadowed-site-container">
 <div class="container">
     <h1>Our Providers</h1>
 
@@ -105,35 +108,34 @@
 <h4> Filters:</h4>
 
 <div class="form-container">
-    <form asp-action="Index" asp-controller="Our_Providers" method="get">
-        <!-- <label for="officeLocation">Select Office Location:</label> -->
-        <select name="officeLocation" id="officeLocation">
-            <option value="">All Locations</option>
-            <option value="Houston">Houston</option>
-            <option value="Missouri City">Missouri City</option>
-            <option value="Pasadena">Pasadena</option>
-            <option value="Katy">Katy</option>
-        </select>
-        <button type="submit">Filter</button>
-    </form>
+        <form asp-action="Index" asp-controller="Our_Providers" method="get">
 
-    <form asp-action="Index" asp-controller="Our_Providers" method="get">
-        <!-- <label for="officeLocation">Select Office Location:</label> -->
-        <select name="classification" id="classification">
-            <option value="">All Classifications</option>
-            <option value="Cardiology">Cardiology</option>
-            <option value="Family Medicine">Family Medicine</option>
-            <option value="Neurology">Neurology</option>
-            <option value="Pediatrics">Pediatrics</option>
-            <option value="Orthopedics">Orthopedics</option>
-            <option value="Gastroenterology">Gastroenterology</option>
-            <option value="Radiology">Radiology</option>
-            <option value="Endocrinology">Endocrinology</option>
-            <option value="Oncology">Oncology</option>
-            <option value="Dermatology">Dermatology</option>
-            <option value="Nurse">Nurse</option>
-        </select>
-        <button type="submit">Filter</button>
-    </form>
+            <select name="officeLocation" id="officeLocation">
+                <option value="">All Locations</option>
+                <option value="Houston">Houston</option>
+                <option value="Missouri City">Missouri City</option>
+                <option value="Pasadena">Pasadena</option>
+                <option value="Katy">Katy</option>
+            </select>
 
+
+            <select name="classification" id="classification">
+                <option value="">All Classifications</option>
+                <option value="Cardiology">Cardiology</option>
+                <option value="Family Medicine">Family Medicine</option>
+                <option value="Neurology">Neurology</option>
+                <option value="Pediatrics">Pediatrics</option>
+                <option value="Orthopedics">Orthopedics</option>
+                <option value="Gastroenterology">Gastroenterology</option>
+                <option value="Radiology">Radiology</option>
+                <option value="Endocrinology">Endocrinology</option>
+                <option value="Oncology">Oncology</option>
+                <option value="Dermatology">Dermatology</option>
+                <option value="Nurse">Nurse</option>
+            </select>
+
+            <button type="submit">Filter</button>
+        </form>
+
+</div>
 </div>

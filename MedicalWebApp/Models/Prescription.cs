@@ -2,7 +2,7 @@
 {
     public class Prescription
     {
-       
+
         
             public int PrescriptionId { get; set; }
             public int DoctorId { get; set; }

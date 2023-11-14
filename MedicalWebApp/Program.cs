@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using med_test8.Data;
+using TrialRun.Data;
 using Microsoft.AspNetCore.Identity;
 using MedicalWebApp.Models;
 
@@ -11,6 +12,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddDbContext<team12MainContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'med_test8Context' not found.")));
 
+builder.Services.AddDbContext<TrialRunContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'med_test8Context' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

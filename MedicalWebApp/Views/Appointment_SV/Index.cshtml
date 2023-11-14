@@ -73,6 +73,9 @@
 </div>
 <div style="padding-bottom: 20px;"></div>
 
+
+<div class="shadowed-wide-container">
+
 <h3> Appointments </h3>
 
 
@@ -155,19 +158,11 @@
 
 <h4> Filters: </h4>
 
-<div class="form-container">
-    <form asp-action="Index" asp-controller="Appointment_SV" method="get" style="margin-right: 20px;">
-        <!-- <label for="doctorName">Enter Doctor's Name:</label> -->
-        <input type="text" name="doctorName" id="doctorName" placeholder="Doctor's Name">
-        <button type="submit">Filter</button>
-    </form>
-
-    
-
-    <form asp-action="Index" asp-controller="Appointment_SV" method="get">
-        <!-- <label for="doctorName">Enter Doctor's Name:</label> -->
-        <input type="text" name="patientName" id="patientName" placeholder="Patient's Name">
-        <button type="submit">Filter</button>
-    </form>
-
+    <div class="form-container">
+        <form asp-action="Index" asp-controller="Appointment_SV" method="get" style="margin-right: 20px;">
+            <input type="text" name="doctorName" id="doctorName" placeholder="Doctor's Name">
+            <input type="text" name="patientName" id="patientName" placeholder="Patient's Name">
+            <button type="submit">Filter</button>
+        </form>
+    </div>
 </div>

@@ -85,6 +85,7 @@ namespace TrialRun.Models
     }
 public partial class Prescriptions
     {
+        [Key]
         public int prescription_id { get; set; }
         public int doctor_id { get; set; }
         public int patient_id { get; set; }
