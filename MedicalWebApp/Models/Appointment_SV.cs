@@ -96,9 +96,10 @@ namespace med_test8.Models
     {
         [Key]
         public int id { get; set; }
-        public string name { get; set; }
+        public string FullName { get; set; }
         public string Office { get; set; }
         public string classification { get; set; }
+        public char gender { get; set; }
     }
 
     public class Provider_Info

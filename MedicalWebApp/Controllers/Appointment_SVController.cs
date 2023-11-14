@@ -131,7 +131,7 @@ namespace med_test8.Controllers
                 Body = $"Hello, {patient.first_name}. Your appointment on {appointment.date_appointment} has been successfully scheduled."
             };
 
-            mailMessage.To.Add("kijanac1@yahoo.com"); // Replace with the actual customer's email address
+            mailMessage.To.Add(patient.email); // Replace with the actual customer's email address
 
             await smtpClient.SendMailAsync(mailMessage);
         }

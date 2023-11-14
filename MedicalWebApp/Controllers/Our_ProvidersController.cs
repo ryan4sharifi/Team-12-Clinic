@@ -20,14 +20,15 @@ namespace med_test8.Controllers
         }
 
 
-        public async Task<IActionResult> Index(string officeLocation, string classification)
+        public async Task<IActionResult> Index(string officeLocation, string classification, char Gen)
         {
             IQueryable<med_test8.Models.Our_Providers> providers = _context.Our_Providers;
 
             providers = providers
                 .Where(p =>
                     (string.IsNullOrEmpty(officeLocation) || p.Office == officeLocation) &&
-                    (string.IsNullOrEmpty(classification) || p.classification == classification)
+                    (string.IsNullOrEmpty(classification) || p.classification == classification) &&
+                    (Gen == default || p.gender == Gen)
                 );
 
             return View(await providers.ToListAsync());

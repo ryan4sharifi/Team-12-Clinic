@@ -81,7 +81,7 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.name)
+                        @Html.DisplayNameFor(model => model.FullName)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Office)
@@ -89,6 +89,9 @@
                 <th>
                     @Html.DisplayNameFor(model => model.classification)
                 </th>
+               <th>
+                        @Html.DisplayNameFor(model => model.gender)
+                    </th>
                 <th></th>
             </tr>
         </thead>
@@ -97,7 +100,7 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.name)
+                            @Html.DisplayFor(modelItem => item.FullName)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Office)
@@ -105,6 +108,10 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.classification)
                     </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.gender)
+                        </td>
                     <td>
 
                         <a asp-action="Details" asp-route-id="@item.id">Details</a>
@@ -144,6 +151,11 @@
                 <option value="Nurse">Nurse</option>
             </select>
 
+            <select name="Gen" id="Gen">
+                <option value="">All Genders</option>
+                <option value="M">Male</option>
+                <option value="F">Female</option>
+            </select>
 
             <button type="submit">Filter</button>
         </form>
