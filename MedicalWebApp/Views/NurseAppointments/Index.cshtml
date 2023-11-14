@@ -1,10 +1,24 @@
 ﻿@model IEnumerable<WebApplication3.Models.NurseAppointments>
 
 @{
-    // Filter and order appointments for the current day by time of day
+    // Filter appointments for the selected doctor and location occurring today
+    var selectedDoctorId = Context.Request.Query["doctorId"];
+    var selectedLocationId = Context.Request.Query["locationId"];
+
     var currentDateAppointments = Model
-        .Where(a => a.date_appointment.Date == DateTime.Today)
-        .OrderBy(a => a.date_appointment.TimeOfDay);
+        .Where(a => a.date_appointment.Date == DateTime.Today);
+
+    if (!string.IsNullOrEmpty(selectedDoctorId))
+    {
+        currentDateAppointments = currentDateAppointments.Where(a => a.doctor_id == int.Parse(selectedDoctorId));
+    }
+
+    if (!string.IsNullOrEmpty(selectedLocationId))
+    {
+        currentDateAppointments = currentDateAppointments.Where(a => a.office_id == int.Parse(selectedLocationId));
+    }
+
+    currentDateAppointments = currentDateAppointments.OrderBy(a => a.date_appointment.TimeOfDay);
 }
 
 <!DOCTYPE html>
@@ -13,7 +27,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nurse Appointments</title>
+    <title>Nurse Dashboard</title>
     <style>
         /* Your existing styles */
         body {
@@ -97,7 +111,6 @@
             align-items: center;
         }
 
-
         }
 
         /* Add some styling for the close button */
@@ -117,12 +130,32 @@
 </head>
 
 <body>
-    <h2>Nurse Appointments</h2>
+    <h2>Nurse Dashboard</h2>
     <div>
-        <div class="buttons">
-            <button onclick="location.href='@Url.Action("CreateTest", "NurseAppointments")'" class="dashboard-link" type="button">Test Form</button>
-            <button onclick="location.href='@Url.Action("CreateVaccine", "NurseAppointments")'" class="dashboard-link" type="button">Vaccine Form</button>
-            <button onclick="location.href='@Url.Action("CreateCheckup", "NurseAppointments")'" class="dashboard-link" type="button">Checkup Form</button>
+        <div class="form-links">
+            <form method="get">
+                <label for="doctorId">Filter by Doctor:</label>
+                <select id="doctorId" name="doctorId">
+                    <option value="">All Doctors</option>
+                    <!-- Add options dynamically based on available doctors -->
+                    @foreach (var doctorId in Model.Select(a => a.doctor_id).Distinct())
+                    {
+                        <option value="@doctorId">@doctorId</option>
+                    }
+                </select>
+
+                <label for="locationId">Filter by Location:</label>
+                <select id="locationId" name="locationId">
+                    <option value="">All Locations</option>
+                    <!-- Add options dynamically based on available locations -->
+                    @foreach (var locationId in Model.Select(a => a.office_id).Distinct())
+                    {
+                        <option value="@locationId">@locationId</option>
+                    }
+                </select>
+
+                <input type="submit" value="Apply Filters">
+            </form>
         </div>
 
         <div id="upcomingAppointments">
@@ -153,13 +186,14 @@
                             </td>
                         </tr>
                     }
-            </tbody>
-        </table>
-    </div>
+                </tbody>
+            </table>
+        </div>
 
-    <section>
-        <!-- Any additional sections can be added here -->
-    </section>
+        <section>
+            <!-- Any additional sections can be added here -->
+        </section>
+    </div>
 </body>
 
 </html>
