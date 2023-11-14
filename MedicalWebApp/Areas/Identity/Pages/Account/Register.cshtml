@@ -109,6 +109,8 @@
             <h3>Patient Details</h3>
             <label>First Name</label>
             <input name="PatientFirstName" />
+            <label>Middle Initial</label>
+            <input name="PatientMiddleInitial" />
             <label>Last Name</label>
             <input name="PatientLastName" />
             <label>Address</label>
@@ -117,14 +119,12 @@
             <input name="PatientPhone" />
             <label>Gender</label>
             <select name="PatientGender">
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
+                <option value="M">Male</option>
+                <option value="F">Female</option>
                 <!-- ... -->
             </select>
             <label>Date of Birth</label>
             <input name="PatientDoB" type="date" />
-            <label>Balance</label>
-            <input name="PatientBalance" type="number" step="0.01" />
         </div>
 
         <button type="submit">Register</button>

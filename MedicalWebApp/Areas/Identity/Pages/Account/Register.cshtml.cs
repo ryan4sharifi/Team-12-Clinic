@@ -145,24 +145,25 @@ public class RegisterModel : PageModel
 
                     case "Patient":
                         var patientFirstName = Request.Form["PatientFirstName"];
+                        var patientMiddleInitial = Request.Form["PatientMiddleInitial"];
                         var patientLastName = Request.Form["PatientLastName"];
                         var patientAddress = Request.Form["PatientAddress"];
                         var patientPhone = Request.Form["PatientPhone"];
                         var patientGender = Request.Form["PatientGender"];
                         var patientDoB = DateTime.TryParse(Request.Form["PatientDoB"], out DateTime parsedDate) ? parsedDate : DateTime.MinValue;
-                        var patientBalance = decimal.TryParse(Request.Form["PatientBalance"], out decimal parsedBalance) ? parsedBalance : 0m;
 
                         var newPatient = new Patient
                         {
                             IdentityUserId = user.Id,
                             FirstName = patientFirstName,
+                            MiddleInitial = patientMiddleInitial,
                             LastName = patientLastName,
                             Email = Input.Email,
                             Address = patientAddress,
                             Phone = patientPhone,
                             Gender = patientGender,
                             DoB = patientDoB,
-                            Balance = patientBalance
+
                         };
 
                         // Add the new patient to the Patients table
