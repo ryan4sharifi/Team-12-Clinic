@@ -39,6 +39,7 @@ namespace med_test8.Models
         [DataType(DataType.Date)]
         public DateTime DoB { get; set; }
         public decimal balance { get; set; }
+       
     }
 
     public class Doctors

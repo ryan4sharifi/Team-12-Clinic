@@ -67,7 +67,14 @@
     <header> Patient Dashboard </header>
 </div>
 
-<h2>Welcome, Patient!</h2>
+@{
+    var dbContext = new team12MainContext(); // Replace with your actual DbContext
+    var userEmail = User.Identity.Name;
+    var user = dbContext.Patients.FirstOrDefault(p => p.Email == userEmail);
+}
+
+<h2>Welcome, @user.FirstName!</h2>
+
 
 <div class="container">
     <main role="main">

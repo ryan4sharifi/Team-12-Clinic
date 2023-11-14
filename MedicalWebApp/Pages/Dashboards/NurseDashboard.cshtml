@@ -1,5 +1,12 @@
 ﻿@page
 @model NurseDashboardModel
 
-<h2>Welcome, Nurse!</h2>
+@{
+    var dbContext = new team12MainContext(); // Replace with your actual DbContext
+    var userEmail = User.Identity.Name;
+    var user = dbContext.Nurses.FirstOrDefault(p => p.Email == userEmail);
+}
+
+<h2>Welcome, @user.FirstName!</h2>
+
 <p>This is your dashboard. Access tools and resources specific to your role here.</p>

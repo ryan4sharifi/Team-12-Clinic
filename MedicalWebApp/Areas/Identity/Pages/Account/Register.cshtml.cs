@@ -136,7 +136,7 @@ public class RegisterModel : PageModel
                         var nurseOffice = Request.Form["NurseOffice"];
                         var nurseDoB = DateTime.TryParse(Request.Form["NurseDoB"], out DateTime nurseParsedDate) ? nurseParsedDate : DateTime.MinValue;
                         var nursePhone = Request.Form["NursePhone"];
-                        _context.Nurses.Add(new Nurse
+                        var newNurse = new Nurse
                         {
                             IdentityUserId = user.Id,
                             FirstName = nurseFirstName,
@@ -146,7 +146,12 @@ public class RegisterModel : PageModel
                             Office = nurseOffice,
                             DoB = nurseDoB,
                             Phone = nursePhone
-                        });
+                        };
+
+                        _context.Nurses.Add(newNurse);
+
+                        await _userManager.UpdateAsync(user);
+
                         break;
 
                     case "Patient":

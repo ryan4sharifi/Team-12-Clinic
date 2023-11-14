@@ -1,7 +1,14 @@
 @page "/Dashboards/DoctorDashboard"
 @model MedicalWebApp.Pages.Dashboards.DoctorDashboardModel
 
-<h2>Welcome, Doctor!</h2>
+@{
+    var dbContext = new team12MainContext(); // Replace with your actual DbContext
+    var userEmail = User.Identity.Name;
+    var user = dbContext.Doctors.FirstOrDefault(p => p.Email == userEmail);
+}
+
+<h2>Welcome, Dr. @user.LastName!</h2>
+
 <p>This is your dashboard. View patient appointments, medical records, and more.</p>
 
 <div class="container">
