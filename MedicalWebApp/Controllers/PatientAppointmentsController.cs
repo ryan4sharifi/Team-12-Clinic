@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -22,9 +23,21 @@ namespace TrialRun.Controllers
         // GET: PatientAppointments
         public async Task<IActionResult> Index()
         {
-              return _context.PatientAppointment != null ? 
-                          View(await _context.PatientAppointment.ToListAsync()) :
-                          Problem("Entity set 'TrialRunContext.PatientAppointment'  is null.");
+            if (User.Identity.IsAuthenticated)
+            {
+                // Get the currently logged-in user's email
+                var loggedInUserEmail = User.FindFirstValue(ClaimTypes.Email);
+
+                // Retrieve appointments only for the logged-in patient based on email
+                var patientAppointments = await _context.PatientAppointmentII
+                    .Where(pa => pa.PatientEmail == loggedInUserEmail)
+                    .ToListAsync();
+
+                return View(patientAppointments);
+            }
+
+            // Handle the case where the user is not authenticated
+            return Challenge();
         }
 
         // GET: PatientAppointments/Details/5

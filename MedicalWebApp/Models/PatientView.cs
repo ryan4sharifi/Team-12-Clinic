@@ -65,7 +65,22 @@ namespace TrialRun.Models
         public int DoctorId { get; set; }
         public string DoctorLastName { get; set; }
         public string DoctorOffice { get; set; }
+
     }
+
+    public class PatientAppointmentII
+    {
+        [Key]
+        public int AppointmentId { get; set; }
+        public int patient_id { get; set; }
+        public string PatientLastName { get; set; }
+        public int DoctorId { get; set; }
+        public string DoctorLastName { get; set; }
+        public string DoctorOffice { get; set; }
+        public string PatientEmail { get; set; }
+
+    }
+
 
     public class Patients
     {
@@ -83,7 +98,8 @@ namespace TrialRun.Models
         public decimal balance { get; set; }
 
     }
-public class Prescriptions
+
+    public class Prescriptions
     {
         [Key]
         public int prescription_id { get; set; }
@@ -93,6 +109,7 @@ public class Prescriptions
         public string dosage { get; set; } = null!;
         public int refills { get; set; }
         public DateTime date_prescription { get; set; }
+
 
       
     }

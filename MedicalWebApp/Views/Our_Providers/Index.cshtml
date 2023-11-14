@@ -5,6 +5,11 @@
 }
 
 <style>
+    .buttons {
+        max-width: 200px; /* Adjust the maximum width as needed */
+        margin: 0; /* Center the container */
+    }
+
     .container {
         position: relative;
     }
@@ -60,6 +65,10 @@
 
 </style>
 
+<div class="blueHeader">
+    <header> Office Admin View </header>
+</div>
+
 <div style="padding-bottom: 20px;"></div>
 
 <div class="shadowed-site-container">
@@ -97,6 +106,7 @@
                         @Html.DisplayFor(modelItem => item.classification)
                     </td>
                     <td>
+
                         <a asp-action="Details" asp-route-id="@item.id">Details</a>
                     </td>
                 </tr>
@@ -133,6 +143,7 @@
                 <option value="Dermatology">Dermatology</option>
                 <option value="Nurse">Nurse</option>
             </select>
+
 
             <button type="submit">Filter</button>
         </form>

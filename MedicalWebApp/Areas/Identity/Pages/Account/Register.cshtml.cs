@@ -88,7 +88,8 @@ public class RegisterModel : PageModel
                         var doctorDoB = DateTime.TryParse(Request.Form["DoctorDoB"], out DateTime doctorParsedDate) ? doctorParsedDate : DateTime.MinValue;
                         var doctorPhone = Request.Form["DoctorPhone"];
                         var doctorSpecialtyId = int.Parse(Request.Form["DoctorSpecialtyId"]); // Assuming a select dropdown for specialties
-                        _context.Doctors.Add(new Doctor
+
+                        var doctor = new Doctor
                         {
                             IdentityUserId = user.Id,
                             FirstName = doctorFirstName,
@@ -99,7 +100,12 @@ public class RegisterModel : PageModel
                             DoB = doctorDoB,
                             Phone = doctorPhone,
                             SpecialityId = doctorSpecialtyId
-                        });
+                        };
+
+                        _context.Doctors.Add(doctor);
+
+                        await _userManager.UpdateAsync(user);
+
                         break;
 
                     case "Admin":
@@ -130,7 +136,7 @@ public class RegisterModel : PageModel
                         var nurseOffice = Request.Form["NurseOffice"];
                         var nurseDoB = DateTime.TryParse(Request.Form["NurseDoB"], out DateTime nurseParsedDate) ? nurseParsedDate : DateTime.MinValue;
                         var nursePhone = Request.Form["NursePhone"];
-                        _context.Nurses.Add(new Nurse
+                        var newNurse = new Nurse
                         {
                             IdentityUserId = user.Id,
                             FirstName = nurseFirstName,
@@ -140,29 +146,35 @@ public class RegisterModel : PageModel
                             Office = nurseOffice,
                             DoB = nurseDoB,
                             Phone = nursePhone
-                        });
+                        };
+
+                        _context.Nurses.Add(newNurse);
+
+                        await _userManager.UpdateAsync(user);
+
                         break;
 
                     case "Patient":
                         var patientFirstName = Request.Form["PatientFirstName"];
+                        var patientMiddleInitial = Request.Form["PatientMiddleInitial"];
                         var patientLastName = Request.Form["PatientLastName"];
                         var patientAddress = Request.Form["PatientAddress"];
                         var patientPhone = Request.Form["PatientPhone"];
                         var patientGender = Request.Form["PatientGender"];
                         var patientDoB = DateTime.TryParse(Request.Form["PatientDoB"], out DateTime parsedDate) ? parsedDate : DateTime.MinValue;
-                        var patientBalance = decimal.TryParse(Request.Form["PatientBalance"], out decimal parsedBalance) ? parsedBalance : 0m;
 
                         var newPatient = new Patient
                         {
                             IdentityUserId = user.Id,
                             FirstName = patientFirstName,
+                            MiddleInitial = patientMiddleInitial,
                             LastName = patientLastName,
                             Email = Input.Email,
                             Address = patientAddress,
                             Phone = patientPhone,
                             Gender = patientGender,
                             DoB = patientDoB,
-                            Balance = patientBalance
+
                         };
 
                         // Add the new patient to the Patients table

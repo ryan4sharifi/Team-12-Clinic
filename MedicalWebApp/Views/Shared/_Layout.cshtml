@@ -27,7 +27,6 @@
                     <div class="bar3"></div>
                 </div>
                 <div class="navigation">
-
                     <ul>
                         <li>
                             <a href="/Index">Home</a>
@@ -39,40 +38,36 @@
                             <a href="/Appointments/ScheduleAppointment">Make an Appointment</a>
                         </li>
 
-                        <li>
-                            <a href="/Dashboards/AdminDashboard">Admin Home</a>
-                        </li>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li>
+                                <a href="/Dashboards/AdminDashboard">Admin Home</a>
+                            </li>
+                        }
+                        else if (User.IsInRole("Doctor"))
+                        {
+                            <li>
+                                <a href="/Dashboards/DoctorDashboard">Doctor Home</a>
+                            </li>
+                        }
+                        else if (User.IsInRole("Nurse"))
+                        {
+                            <li>
+                                <a href="/Dashboards/NurseDashboard">Nurse Home</a>
+                            </li>
+                        }
+                        else if (User.IsInRole("Patient"))
+                        {
+                            <li>
+                                <a href="/Dashboards/PatientDashboard">Patient Home</a>
+                            </li>
+                        }
 
                     </ul>
-
-                    <!--
-                        <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                        <ul class="navbar-nav flex-grow-1">
-                            <li class="nav-item">
-                                <a class="nav-link custom-text-color" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link custom-text-color" asp-area="" asp-controller="Appointment_SV" asp-action="Index">Appointments</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link custom-text-color" asp-area="" asp-controller="Patients" asp-action="Index">Patients</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link custom-text-color" asp-area="" asp-controller="Doctor_List" asp-action="Index">Doctors</a>
-                            </li>
-                        </ul>
-                        <partial name="_LoginPartial" />
-
-                    </div>
-
-
-
-
-
-                    -->
                 </div>
             </div>
         </nav>
+
     </header>
     <div class="container">
         <main role="main" class="pb-3">

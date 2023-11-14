@@ -1,28 +1,11 @@
 ﻿@model med_test8.Models.Appointment_SV
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Details";
 }
 
-<style>
-    .buttons {
-        max-width: 200px; /* Adjust the maximum width as needed */
-        margin: 0; /* Center the container */
-    }
-</style>
+<h1>Details</h1>
 
-<div class="blueHeader">
-    <header> Office Admin View </header>
-</div>
-
-
-<div style="padding-bottom: 20px;"></div>
-
-<div class="shadowed-site-container">
-
-<h1>Delete</h1>
-
-<h3>Are you sure you want to delete this?</h3>
 <div>
     <h4>Appointment_SV</h4>
     <hr />
@@ -46,16 +29,8 @@
             @Html.DisplayFor(model => model.date_appointment)
         </dd>
     </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="appointment_id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> 
-    </form>
-
-    <div class="buttons">
-        <button onclick="location.href='@Url.Action("Index", "Appointment_SV")'" class="custom-button" type="button">Back to List</button>
-    </div>
-
 </div>
-
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.appointment_id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
 </div>

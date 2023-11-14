@@ -1,7 +1,14 @@
 @page "/Dashboards/DoctorDashboard"
 @model MedicalWebApp.Pages.Dashboards.DoctorDashboardModel
 
-<h2>Welcome, Doctor!</h2>
+@{
+    var dbContext = new team12MainContext(); // Replace with your actual DbContext
+    var userEmail = User.Identity.Name;
+    var user = dbContext.Doctors.FirstOrDefault(p => p.Email == userEmail);
+}
+
+<h2>Welcome, Dr. @user.LastName!</h2>
+
 <p>This is your dashboard. View patient appointments, medical records, and more.</p>
 
 <div class="container">
@@ -10,10 +17,8 @@
         <div class="square-container">
             <div class="buttons-container">
                 <h3> Navigation </h3>
-                <button onclick="location.href='/Doctor_View/Appointment_Index'" type="button" class="custom-button">Appointments</button>
-
-                
-                
+                <button onclick="location.href='@Url.Action("Index", "Doctor_Appointment")'" class="custom-button" type="button">Check out upcoming Appointments</button>
+                <button onclick="location.href='@Url.Action("Index", "Patient_List_For_Doctor")'" class="custom-button" type="button">Patient List</button>
 
             </div>
             <div class="square"></div>

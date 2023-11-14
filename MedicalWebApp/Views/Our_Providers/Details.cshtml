@@ -1,8 +1,25 @@
-﻿@model med_test8.Models.Our_Providers
+﻿@model med_test8.Models.Provider_Info
 
 @{
     ViewData["Title"] = "Details";
 }
+
+<style>
+
+    .buttons {
+        max-width: 200px; /* Adjust the maximum width as needed */
+        margin: 0; /* Center the container */
+    }
+
+    .label-bold {
+        font-weight: bold;
+        color: #238cff;
+    }
+
+    .red-text {
+        
+    }
+</style>
 
 <div style="padding-bottom: 20px;"></div>
 
@@ -10,31 +27,62 @@
 <h1>Details</h1>
 
 <div>
-    <h4>Our_Providers</h4>
+    <h4>Provider Info</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Office)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Office)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.classification)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.classification)
-        </dd>
+            <dt class="col-sm-2 label-bold">
+                @Html.DisplayNameFor(model => model.ID)
+            </dt>
+            <dd class="col-sm-10 ">
+                @Html.DisplayFor(model => model.ID)
+            </dd>
+            <div class="" style="padding:5px"></div>
+
+            <dt class="col-sm-2 label-bold">
+                @Html.DisplayNameFor(model => model.FullName)
+            </dt>
+            <dd class="col-sm-10 ">
+                @Html.DisplayFor(model => model.FullName)
+            </dd>
+            <div class=""style="padding:5px"></div>
+
+            <dt class="col-sm-2 label-bold">
+                @Html.DisplayNameFor(model => model.Office)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Office)
+            </dd>
+            <div class="" style="padding:5px"></div>
+
+            <dt class="col-sm-2 label-bold">
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.PhoneNumber)
+            </dd>
+            <div class="" style="padding:5px"></div>
+
+            <dt class="col-sm-2 label-bold">
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+            <div class="" style="padding:5px"></div>
+
+            <dt class="col-sm-2 label-bold">
+                @Html.DisplayNameFor(model => model.Classification)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Classification)
+            </dd>
+            <div class="" style="padding:10px"></div>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+
+        <div class="buttons">
+            <button onclick="location.href='@Url.Action("Index", "Our_Providers")'" class="custom-button" type="button">Back to Providers</button>
+        </div>
 </div>
 </div>

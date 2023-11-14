@@ -37,42 +37,24 @@ namespace med_test8.Controllers
         // GET: Our_Providers/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Our_Providers == null)
+            if (id == null || _context.Provider_Info == null)
             {
                 return NotFound();
             }
 
-            var our_Providers = await _context.Our_Providers
-                .FirstOrDefaultAsync(m => m.id == id);
-            if (our_Providers == null)
+            var Provider_Info = await _context.Provider_Info
+                .FirstOrDefaultAsync(m => m.ID == id);
+            if (Provider_Info == null)
             {
                 return NotFound();
             }
 
-            return View(our_Providers);
+            return View(Provider_Info);
         }
 
-        // GET: Our_Providers/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
+  
 
-        // POST: Our_Providers/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,name,Office,classification")] Our_Providers our_Providers)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(our_Providers);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(our_Providers);
-        }
+    
 
     }
 }
