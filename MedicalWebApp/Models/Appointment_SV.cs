@@ -55,6 +55,7 @@ namespace med_test8.Models
         public DateTime DoB { get; set; }
         public string phone { get; set; }
         public string email { get; set; }
+        public string gender { get; set; }
     }
 
     public class Doctor_Details

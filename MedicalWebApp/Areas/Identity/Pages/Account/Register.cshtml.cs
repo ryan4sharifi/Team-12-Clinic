@@ -88,6 +88,7 @@ public class RegisterModel : PageModel
                         var doctorDoB = DateTime.TryParse(Request.Form["DoctorDoB"], out DateTime doctorParsedDate) ? doctorParsedDate : DateTime.MinValue;
                         var doctorPhone = Request.Form["DoctorPhone"];
                         var doctorSpecialtyId = int.Parse(Request.Form["DoctorSpecialtyId"]); // Assuming a select dropdown for specialties
+                        var doctorGender = Request.Form["DoctorGender"];
 
                         var doctor = new Doctor
                         {
@@ -99,7 +100,8 @@ public class RegisterModel : PageModel
                             Office = doctorOffice,
                             DoB = doctorDoB,
                             Phone = doctorPhone,
-                            SpecialityId = doctorSpecialtyId
+                            SpecialityId = doctorSpecialtyId,
+                            Gender = doctorGender
                         };
 
                         _context.Doctors.Add(doctor);

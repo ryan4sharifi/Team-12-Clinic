@@ -14,6 +14,7 @@ namespace MedicalWebApp.Models
             ReferralSpecialistDoctors = new HashSet<Referral>();
             Schedules = new HashSet<Schedule>();
             Tests = new HashSet<Test>();
+
         }
 
         public int DoctorId { get; set; }
@@ -25,6 +26,7 @@ namespace MedicalWebApp.Models
         public DateTime DoB { get; set; }
         public string Phone { get; set; } = null!;
         public string Email { get; set; } = null!;
+        public string Gender { get; set; } = null!;
 
         public string IdentityUserId { get; set; }
         public virtual IdentityUser IdentityUser { get; set; }
