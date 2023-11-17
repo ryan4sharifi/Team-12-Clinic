@@ -78,6 +78,7 @@ namespace TrialRun.Models
         public string DoctorLastName { get; set; }
         public string DoctorOffice { get; set; }
         public string PatientEmail { get; set; }
+        public DateTime AppointmentDate { get; set; }
 
     }
 
@@ -97,6 +98,22 @@ namespace TrialRun.Models
         public DateTime DoB { get; set; }
         public decimal balance { get; set; }
 
+    }
+
+    public class Doctors
+    {
+        [Key]
+        public int doctor_id { get; set; }
+        public string first_name { get; set; }
+        public string middle_initial { get; set; }
+        public string last_name { get; set; }
+        public int specialty_id { get; set; }
+        public string office { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime DoB { get; set; }
+        public string phone { get; set; }
+        public string email { get; set; }
+        public string gender { get; set; }
     }
 
     public class Prescriptions

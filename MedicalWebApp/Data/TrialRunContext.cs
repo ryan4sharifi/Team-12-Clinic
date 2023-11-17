@@ -15,6 +15,7 @@ namespace TrialRun.Data
         }
 
         public DbSet<TrialRun.Models.Patients> Patients { get; set; } = default!;
+        public DbSet<TrialRun.Models.Doctors>? Doctors { get; set; }
 
         public DbSet<TrialRun.Models.Appointments>? Appointments { get; set; }
 
@@ -25,6 +26,8 @@ namespace TrialRun.Data
         public DbSet<TrialRun.Models.Prescriptions>? Prescriptions { get; set; }
 
         public DbSet<TrialRun.Models.PatientAppointmentII>? PatientAppointmentII { get; set; }
+
+        
 
     }
 }

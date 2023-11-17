@@ -1,8 +1,25 @@
-﻿@model TrialRun.Models.PatientAppointment
+﻿@model TrialRun.Models.Appointments
 
 @{
     ViewData["Title"] = "Create";
 }
+
+<style>
+    .form-container {
+        max-width: 800px; /* Adjust the maximum width as needed */
+        margin: 0 auto; /* Center the container */
+    }
+
+    .buttons {
+        max-width: 200px; /* Adjust the maximum width as needed */
+        margin: 0; /* Center the container */
+    }
+</style>
+
+<div class="" style="padding: 20px"></div>
+<div class="shadowed-wide-container">
+<div class="form-container">
+
 
 <h1>Create</h1>
 
@@ -11,41 +28,42 @@
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                <label asp-for="doctor_id" class="control-label">Doctor</label>
+                <select asp-for="doctor_id" asp-items="@(new SelectList(ViewBag.Doctors, "Id", "FullName"))" class="form-control">
+                    <option value="">Select Doctor</option>
+                </select>
+                <span asp-validation-for="doctor_id" class="text-danger"></span>
+            </div>
+
             <div class="form-group">
-                <label asp-for="patient_id" class="control-label"></label>
-                <input asp-for="patient_id" class="form-control" />
+                <label asp-for="patient_id" class="control-label">Patient</label>
+                <select asp-for="patient_id" asp-items="@(new SelectList(ViewBag.Patients, "Id", "FullName"))" class="form-control">
+                    <option value="">Select Patient</option>
+                </select>
                 <span asp-validation-for="patient_id" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="PatientLastName" class="control-label"></label>
-                <input asp-for="PatientLastName" class="form-control" />
-                <span asp-validation-for="PatientLastName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DoctorId" class="control-label"></label>
-                <input asp-for="DoctorId" class="form-control" />
-                <span asp-validation-for="DoctorId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DoctorLastName" class="control-label"></label>
-                <input asp-for="DoctorLastName" class="form-control" />
-                <span asp-validation-for="DoctorLastName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DoctorOffice" class="control-label"></label>
-                <input asp-for="DoctorOffice" class="form-control" />
-                <span asp-validation-for="DoctorOffice" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+                <div class="form-group">
+                    <label asp-for="date_appointment" class="control-label">Appointment Date</label>
+                    <input asp-for="date_appointment" class="form-control" />
+                    <span asp-validation-for="date_appointment" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="office_id" class="control-label">Office ID</label>
+                    <input asp-for="office_id" class="form-control" value="" />
+                    <span asp-validation-for="office_id" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
     </div>
 </div>
-
+</div>
 <div>
     <a asp-action="Index">Back to List</a>
+</div>
 </div>
 
 @section Scripts {

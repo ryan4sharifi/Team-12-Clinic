@@ -27,7 +27,9 @@ namespace WebApplication3.Models
         public int doctor_id { get; set; }
         [DataType(DataType.Date)]
         public DateTime date_test { get; set; }
-        public TimeSpan time { get; set; }
+        [DataType(DataType.Time)]
+        [DisplayFormat(DataFormatString = "{0:hh\\:mm tt}", ApplyFormatInEditMode = true)]
+        public DateTime time { get; set; }
         public string description { get; set; }
     }
 

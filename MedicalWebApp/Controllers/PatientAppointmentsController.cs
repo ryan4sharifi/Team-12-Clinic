@@ -61,7 +61,33 @@ namespace TrialRun.Controllers
         // GET: PatientAppointments/Create
         public IActionResult Create()
         {
-            return View();
+            var loggedInUserEmail = User.FindFirstValue(ClaimTypes.Email);
+
+            // Retrieve the patient whose email matches the currently logged-in user's email
+            var loggedInPatient = _context.Patients
+                .FirstOrDefault(p => p.email == loggedInUserEmail);
+
+            if (loggedInPatient != null)
+            {
+                // Only include the currently logged-in patient in the dropdown
+                ViewBag.Patients = new List<object>
+        {
+            new { Id = loggedInPatient.patient_id, FullName = $"{loggedInPatient.last_name}, {loggedInPatient.first_name}   {loggedInPatient.patient_id}" }
+        };
+            }
+            else
+            {
+                // Handle the case where the currently logged-in user is not a patient
+                ViewBag.Patients = new List<object>();
+            }
+
+            ViewBag.Doctors = _context.Doctors
+                .OrderBy(d => d.last_name)
+                .ThenBy(d => d.first_name)
+                .Select(d => new { Id = d.doctor_id, FullName = $"{d.last_name}, {d.first_name}   {d.doctor_id}" })
+                .ToList();
+
+            return View(new Appointments());
         }
 
         // POST: PatientAppointments/Create
@@ -69,7 +95,7 @@ namespace TrialRun.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AppointmentId,patient_id,PatientLastName,DoctorId,DoctorLastName,DoctorOffice")] PatientAppointment patientAppointment)
+        public async Task<IActionResult> Create([Bind("AppointmentId,patient_id,doctor_id,date_appointment,office_id")] Appointments patientAppointment)
         {
             if (ModelState.IsValid)
             {
@@ -132,15 +158,15 @@ namespace TrialRun.Controllers
         }
 
         // GET: PatientAppointments/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Cancel(int? id)
         {
-            if (id == null || _context.PatientAppointment == null)
+            if (id == null || _context.Appointments == null)
             {
                 return NotFound();
             }
 
-            var patientAppointment = await _context.PatientAppointment
-                .FirstOrDefaultAsync(m => m.AppointmentId == id);
+            var patientAppointment = await _context.Appointments
+                .FirstOrDefaultAsync(m => m.appointment_id == id);
             if (patientAppointment == null)
             {
                 return NotFound();
@@ -150,7 +176,7 @@ namespace TrialRun.Controllers
         }
 
         // POST: PatientAppointments/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("Cancel")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
@@ -158,10 +184,10 @@ namespace TrialRun.Controllers
             {
                 return Problem("Entity set 'TrialRunContext.PatientAppointment'  is null.");
             }
-            var patientAppointment = await _context.PatientAppointment.FindAsync(id);
+            var patientAppointment = await _context.Appointments.FindAsync(id);
             if (patientAppointment != null)
             {
-                _context.PatientAppointment.Remove(patientAppointment);
+                _context.Appointments.Remove(patientAppointment);
             }
             
             await _context.SaveChangesAsync();

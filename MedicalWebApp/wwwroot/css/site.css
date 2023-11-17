@@ -103,6 +103,14 @@ main {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Add a shadow for depth */
 }
 
+.orangeHeader {
+    background-color: #FF8133; /* Dark background color */
+    color: #fff; /* White text color */
+    padding: 20px; /* Add padding for better readability */
+    text-align: center; /* Center the text */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Add a shadow for depth */
+}
+
 .shadowed-site-container {
     max-width: 900px; /* Adjust the maximum width as needed */
     max-height: 100%; /* Set maximum height to 100% of the parent container */

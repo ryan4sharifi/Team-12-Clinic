@@ -94,6 +94,8 @@
     }
 </style>
 
+<div class=""style="padding: 20px;"></div>
+
 <div class="login-form-container">
 
     <h1>Create</h1>
@@ -105,11 +107,7 @@
             <form asp-action="CreateTest" method="post">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                <div class="form-group">
-                    <label asp-for="test_id" class="control-label">Test ID</label>
-                    <input asp-for="patient_id" class="form-control" style="min-width: 560px;" />
-                    <span asp-validation-for="patient_id" class="text-danger"></span>
-                </div>
+                <!-- Getting rid of option to enter. This should be self incrementing by database -->
 
                 <div class="form-group">
                     <label asp-for="patient_id" class="control-label">Patient ID</label>
@@ -131,7 +129,7 @@
 
                 <div class="form-group">
                     <label asp-for="time" class="control-label">Time</label>
-                    <input asp-for="time" class="form-control" style="min-width: 560px;" />
+                    <input asp-for="time" type="time" class="form-control" style="min-width: 560px;" />
                     <span asp-validation-for="time" class="text-danger"></span>
                 </div>
 

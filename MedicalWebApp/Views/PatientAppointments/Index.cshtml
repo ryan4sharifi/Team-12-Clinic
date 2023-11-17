@@ -5,69 +5,63 @@
 }
 
 <style>
-    .buttons {
+
+    .custom-button {
         max-width: 200px; /* Adjust the maximum width as needed */
         margin: 0; /* Center the container */
     }
 
-    .container {
-        position: relative;
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #FFFFFF;
+        color: #000000;
     }
 
+
     .table {
-        width: 80%;
-        margin: 20px auto; /* Center the table horizontally and provide space at the top */
         border-collapse: collapse;
+        width: 100%;
+        margin-top: 20px;
     }
 
         .table th, .table td {
-            padding: 12px;
+            border: 1px solid #DDDDDD;
+            padding: 8px;
             text-align: left;
-            border-bottom: 1px solid #ddd;
-            height: 40px;
+            font-size: 15px;
         }
 
-        .table th {
-            background-color: #f18383;
-            color: white;
-        }
 
-        .table tr:hover {
-            background-color: #fff2cc;
-        }
-
-        .table td {
-            background-color: #ffe7e7;
-        }
-
-        .table a span {
-            display: inline-block;
-            margin-left: 5px;
-            vertical-align: middle;
-        }
-
-            .table a span::before {
-                font-size: 10px;
-            }
-
-        .table a.desc span::before {
-            content: "\25bc";
-        }
-
-    .form-container {
-        max-width: 300px;
-        margin: 20px auto; /* Center the form horizontally */
-        display: flex;
-        justify-content: space-between; /* Adjust as needed */
+    thead {
+        background-color: #C8102E;
+        color: #FFFFFF;
     }
 
+    th {
+        font-weight: bold;
+    }
+
+
+    tbody tr:nth-child(odd) {
+        background-color: #F2F2F2;
+    }
+
+    a {
+        color: #C8102E;
+        text-decoration: none;
+    }
+
+        a:hover {
+            text-decoration: underline;
+        }
 </style>
 
-<h1>Scheduled Appointments<h1>
+<h1>Your Scheduled Appointments<h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <button onclick="location.href='@Url.Action("Create", "PatientAppointments")'" class="custom-button" type="button">Schedule New Appointment</button>
 </p>
+
 <table class="table">
     <thead>
         <tr>
@@ -86,6 +80,10 @@
             <th>
                 @Html.DisplayNameFor(model => model.DoctorOffice)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AppointmentDate)
+            </th>
+                    
             <th></th>
         </tr>
     </thead>
@@ -109,9 +107,13 @@
                     @Html.DisplayFor(modelItem => item.DoctorOffice)
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.AppointmentDate)
+                </td>
+                <td>
                     <a asp-action="Edit" asp-route-id="@item.AppointmentId">Edit</a> |
                     <a asp-action="Details" asp-route-id="@item.AppointmentId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.AppointmentId">Delete</a>
+                    <a asp-action="Cancel" asp-route-id="@item.AppointmentId">Cancel</a>
+                    <!-- Need to update deletion to "Cancel appointment" button -->
                 </td>
             </tr>
         }

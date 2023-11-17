@@ -34,6 +34,10 @@ namespace MedicalWebApp.Models
         public virtual DbSet<Schedule> Schedules { get; set; } = null!;
         public virtual DbSet<Speciality> Specialities { get; set; } = null!;
         public virtual DbSet<Test> Tests { get; set; } = null!;
+        public virtual DbSet<DoctorsPatientList> DoctorsPatientList { get; set; } = null!;
+
+        
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

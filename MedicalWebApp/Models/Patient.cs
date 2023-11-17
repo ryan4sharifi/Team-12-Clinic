@@ -44,4 +44,25 @@ namespace MedicalWebApp.Models
         public virtual ICollection<Referral> Referrals { get; set; }
         public virtual ICollection<Test> Tests { get; set; }
     }
+
+
+    // Adding a new model to filter the patients each doctor has for doctor view
+
+    public class DoctorsPatientList
+    {
+        [Key]
+        public int PatientId { get; set; }
+        public string PatientFirstName { get; set; }
+        public string PatientMiddleInitial { get; set; }
+        public string PatientLastName { get; set; }
+        public string PatientAddress { get; set; }
+        public string PatientEmail { get; set; }
+        public string PatientPhone { get; set; }
+        public char PatientGender { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime PatientDateOfBirth { get; set; }
+        public int DoctorId { get; set; }
+        public string DoctorEmail { get; set; }
+
+    }
 }

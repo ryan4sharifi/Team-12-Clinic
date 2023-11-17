@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MedicalWebApp.Models;
+using System.Security.Claims;
 
 namespace MedicalWebApp.Controllers
 {
@@ -21,8 +22,21 @@ namespace MedicalWebApp.Controllers
         // GET: Patient_List_For_Doctor
         public async Task<IActionResult> Index()
         {
-            var team12MainContext = _context.Patients.Include(p => p.IdentityUser);
-            return View(await team12MainContext.ToListAsync());
+            if (User.Identity.IsAuthenticated)
+            {
+                // Get the currently logged-in user's email
+                var loggedInUserEmail = User.FindFirstValue(ClaimTypes.Email);
+
+                // Retrieve appointments only for the logged-in patient based on email
+                var patientAppointments = await _context.DoctorsPatientList
+                    .Where(pa => pa.DoctorEmail == loggedInUserEmail)
+                    .ToListAsync();
+
+                return View(patientAppointments);
+            }
+
+            // Handle the case where the user is not authenticated
+            return Challenge();
         }
 
         // GET: Patient_List_For_Doctor/Details/5

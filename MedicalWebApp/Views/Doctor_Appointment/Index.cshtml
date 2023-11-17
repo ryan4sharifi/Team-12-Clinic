@@ -4,27 +4,64 @@
     ViewData["Title"] = "Index";
 }
 
+<style>
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #FFFFFF;
+        color: #000000;
+    }
+
+
+    .table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 20px;
+    }
+
+        .table th, .table td {
+            border: 1px solid #DDDDDD;
+            padding: 8px;
+            text-align: left;
+        }
+
+
+    thead {
+        background-color: #C8102E;
+        color: #FFFFFF;
+    }
+
+    th {
+        font-weight: bold;
+    }
+
+
+    tbody tr:nth-child(odd) {
+        background-color: #F2F2F2;
+    }
+
+    tbody tr:hover {
+        background-color: #EAEAEA;
+    }
+
+
+    a {
+        color: #C8102E;
+        text-decoration: none;
+    }
+
+        a:hover {
+            text-decoration: underline;
+        }
+</style>
+
 <h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.DoctorName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PatientName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.date_appointment)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
+<!-- Removing create feature. Doctors do not create appointments
+    they can only view appointments. This page should just display doctor's
+    appointments -->
+
+
 @foreach (var item in Model) {
         <tr>
             <td>
@@ -37,9 +74,7 @@
                 @Html.DisplayFor(modelItem => item.date_appointment)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.appointment_id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.appointment_id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.appointment_id">Delete</a>
+                <a asp-action="Details" asp-route-id="@item.appointment_id">Details</a> 
             </td>
         </tr>
 }

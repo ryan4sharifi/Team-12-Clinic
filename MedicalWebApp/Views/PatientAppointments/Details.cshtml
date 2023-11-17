@@ -4,6 +4,22 @@
     ViewData["Title"] = "Details";
 }
 
+<style>
+    .form-container {
+        max-width: 800px; /* Adjust the maximum width as needed */
+        margin: 0 auto; /* Center the container */
+    }
+
+    .buttons {
+        max-width: 200px; /* Adjust the maximum width as needed */
+        margin: 0; /* Center the container */
+    }
+</style>
+
+<div class="" style="padding: 20px"></div>
+<div class="shadowed-wide-container">
+<div class="form-container">
+     
 <h1>Details</h1>
 
 <div>
@@ -42,7 +58,9 @@
         </dd>
     </dl>
 </div>
+</div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.AppointmentId">Edit</a> |
     <a asp-action="Index">Back to List</a>
+</div>
 </div>

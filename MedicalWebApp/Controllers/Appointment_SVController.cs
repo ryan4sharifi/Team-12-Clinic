@@ -76,6 +76,18 @@ namespace med_test8.Controllers
         // GET: CreateAppointment_SV/Create
         public IActionResult Create()
         {
+            ViewBag.Doctors = _context.Doctors
+                .OrderBy(d => d.last_name)
+                .ThenBy(d => d.first_name)
+                .Select(d => new { Id = d.doctor_id, FullName = $"{d.last_name}, {d.first_name}   {d.doctor_id}" })
+                .ToList();
+
+            ViewBag.Patients = _context.Patients
+                .OrderBy(p => p.last_name)
+                .ThenBy(p => p.first_name)
+                .Select(p => new { Id = p.patient_id, FullName = $"{p.last_name}, {p.first_name}   {p.patient_id}" })
+                .ToList();
+
             return View(new Appointments());
         }
 

@@ -33,15 +33,20 @@
             <form asp-action="Create">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
-                        <label asp-for="doctor_id" class="control-label">Doctor ID</label>
-                    <input asp-for="doctor_id" class="form-control" value="" />
-                    <span asp-validation-for="doctor_id" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="patient_id" class="control-label">Patient ID</label>
-                    <input asp-for="patient_id" class="form-control" value="" />
-                    <span asp-validation-for="patient_id" class="text-danger"></span>
-                </div>
+                <label asp-for="doctor_id" class="control-label">Doctor</label>
+                <select asp-for="doctor_id" asp-items="@(new SelectList(ViewBag.Doctors, "Id", "FullName"))" class="form-control">
+                    <option value="">Select Doctor</option>
+                </select>
+                <span asp-validation-for="doctor_id" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="patient_id" class="control-label">Patient</label>
+                <select asp-for="patient_id" asp-items="@(new SelectList(ViewBag.Patients, "Id", "FullName"))" class="form-control">
+                    <option value="">Select Patient</option>
+                </select>
+                <span asp-validation-for="patient_id" class="text-danger"></span>
+            </div>
                 <div class="form-group">
                     <label asp-for="date_appointment" class="control-label">Appointment Date</label>
                     <input asp-for="date_appointment" class="form-control" />
