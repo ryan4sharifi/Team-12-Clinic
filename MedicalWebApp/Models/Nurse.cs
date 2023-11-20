@@ -16,6 +16,7 @@ namespace MedicalWebApp.Models
         public string Email { get; set; } = null!;
 
         public string? IdentityUserId { get; set; }
+        public string Gender { get; set; }
         public virtual IdentityUser IdentityUser { get; set; }
     }
 }

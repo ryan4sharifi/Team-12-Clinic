@@ -73,8 +73,18 @@
             <input name="DoctorMiddleInitial" maxlength="1" />
             <label>Last Name</label>
             <input name="DoctorLastName" />
-            <label>Office</label>
-            <input name="DoctorOffice" />
+
+                <label for="doctorOffice">Doctor's Office:</label>
+                <select name="doctorOffice" id="doctorOffice">
+                    <option value="Houston">Houston</option>
+                    <option value="Katy">Katy</option>
+                    <option value="Galveston">Galveston</option>
+                    <option value="MissouriCity">Missouri City</option>
+                    <option value="Pasadena">Pasadena</option>
+                    <option value="SugarLand">Sugarland</option>
+                </select>
+
+
             <label>Date of Birth</label>
             <input name="DoctorDoB" type="date" />
             <label>Phone</label>
@@ -100,12 +110,26 @@
             <input name="NurseMiddleInitial" maxlength="1" />
             <label>Last Name</label>
             <input name="NurseLastName" />
-            <label>Office</label>
-            <input name="NurseOffice" />
+
+                <label for="nurseOffice">Nurse's Office:</label>
+                <select name="nurseOffice" id="nurseOffice">
+                    <option value="Houston">Houston</option>
+                    <option value="Katy">Katy</option>
+                    <option value="Galveston">Galveston</option>
+                    <option value="MissouriCity">Missouri City</option>
+                    <option value="Pasadena">Pasadena</option>
+                    <option value="SugarLand">Sugarland</option>
+                </select>
+
             <label>Date of Birth</label>
             <input name="NurseDoB" type="date" />
             <label>Phone</label>
             <input name="NursePhone" />
+            <label>Gender</label>
+                <select name="NurseGender">
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
+                </select>
         </div>
 
         <!-- Patient Fields -->

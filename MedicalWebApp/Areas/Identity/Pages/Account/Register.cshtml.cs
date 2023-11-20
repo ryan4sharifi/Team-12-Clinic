@@ -138,7 +138,9 @@ public class RegisterModel : PageModel
                         var nurseOffice = Request.Form["NurseOffice"];
                         var nurseDoB = DateTime.TryParse(Request.Form["NurseDoB"], out DateTime nurseParsedDate) ? nurseParsedDate : DateTime.MinValue;
                         var nursePhone = Request.Form["NursePhone"];
+                        var nurseGender = Request.Form["NurseGender"];
                         var newNurse = new Nurse
+                        
                         {
                             IdentityUserId = user.Id,
                             FirstName = nurseFirstName,
@@ -147,7 +149,8 @@ public class RegisterModel : PageModel
                             Email = Input.Email,
                             Office = nurseOffice,
                             DoB = nurseDoB,
-                            Phone = nursePhone
+                            Phone = nursePhone,
+                            Gender = nurseGender
                         };
 
                         _context.Nurses.Add(newNurse);
