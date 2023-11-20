@@ -1,0 +1,129 @@
+﻿@model IEnumerable<med_test8.Models.Patients>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style>
+
+    .custom-button {
+        max-width: 200px; /* Adjust the maximum width as needed */
+        margin: 0; /* Center the container */
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #FFFFFF;
+        color: #000000;
+    }
+
+
+    .table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 20px;
+    }
+
+        .table th, .table td {
+            border: 1px solid #DDDDDD;
+            padding: 8px;
+            text-align: left;
+            font-size: 15px;
+        }
+
+
+    thead {
+        background-color: #C8102E;
+        color: #FFFFFF;
+    }
+
+    th {
+        font-weight: bold;
+    }
+
+
+    tbody tr:nth-child(odd) {
+        background-color: #F2F2F2;
+    }
+
+    a {
+        color: #C8102E;
+        text-decoration: none;
+    }
+
+        a:hover {
+            text-decoration: underline;
+        }
+</style>
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Add New Patient</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.first_name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.middle_initial)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.last_name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DoB)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.first_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.middle_initial)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.last_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DoB)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.patient_id">Edit</a> | 
+                <a href="@Url.Action("Create", "Appointment_SV")" class="custom-link">Schedule Appt.</a> | 
+                <a asp-action="Delete" asp-route-id="@item.patient_id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

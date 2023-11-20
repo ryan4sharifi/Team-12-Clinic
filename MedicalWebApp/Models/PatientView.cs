@@ -131,5 +131,23 @@ namespace TrialRun.Models
       
     }
 
+    public class DoctorPrescriptions // Recycling Table. Will be used for Patient View
+    {
+        [Key]
+        public int prescription_id { get; set; }
+        public int doctor_id { get; set; }
+        public int patient_id { get; set; }
+        public string PatientName { get; set; }
+        public string DoctorName { get; set; }
+        public string drug_name { get; set; } = null!;
+        public string dosage { get; set; } = null!;
+        public int refills { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime date_prescription { get; set; }
+        public string doctor_email { get; set; }
+        public string patient_email { get; set; }
+
+
+    }
 
 }

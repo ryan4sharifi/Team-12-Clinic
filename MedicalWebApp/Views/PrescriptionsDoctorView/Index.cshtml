@@ -1,0 +1,123 @@
+﻿@model IEnumerable<MedicalWebApp.Models.DoctorPrescriptions>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style>
+
+    .custom-button {
+        max-width: 200px; /* Adjust the maximum width as needed */
+        margin: 0; /* Center the container */
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #FFFFFF;
+        color: #000000;
+    }
+
+
+    .table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 20px;
+    }
+
+        .table th, .table td {
+            border: 1px solid #DDDDDD;
+            padding: 8px;
+            text-align: left;
+            font-size: 15px;
+        }
+
+
+    thead {
+        background-color: #C8102E;
+        color: #FFFFFF;
+    }
+
+    th {
+        font-weight: bold;
+    }
+
+
+    tbody tr:nth-child(odd) {
+        background-color: #F2F2F2;
+    }
+
+    a {
+        color: #C8102E;
+        text-decoration: none;
+    }
+
+        a:hover {
+            text-decoration: underline;
+        }
+</style>
+
+<h1>Prescribed Medications</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Prescribed By
+            </th>
+            <th>
+                Patient ID
+            </th>
+            <th>
+                Patient Name
+            </th>
+            <th>
+                Drug Name
+            </th>
+            <th>
+                Dosage
+            </th>
+            <th>
+                Refills
+            </th>
+            <th>
+                Date Prescribed
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.doctor_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.patient_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PatientName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.drug_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dosage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.refills)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.date_prescription)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.prescription_id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.prescription_id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.prescription_id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

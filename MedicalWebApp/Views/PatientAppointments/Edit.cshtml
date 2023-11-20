@@ -1,42 +1,33 @@
-﻿@model TrialRun.Models.PatientAppointment
+﻿@model TrialRun.Models.Appointments
 
 @{
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<h1>Edit your appointment for @Html.DisplayFor(model => model.date_appointment) ? </h1>
 
-<h4>PatientAppointment</h4>
+<h4></h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="AppointmentId" />
+            <input type="hidden" asp-for="appointment_id" />
+
             <div class="form-group">
-                <label asp-for="patient_id" class="control-label"></label>
-                <input asp-for="patient_id" class="form-control" />
+                <label asp-for="patient_id" class="control-label"><strong>Patient ID</strong></label>
+                <div class="readonly-display">@Model.patient_id</div>
                 <span asp-validation-for="patient_id" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PatientLastName" class="control-label"></label>
-                <input asp-for="PatientLastName" class="form-control" />
-                <span asp-validation-for="PatientLastName" class="text-danger"></span>
+                <label asp-for="appointment_id" class="control-label"><strong>Appointment ID</strong></label>
+                <div class="readonly-display">@Model.appointment_id</div>
+                <span asp-validation-for="patient_id" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DoctorId" class="control-label"></label>
-                <input asp-for="DoctorId" class="form-control" />
-                <span asp-validation-for="DoctorId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DoctorLastName" class="control-label"></label>
-                <input asp-for="DoctorLastName" class="form-control" />
-                <span asp-validation-for="DoctorLastName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DoctorOffice" class="control-label"></label>
-                <input asp-for="DoctorOffice" class="form-control" />
-                <span asp-validation-for="DoctorOffice" class="text-danger"></span>
+                <label asp-for="date_appointment" class="control-label"><strong>Appointment Date</strong></label>
+                <input asp-for="date_appointment" class="form-control" />
+                <span asp-validation-for="date_appointment" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

@@ -109,12 +109,12 @@ namespace TrialRun.Controllers
         // GET: PatientAppointments/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.PatientAppointment == null)
+            if (id == null || _context.Appointments == null)
             {
                 return NotFound();
             }
 
-            var patientAppointment = await _context.PatientAppointment.FindAsync(id);
+            var patientAppointment = await _context.Appointments.FindAsync(id);
             if (patientAppointment == null)
             {
                 return NotFound();
@@ -127,9 +127,9 @@ namespace TrialRun.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("AppointmentId,patient_id,PatientLastName,DoctorId,DoctorLastName,DoctorOffice")] PatientAppointment patientAppointment)
+        public async Task<IActionResult> Edit(int id, [Bind("AppointmentId,patient_id,PatientLastName,DoctorId,DoctorLastName,DoctorOffice")] Appointments patientAppointment)
         {
-            if (id != patientAppointment.AppointmentId)
+            if (id != patientAppointment.appointment_id)
             {
                 return NotFound();
             }
@@ -143,7 +143,7 @@ namespace TrialRun.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PatientAppointmentExists(patientAppointment.AppointmentId))
+                    if (!PatientAppointmentExists(patientAppointment.appointment_id))
                     {
                         return NotFound();
                     }

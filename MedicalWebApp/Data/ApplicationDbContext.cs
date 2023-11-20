@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using med_test8.Models;
+using MedicalWebApp.Models;
 
 namespace med_test8.Data
 {
@@ -20,6 +21,8 @@ namespace med_test8.Data
         public DbSet<med_test8.Models.Our_Providers>? Our_Providers { get; set; }
 
         public DbSet<med_test8.Models.Provider_Info>? Provider_Info { get; set; }
+
+        public DbSet<MedicalWebApp.Models.Prescriptions>? Prescriptions { get; set; }
 
         
     }

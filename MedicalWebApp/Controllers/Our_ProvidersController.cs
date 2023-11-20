@@ -27,7 +27,7 @@ namespace med_test8.Controllers
             providers = providers
                 .Where(p =>
                     (string.IsNullOrEmpty(officeLocation) || p.Office == officeLocation) &&
-                    (string.IsNullOrEmpty(classification) || p.classification == classification) &&
+                    (string.IsNullOrEmpty(classification) || p.Classification == classification) &&
                     (Gen == default || p.gender == Gen)
                 );
 

@@ -1,0 +1,113 @@
+﻿@model WebApplication3.Models.combined_health_view
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<style>
+    .form-container {
+        max-width: 600px; /* Adjust the maximum width as needed */
+        margin: 0 auto; /* Center the container */
+    }
+
+    .buttons {
+        max-width: 200px; /* Adjust the maximum width as needed */
+        margin: 0; /* Center the container */
+    }
+</style>
+
+<div style="padding-bottom: 20px;"></div>
+
+<div class="shadowed-site-container">
+
+<h1>Details</h1>
+
+<div>
+    <h4>combined_health_view</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.weight_lbs)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.weight_lbs)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.height_inches)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.height_inches)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.heart_rate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.heart_rate)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.systolic_pressure)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.systolic_pressure)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.diastolic_pressure)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.diastolic_pressure)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.temperature_fahrenheit)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.temperature_fahrenheit)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.smoke_or_vape)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.smoke_or_vape)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.consume_alcohol)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.consume_alcohol)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.allergies)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.allergies)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.nurse_id)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.nurse_id)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.patient_id)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.patient_id)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PatientName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PatientName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NurseName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NurseName)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.appointment_id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+</div>

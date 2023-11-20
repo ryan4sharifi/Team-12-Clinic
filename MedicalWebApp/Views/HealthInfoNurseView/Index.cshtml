@@ -1,0 +1,181 @@
+﻿@model IEnumerable<WebApplication3.Models.combined_health_view>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style>
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #FFFFFF;
+        color: #000000;
+    }
+
+
+    .table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 20px;
+    }
+
+        .table th, .table td {
+            border: 1px solid #DDDDDD;
+            padding: 8px;
+            text-align: left;
+        }
+
+
+    thead {
+        background-color: #C8102E;
+        color: #FFFFFF;
+    }
+
+    th {
+        font-weight: bold;
+    }
+
+
+    tbody tr:nth-child(odd) {
+        background-color: #F2F2F2;
+    }
+
+    tbody tr:hover {
+        background-color: #EAEAEA;
+    }
+
+
+    a {
+        color: #C8102E;
+        text-decoration: none;
+    }
+
+        a:hover {
+            text-decoration: underline;
+        }
+</style>
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="CreateCheckup">Checkup Form</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Patient ID
+            </th>
+            <th>
+                Patient Name
+            </th>
+            <th>
+                Weight (lbs)
+            </th>
+            <th>
+                Height (inches)
+            </th>
+            <th>
+                Heart Rate
+            </th>
+            <th>
+                Systolic Pressure
+            </th>
+            <th>
+                Diastolic Pressure)
+            </th>
+            <th>
+                Temperature (Fahrenheit)
+            </th>
+            <th>
+                Smoke or Vape
+            </th>
+            <th>
+                Consume Alcohol
+            </th>
+            <th>
+                Allergies
+            </th>
+           
+            <th>
+                Assiting Nurse ID
+            </th>
+            <th>
+                Nurse Name
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.patient_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PatientName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.weight_lbs)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.height_inches)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.heart_rate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.systolic_pressure)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.diastolic_pressure)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.temperature_fahrenheit)
+            </td>
+                <td>
+                    @if (item.smoke_or_vape)
+                    {
+                        <text>Yes</text>
+                    }
+                    else
+                    {
+                        <text>No</text>
+                    }
+                </td>
+                <td>
+                    @if (item.consume_alcohol)
+                    {
+                        <text>Yes</text>
+                    }
+                    else
+                    {
+                        <text>No</text>
+                    }
+                </td>
+                <td>
+                    @if (item.allergies)
+                    {
+                        <text>Yes</text>
+                    }
+                    else
+                    {
+                        <text>No</text>
+                    }
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nurse_id)
+            </td>
+          
+            <td>
+                @Html.DisplayFor(modelItem => item.NurseName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.appointment_id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.appointment_id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.appointment_id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

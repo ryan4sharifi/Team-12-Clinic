@@ -29,14 +29,16 @@ namespace MedicalWebApp.Models
         public virtual DbSet<MetaData> MetaDatas { get; set; } = null!;
         public virtual DbSet<Nurse> Nurses { get; set; } = null!;
         public virtual DbSet<Patient> Patients { get; set; } = null!;
-        public virtual DbSet<Prescription> Prescriptions { get; set; } = null!;
+        public virtual DbSet<Prescriptions> Prescriptions { get; set; } = null!;
+        public virtual DbSet<DoctorPrescriptions> DoctorPrescriptions { get; set; } = null!;
         public virtual DbSet<Referral> Referrals { get; set; } = null!;
         public virtual DbSet<Schedule> Schedules { get; set; } = null!;
         public virtual DbSet<Speciality> Specialities { get; set; } = null!;
-        public virtual DbSet<Test> Tests { get; set; } = null!;
+        public virtual DbSet<Tests> Tests { get; set; } = null!;
+        public virtual DbSet<Test> DoctorTests { get; set; } = null!;
         public virtual DbSet<DoctorsPatientList> DoctorsPatientList { get; set; } = null!;
 
-        
+
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -120,8 +122,6 @@ namespace MedicalWebApp.Models
                 entity.Property(e => e.OfficeId).HasColumnName("office_id");
 
                 entity.Property(e => e.PatientId).HasColumnName("patient_id");
-
-                entity.Property(e => e.Time).HasColumnName("time");
 
                 entity.HasOne(d => d.Doctor)
                     .WithMany(p => p.Appointments)
@@ -550,16 +550,10 @@ namespace MedicalWebApp.Models
 
                 entity.Property(e => e.PatientId).HasColumnName("patient_id");
 
-                entity.Property(e => e.Results)
-                    .HasColumnType("text")
-                    .HasColumnName("results");
-
                 entity.Property(e => e.Status)
                     .HasMaxLength(10)
                     .IsUnicode(false)
                     .HasColumnName("status");
-
-                entity.Property(e => e.Time).HasColumnName("time");
 
                 entity.HasOne(d => d.Doctor)
                     .WithMany(p => p.Tests)
@@ -578,6 +572,10 @@ namespace MedicalWebApp.Models
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+        public DbSet<Appointment_SV>? Appointment_SV { get; set; }
+
+        public DbSet<TestDetails>? TestDetails { get; set; }
 
     }
 }

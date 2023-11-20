@@ -1,0 +1,76 @@
+﻿@model MedicalWebApp.Models.Prescriptions
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<style>
+    .form-container {
+        max-width: 800px; /* Adjust the maximum width as needed */
+        margin: 0 auto; /* Center the container */
+    }
+
+    .buttons {
+        max-width: 200px; /* Adjust the maximum width as needed */
+        margin: 0; /* Center the container */
+    }
+</style>
+
+<div style="padding-bottom: 20px;"></div>
+
+<div class="shadowed-site-container">
+
+<h1>Edit</h1>
+
+<h4>DoctorPrescriptions</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"><strong>Prescription ID</strong></div>
+            <input type="hidden" asp-for="prescription_id" />
+            <div class="form-group">
+                <label asp-for="doctor_id" class="control-label"><strong>Doctor ID</strong></label>
+                <input asp-for="doctor_id" class="form-control" style="background-color: #f0f0f0;" readonly/>
+                <span asp-validation-for="doctor_id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="patient_id" class="control-label"><strong>Patient ID</strong></label>
+                <input asp-for="patient_id" class="form-control" style="background-color: #f0f0f0;" readonly/>
+                <span asp-validation-for="patient_id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="drug_name" class="control-label"><strong>Drug Name</strong></label>
+                <input asp-for="drug_name" class="form-control"  />
+                <span asp-validation-for="drug_name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="dosage" class="control-label"><strong>Dosage</strong></label>
+                <input asp-for="dosage" class="form-control" />
+                <span asp-validation-for="dosage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="refills" class="control-label"><strong>Refills</strong></label>
+                <input asp-for="refills" class="form-control" />
+                <span asp-validation-for="refills" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="date_prescription" class="control-label"><strong>Prescription Date</strong></label>
+                <input asp-for="date_prescription" class="form-control" style="background-color: #f0f0f0;" readonly />
+                <span asp-validation-for="date_prescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

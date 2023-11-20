@@ -10,6 +10,7 @@ namespace med_test8.Models
         public string DoctorName { get; set; }
         public string PatientName { get; set; }
         public DateTime date_appointment { get; set; }
+        public string DoctorEmail { get; set; }
     }
 
     public class Appointments
@@ -96,10 +97,12 @@ namespace med_test8.Models
     public class Our_Providers
     {
         [Key]
-        public int id { get; set; }
+        public int ID { get; set; }
         public string FullName { get; set; }
         public string Office { get; set; }
-        public string classification { get; set; }
+        public string PhoneNumber { get; set; }
+        public string Email { get; set; }
+        public string Classification { get; set; }
         public char gender { get; set; }
     }
 

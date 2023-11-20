@@ -5,69 +5,56 @@
 }
 
 <style>
-    .buttons {
+
+    .custom-button {
         max-width: 200px; /* Adjust the maximum width as needed */
         margin: 0; /* Center the container */
     }
 
-    .container {
-        position: relative;
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #FFFFFF;
+        color: #000000;
     }
 
+
     .table {
-        width: 80%;
-        margin: 20px auto; /* Center the table horizontally and provide space at the top */
         border-collapse: collapse;
+        width: 100%;
+        margin-top: 20px;
     }
 
         .table th, .table td {
-            padding: 12px;
+            border: 1px solid #DDDDDD;
+            padding: 8px;
             text-align: left;
-            border-bottom: 1px solid #ddd;
-            height: 40px;
+            font-size: 15px;
         }
 
-        .table th {
-            background-color: #f18383;
-            color: white;
-        }
 
-        .table tr:hover {
-            background-color: #fff2cc;
-        }
+    thead {
+        background-color: #C8102E;
+        color: #FFFFFF;
+    }
 
-        .table td {
-            background-color: #ffe7e7;
-        }
-
-        .table a span {
-            display: inline-block;
-            margin-left: 5px;
-            vertical-align: middle;
-        }
-
-            .table a span::before {
-                font-size: 10px;
-            }
-
-        .table a.desc span::before {
-            content: "\25bc";
-        }
-
-    .form-container {
-        max-width: 300px;
-        margin: 20px auto; /* Center the form horizontally */
-        display: flex;
-        justify-content: space-between; /* Adjust as needed */
+    th {
+        font-weight: bold;
     }
 
 
+    tbody tr:nth-child(odd) {
+        background-color: #F2F2F2;
+    }
 
+    a {
+        color: #C8102E;
+        text-decoration: none;
+    }
+
+        a:hover {
+            text-decoration: underline;
+        }
 </style>
-
-<div class="blueHeader">
-    <header> Office Admin View </header>
-</div>
 
 <div style="padding-bottom: 20px;"></div>
 
@@ -77,22 +64,77 @@
 
 
 
+        <h4> Filters:</h4>
+
+        <div class="form-container">
+            <form asp-action="Index" asp-controller="Our_Providers" method="get">
+
+                <select name="officeLocation" id="officeLocation">
+                    <option value="">All Locations</option>
+                    <option value="Houston">Houston</option>
+                    <option value="Missouri City">Missouri City</option>
+                    <option value="Pasadena">Pasadena</option>
+                    <option value="Katy">Katy</option>
+                    <option value="Sugarland">Sugarland</option>
+                </select>
+
+
+                <select name="classification" id="classification">
+                    <option value="">All Classifications</option>
+                    <option value="Cardiology">Cardiology</option>
+                    <option value="Family Medicine">Family Medicine</option>
+                    <option value="Neurology">Neurology</option>
+                    <option value="Pediatrics">Pediatrics</option>
+                    <option value="Orthopedics">Orthopedics</option>
+                    <option value="Gastroenterology">Gastroenterology</option>
+                    <option value="Radiology">Radiology</option>
+                    <option value="Endocrinology">Endocrinology</option>
+                    <option value="Oncology">Oncology</option>
+                    <option value="Dermatology">Dermatology</option>
+                    <option value="Nurse">Nurse</option>
+                </select>
+
+                <select name="Gen" id="Gen">
+                    <option value="">All Genders</option>
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
+                </select>
+
+                <button type="submit" style="background-color: #238cff; color: white;">Filter</button>
+            </form>
+
+        </div>
+
+        <div class="" style="padding:20px"></div>
+
+
+
     <table class="table">
         <thead>
             <tr>
                 <th>
-                        @Html.DisplayNameFor(model => model.FullName)
+                    ID
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Office)
+                    Full Name
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.classification)
+                    Office
                 </th>
-               <th>
-                        @Html.DisplayNameFor(model => model.gender)
-                    </th>
-                <th></th>
+                <th>
+                    Phone Number
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Classification
+                </th>
+               
+                <th>
+                    Gender
+                </th>
+
             </tr>
         </thead>
         <tbody>
@@ -100,65 +142,35 @@
             {
                 <tr>
                     <td>
-                            @Html.DisplayFor(modelItem => item.FullName)
+                        @Html.DisplayFor(modelItem => item.ID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FullName)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Office)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.classification)
+                        @Html.DisplayFor(modelItem => item.PhoneNumber)
                     </td>
-
-                        <td>
-                            @Html.DisplayFor(modelItem => item.gender)
-                        </td>
                     <td>
-
-                        <a asp-action="Details" asp-route-id="@item.id">Details</a>
+                        @Html.DisplayFor(modelItem => item.Email)
                     </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Classification)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.gender)
+                    </td>
+
                 </tr>
             }
         </tbody>
     </table>
 </div>
 
-<h4> Filters:</h4>
-
-<div class="form-container">
-        <form asp-action="Index" asp-controller="Our_Providers" method="get">
-
-            <select name="officeLocation" id="officeLocation">
-                <option value="">All Locations</option>
-                <option value="Houston">Houston</option>
-                <option value="Missouri City">Missouri City</option>
-                <option value="Pasadena">Pasadena</option>
-                <option value="Katy">Katy</option>
-            </select>
 
 
-            <select name="classification" id="classification">
-                <option value="">All Classifications</option>
-                <option value="Cardiology">Cardiology</option>
-                <option value="Family Medicine">Family Medicine</option>
-                <option value="Neurology">Neurology</option>
-                <option value="Pediatrics">Pediatrics</option>
-                <option value="Orthopedics">Orthopedics</option>
-                <option value="Gastroenterology">Gastroenterology</option>
-                <option value="Radiology">Radiology</option>
-                <option value="Endocrinology">Endocrinology</option>
-                <option value="Oncology">Oncology</option>
-                <option value="Dermatology">Dermatology</option>
-                <option value="Nurse">Nurse</option>
-            </select>
 
-            <select name="Gen" id="Gen">
-                <option value="">All Genders</option>
-                <option value="M">Male</option>
-                <option value="F">Female</option>
-            </select>
-
-            <button type="submit">Filter</button>
-        </form>
-
-</div>
 </div>

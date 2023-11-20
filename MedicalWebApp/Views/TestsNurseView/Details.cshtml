@@ -1,0 +1,84 @@
+﻿@model WebApplication3.Models.TestDetails
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<style>
+    .form-container {
+        max-width: 600px; /* Adjust the maximum width as needed */
+        margin: 0 auto; /* Center the container */
+    }
+
+    .buttons {
+        max-width: 200px; /* Adjust the maximum width as needed */
+        margin: 0; /* Center the container */
+    }
+</style>
+
+<div style="padding-bottom: 20px;"></div>
+
+<div class="shadowed-site-container">
+
+<h1>Details</h1>
+
+<div>
+    <h4>TestDetails</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.patient_id)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.patient_id)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PatientName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PatientName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.date_test)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.date_test)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.doctor_id)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.doctor_id)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DoctorEmail)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DoctorEmail)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PatientEmail)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PatientEmail)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.status)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.status)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.description)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.description)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.test_id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+
+</div>

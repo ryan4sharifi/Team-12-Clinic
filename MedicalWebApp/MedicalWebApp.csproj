@@ -8,11 +8,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Views\Appointment_SV\CreateAppt.cshtml" />
+    <Content Remove="Views\PatientsAdminView\CreateAppt.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Appointment_SV\CreateAppt.cshtml" />
     <None Include="Views\Appointment_SV\Create.cshtml" />
     <None Include="Views\Appointment_SV\Delete.cshtml" />
     <None Include="Views\Appointment_SV\Details.cshtml" />
     <None Include="Views\Appointment_SV\Edit.cshtml" />
     <None Include="Views\Appointment_SV\Index.cshtml" />
+    <None Include="Views\PatientsAdminView\CreateAppt.cshtml" />
     <None Include="Views\Shared\Error.cshtml" />
     <None Include="Views\Shared\_Layout.cshtml" />
     <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />

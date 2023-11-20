@@ -1,0 +1,101 @@
+﻿@model WebApplication3.Models.AppointmentHealthInformation
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<style>
+    .form-container {
+        max-width: 600px; /* Adjust the maximum width as needed */
+        margin: 0 auto; /* Center the container */
+    }
+
+    .buttons {
+        max-width: 200px; /* Adjust the maximum width as needed */
+        margin: 0; /* Center the container */
+    }
+</style>
+
+<div style="padding-bottom: 20px;"></div>
+
+<div class="shadowed-site-container">
+
+<h1>Edit</h1>
+
+<h4>combined_health_view</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="appointment_id" />
+            <div class="form-group">
+                <label asp-for="appointment_id" class="control-label"><strong>Appointment ID</strong></label>
+                <input asp-for="appointment_id" class="form-control" style="background-color: #f0f0f0;" readonly />
+                <span asp-validation-for="appointment_id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="nurse_id" class="control-label"><strong>Nurse ID</strong></label>
+                <input asp-for="nurse_id" class="form-control" style="background-color: #f0f0f0;" readonly />
+                <span asp-validation-for="nurse_id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="weight_lbs" class="control-label"><strong>Weight (lbs)</strong></label>
+                <input asp-for="weight_lbs" class="form-control" />
+                <span asp-validation-for="weight_lbs" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="height_inches" class="control-label"><strong>Height (inches)</strong></label>
+                <input asp-for="height_inches" class="form-control" />
+                <span asp-validation-for="height_inches" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="heart_rate" class="control-label"><strong>Heart Rate</strong></label>
+                <input asp-for="heart_rate" class="form-control" />
+                <span asp-validation-for="heart_rate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="systolic_pressure" class="control-label"><strong>Systolic Pressure</strong></label>
+                <input asp-for="systolic_pressure" class="form-control" />
+                <span asp-validation-for="systolic_pressure" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <onglabel asp-for="diastolic_pressure" class="control-label"> <strong>Diastolic Pressure</strong> </label>
+                <input asp-for="diastolic_pressure" class="form-control" />
+                <span asp-validation-for="diastolic_pressure" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="temperature_fahrenheit" class="control-label"><strong>Temperature Fahrenheit</strong></label>
+                <input asp-for="temperature_fahrenheit" class="form-control" />
+                <span asp-validation-for="temperature_fahrenheit" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label"> <strong>Smoke or Vape</strong>
+                    <input class="form-check-input" asp-for="smoke_or_vape" />
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label"><strong>Consume Alcohol</strong>
+                    <input class="form-check-input" asp-for="consume_alcohol" />
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label"><strong>Allergies</strong>
+                    <input class="form-check-input" asp-for="allergies" /> 
+                </label>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

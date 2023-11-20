@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -66,78 +67,7 @@ namespace WebApplication3.Controllers
             }
             return View(appointments);
         }
-
-
-        /*
-         ******  Create Test Controller                 ******
-         ******  THIS IS A NEW CONTROLLER I'VE CREATED  ******
-         ******  TO CONNECT THE TEST TABLE WITH HTML    ******
-        */
-
-        // GET: Tests/Create
-        public IActionResult CreateTest()
-        {
-            return View();
-        }
-
-        // POST: Tests/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateTest([Bind("patient_id,doctor_id,date_test,description")] Tests test)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(test);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(test);
-        }
-
-        //My Vaccine Controller
-        // GET: Vaccines/Create
-        public IActionResult CreateVaccine()
-        {
-            return View();
-        }
-
-        // POST: Vaccines/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateVaccine([Bind("patient_id,nurse_id,doctor_id,vaccine_name,date_administered")] Vaccines vaccine)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(vaccine);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index)); // Assuming "Index" is the action to which you want to redirect after adding a vaccine.
-            }
-            return View(vaccine);
-        }
-
-        // My AppointmentHealthInformation Controller
-
-        // GET: AppointmentHealthInformation/Create
-        public IActionResult CreateCheckup()
-        {
-            return View();
-        }
-
-        // POST: AppointmentHealthInformation/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateCheckup([Bind("appointment_id,patient_id,weight_lbs,height_inches,heart_rate,systolic_pressure,diastolic_pressure,temperature_fahrenheit,medications_used,smoke_or_vape,consume_alcohol,allergies")] AppointmentHealthInformation appointmentHealthInformation)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(appointmentHealthInformation);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index)); // Assuming "Index" is the action to which you want to redirect after adding health information.
-            }
-            return View(appointmentHealthInformation);
-        }
-
-
+ 
         // GET: Appointments/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {

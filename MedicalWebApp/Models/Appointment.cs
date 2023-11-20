@@ -8,7 +8,6 @@ namespace MedicalWebApp.Models
         public int AppointmentId { get; set; }
         public int PatientId { get; set; }
         public DateTime DateAppointment { get; set; }
-        public TimeSpan Time { get; set; }
         public int OfficeId { get; set; }
         public int DoctorId { get; set; }
 

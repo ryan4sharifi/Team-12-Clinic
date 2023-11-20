@@ -1,0 +1,71 @@
+﻿@model WebApplication3.Models.Vaccines
+
+@{
+    ViewData["Title"] = "Edit";
+}
+<style>
+    .form-container {
+        max-width: 600px; /* Adjust the maximum width as needed */
+        margin: 0 auto; /* Center the container */
+    }
+
+    .buttons {
+        max-width: 200px; /* Adjust the maximum width as needed */
+        margin: 0; /* Center the container */
+    }
+</style>
+
+<div style="padding-bottom: 20px;"></div>
+
+<div class="shadowed-site-container">
+
+<h1>Edit</h1>
+
+<h4>VaccinationView</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="vaccination_id" />
+
+            <div class="form-group">
+                <label asp-for="vaccination_id" class="control-label"></label>
+                <input asp-for="vaccination_id" class="form-control" style="background-color: #f0f0f0;" readonly />
+                <span asp-validation-for="vaccination_id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="patient_id" class="control-label"></label>
+                <input asp-for="patient_id" class="form-control" style="background-color: #f0f0f0;" readonly />
+                <span asp-validation-for="patient_id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="provider_id" class="control-label"></label>
+                <input asp-for="provider_id" class="form-control" style="background-color: #f0f0f0;" readonly />
+                <span asp-validation-for="provider_id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="vaccine_name" class="control-label"></label>
+                <input asp-for="vaccine_name" class="form-control" />
+                <span asp-validation-for="vaccine_name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="date_administered" class="control-label"></label>
+                <input asp-for="date_administered" class="form-control" style="background-color: #f0f0f0;" readonly />
+                <span asp-validation-for="date_administered" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

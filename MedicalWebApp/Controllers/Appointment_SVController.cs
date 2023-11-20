@@ -73,20 +73,29 @@ namespace med_test8.Controllers
             return View(appointment_SV);
         }
 
-        // GET: CreateAppointment_SV/Create
-        public IActionResult Create()
+        private void PopulateDoctorsDropdown()
         {
             ViewBag.Doctors = _context.Doctors
                 .OrderBy(d => d.last_name)
                 .ThenBy(d => d.first_name)
                 .Select(d => new { Id = d.doctor_id, FullName = $"{d.last_name}, {d.first_name}   {d.doctor_id}" })
                 .ToList();
+        }
 
+        private void PopulatePatientsDropdown()
+        {
             ViewBag.Patients = _context.Patients
                 .OrderBy(p => p.last_name)
                 .ThenBy(p => p.first_name)
                 .Select(p => new { Id = p.patient_id, FullName = $"{p.last_name}, {p.first_name}   {p.patient_id}" })
                 .ToList();
+        }
+
+        // GET: CreateAppointment_SV/Create
+        public IActionResult Create()
+        {
+            PopulateDoctorsDropdown();
+            PopulatePatientsDropdown();
 
             return View(new Appointments());
         }
@@ -108,6 +117,8 @@ namespace med_test8.Controllers
                 if (existingAppointments.Any())
                 {
                     ModelState.AddModelError(string.Empty, "Another appointment with the same doctor is scheduled within 45 minutes of this time. Please try again.");
+                    PopulateDoctorsDropdown();
+                    PopulatePatientsDropdown();
                     return View(newAppointment);
                 }
 
@@ -115,14 +126,16 @@ namespace med_test8.Controllers
                 await _context.SaveChangesAsync();
 
                 // Send email to the customer
-                await SendAppointmentConfirmationEmail(newAppointment);
+                // await SendAppointmentConfirmationEmail(newAppointment);
 
                 return RedirectToAction("Index");
             }
-
+            PopulateDoctorsDropdown();
+            PopulatePatientsDropdown();
             return View(newAppointment);
         }
 
+        
 
         private async Task SendAppointmentConfirmationEmail(Appointments appointment)
         {

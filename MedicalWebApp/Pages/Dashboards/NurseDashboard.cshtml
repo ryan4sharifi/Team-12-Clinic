@@ -22,7 +22,7 @@
         left: 50%;
         -ms-transform: translate(-50%, -50%);
         transform: translate(-50%, -50%);
-        background-color: #cfe2f3;
+        background-color: #dcd6ff;
         display: flex;
         justify-content: flex-start; /* Change the alignment to shift contents to the left */
         align-items: center;
@@ -41,8 +41,8 @@
         justify-content: center;
     }
 
-    .blueHeader {
-        background-color: #238cff; /* Dark background color */
+    .purpleHeader {
+        background-color: #6553d4; /* Dark background color */
         color: #fff; /* White text color */
         padding: 20px; /* Add padding for better readability */
         text-align: center; /* Center the text */
@@ -55,7 +55,7 @@
     }
 
     .custom-button {
-        background-color: #0067d7; /* Set the background color */
+        background-color: #6553d4; /* Set the background color */
         color: #fff; /* Change the text color for better visibility */
         /* Additional styling if needed */
     }
@@ -63,7 +63,7 @@
 </style>
 
 
-<div class="blueHeader">
+<div class="purpleHeader">
     <header> Nurse Dashboard </header>
 </div>
 
@@ -81,10 +81,10 @@
         <div class="square-container">
             <div class="buttons-container">
                 <h3> Navigation </h3>
-                <button onclick="location.href='@Url.Action("Index", "NurseAppointments")'" class="custom-button" type="button">Appointments</button>
-                <button onclick="location.href='@Url.Action("CreateTest", "NurseAppointments")'" class="custom-button" type="button">Test Form</button>
-                <button onclick="location.href='@Url.Action("CreateVaccine", "NurseAppointments")'" class="custom-button" type="button">Vaccine Form</button>
-                <button onclick="location.href='@Url.Action("CreateCheckup", "NurseAppointments")'" class="custom-button" type="button">Checkup Form</button>
+                <!-- appointments -->
+                <button onclick="location.href='@Url.Action("Index", "TestsNurseView")'" class="custom-button" type="button">Test Form</button>
+                <button onclick="location.href='@Url.Action("Index", "VaccinationNurseView")'" class="custom-button" type="button">Vaccine Form</button>
+                <button onclick="location.href='@Url.Action("Index", "HealthInfoNurseView")'" class="custom-button" type="button">Checkup Form</button>
             </div>
             <div class="square"></div>
         </div>
