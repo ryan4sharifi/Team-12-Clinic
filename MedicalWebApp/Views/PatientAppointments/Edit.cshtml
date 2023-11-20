@@ -16,13 +16,18 @@
 
             <div class="form-group">
                 <label asp-for="patient_id" class="control-label"><strong>Patient ID</strong></label>
-                <div class="readonly-display">@Model.patient_id</div>
+                <input asp-for="patient_id" class="form-control" style="background-color: #f0f0f0;" readonly />
                 <span asp-validation-for="patient_id" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="doctor_id" class="control-label"><strong>Doctor ID</strong></label>
+                <input asp-for="doctor_id" class="form-control" style="background-color: #f0f0f0;" readonly />
+                <span asp-validation-for="doctor_id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="appointment_id" class="control-label"><strong>Appointment ID</strong></label>
-                <div class="readonly-display">@Model.appointment_id</div>
-                <span asp-validation-for="patient_id" class="text-danger"></span>
+                <input asp-for="appointment_id" class="form-control" style="background-color: #f0f0f0;" readonly />
+                <span asp-validation-for="appointment_id" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="date_appointment" class="control-label"><strong>Appointment Date</strong></label>

@@ -127,7 +127,7 @@ namespace TrialRun.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("AppointmentId,patient_id,PatientLastName,DoctorId,DoctorLastName,DoctorOffice")] Appointments patientAppointment)
+        public async Task<IActionResult> Edit(int id, [Bind("appointment_id,patient_id,doctor_id,office_id,date_appointment")] Appointments patientAppointment)
         {
             if (id != patientAppointment.appointment_id)
             {
