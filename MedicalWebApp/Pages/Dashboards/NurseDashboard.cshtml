@@ -18,7 +18,7 @@
         display: inline-block;
         margin: 0;
         position: absolute;
-        top: 50%;
+        top: 55%;
         left: 50%;
         -ms-transform: translate(-50%, -50%);
         transform: translate(-50%, -50%);
@@ -75,6 +75,8 @@
 
 <h2>Welcome, @user.FirstName!</h2>
 
+<div class=""style="padding:50px"></div>
+
 
 <div class="container">
     <main role="main">
@@ -85,6 +87,8 @@
                 <button onclick="location.href='@Url.Action("Index", "TestsNurseView")'" class="custom-button" type="button">Test Form</button>
                 <button onclick="location.href='@Url.Action("Index", "VaccinationNurseView")'" class="custom-button" type="button">Vaccine Form</button>
                 <button onclick="location.href='@Url.Action("Index", "HealthInfoNurseView")'" class="custom-button" type="button">Checkup Form</button>
+                <button onclick="location.href='@Url.Action("Index", "MostRecentHealth")'" class="custom-button" type="button">Generate Health Report</button>
+                <button onclick="location.href='@Url.Action("Index", "PrescriptionReport")'" class="custom-button" type="button">Generate Script Report</button>
             </div>
             <div class="square"></div>
         </div>

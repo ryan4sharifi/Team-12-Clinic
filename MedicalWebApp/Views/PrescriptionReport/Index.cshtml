@@ -1,0 +1,156 @@
+﻿@model IEnumerable<WebApplication3.Models.PatientPrescriptionView>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style>
+
+    .custom-button {
+        max-width: 200px; /* Adjust the maximum width as needed */
+        margin: 0; /* Center the container */
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #FFFFFF;
+        color: #000000;
+    }
+
+
+    .table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 20px;
+    }
+
+        .table th, .table td {
+            border: 1px solid #DDDDDD;
+            padding: 8px;
+            text-align: left;
+            font-size: 15px;
+        }
+
+
+    thead {
+        background-color: #C8102E;
+        color: #FFFFFF;
+    }
+
+    th {
+        font-weight: bold;
+    }
+
+
+    tbody tr:nth-child(odd) {
+        background-color: #F2F2F2;
+    }
+
+    a {
+        color: #C8102E;
+        text-decoration: none;
+    }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+    label {
+        margin-bottom: 5px; /* Adjust the value as needed */
+        display: inline-block; /* Ensures the label and input are on the same line */
+    }
+
+    input[type="number"] {
+        margin-bottom: 5px; /* Adjust the value as needed */
+    }
+</style>
+
+<div style="padding-bottom: 20px;"></div>
+
+<div class="shadowed-site-container">
+    <div class="container">
+
+
+<h1>Patient Prescriptions</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Patient Name
+            </th>
+            <th>
+                Drug Name
+            </th>
+            <th>
+                Dosage
+            </th>
+            <th>
+                Date Prescription
+            </th>
+            <th>
+                Age
+            </th>
+            <th>
+                Gender
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.patient_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.drug_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dosage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.date_prescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.age)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.gender)
+            </td>
+
+        </tr>
+}
+    </tbody>
+</table>
+
+        <div class="" style="padding:20px"></div>
+
+        <h3 style="font-size: 25px;">Filters:</h3>
+
+
+        <form asp-action="Index" method="get">
+            <label for="genderFilter">Filter by Gender:</label>
+            <select name="genderFilter" id="genderFilter">
+                <option value="">All</option>
+                <option value="M">Male</option>
+                <option value="F">Female</option>
+            </select>
+            <label for="minAge">Min Age:</label>
+            <input type="number" name="minAge" id="minAge" />
+
+            <label for="maxAge">Max Age:</label>
+            <input type="number" name="maxAge" id="maxAge" />
+
+            <label for="prescriptionName">Filter by Prescription:</label>
+            <select name="prescriptionName" id="prescriptionName">
+                <option value="">All</option>
+                @foreach (var prescriptionName in ViewBag.PrescriptionNames)
+                {
+                    <option value="@prescriptionName">@prescriptionName</option>
+                }
+            </select>
+
+            <button type="submit" style="background-color: #238cff; color: white;">Apply Filters</button>
+        </form>
+
+</div>

@@ -29,7 +29,9 @@ namespace WebApplication3.Data
         public DbSet<WebApplication3.Models.past_appointments> past_appointments { get; set; }
         public DbSet<WebApplication3.Models.TestDetails> TestDetails { get; set; }
         public DbSet<med_test8.Models.Patients>? Patients_1 { get; set; }
+        public DbSet<WebApplication3.Models.MostRecentHealthInfo>? MostRecentHealthInfo { get; set; }
+        public DbSet<WebApplication3.Models.PatientPrescriptionView>? PatientPrescriptionView { get; set; }
+        public DbSet<WebApplication3.Models.Prescriptions>? Prescriptions { get; set; }
 
-        
     }
 }

@@ -1,0 +1,223 @@
+﻿@model IEnumerable<WebApplication3.Models.MostRecentHealthInfo>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style>
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #FFFFFF;
+        color: #000000;
+    }
+
+
+    .table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 20px;
+    }
+
+        .table th, .table td {
+            border: 1px solid #DDDDDD;
+            padding: 8px;
+            text-align: left;
+        }
+
+
+    thead {
+        background-color: #C8102E;
+        color: #FFFFFF;
+    }
+
+    th {
+        font-weight: bold;
+    }
+
+
+    tbody tr:nth-child(odd) {
+        background-color: #F2F2F2;
+    }
+
+    tbody tr:hover {
+        background-color: #EAEAEA;
+    }
+
+
+    a {
+        color: #C8102E;
+        text-decoration: none;
+    }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+
+    form {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        max-width: 600px; /* Adjust the maximum width as needed */
+        margin: 0 auto; /* Center the form */
+    }
+
+        form label,
+        form input {
+            flex-basis: calc(25% - 10px); /* Adjust the width of labels and input fields as needed */
+            margin-bottom: 10px;
+        }
+
+</style>
+
+<div style="padding-bottom: 20px;"></div>
+
+<div class="shadowed-wide-container">
+    <div class="container">
+
+<h1>Patient Health Information</h1>
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Patient ID
+            </th>
+            <th>
+                Weight (lbs)
+            </th>
+            <th>
+                Height (inches)
+            </th>
+            <th>
+                Heart Rate
+            </th>
+            <th>
+                Systolic Pressure
+            </th>
+            <th>
+                Diastolic Pressure
+            </th>
+            <th>
+                Temperature Fahrenheit
+            </th>
+            <th>
+                Smoke or Vape
+            </th>
+            <th>
+                Consume Alcohol
+            </th>
+            <th>
+                Allergies
+            </th>
+            <th>
+                Gender
+            </th>
+            <th>
+                Age
+            </th>
+  
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.patient_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.weight_lbs)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.height_inches)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.heart_rate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.systolic_pressure)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.diastolic_pressure)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.temperature_fahrenheit)
+            </td>
+                <td>
+                    @if (item.smoke_or_vape)
+                    {
+                        <text>Yes</text>
+                    }
+                    else
+                    {
+                        <text>No</text>
+                    }
+                </td>
+                <td>
+                    @if (item.consume_alcohol)
+                    {
+                        <text>Yes</text>
+                    }
+                    else
+                    {
+                        <text>No</text>
+                    }
+                </td>
+                <td>
+                    @if (item.allergies)
+                    {
+                        <text>Yes</text>
+                    }
+                    else
+                    {
+                        <text>No</text>
+                    }
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+
+        </tr>
+}
+    </tbody>
+</table>
+
+<div class ="" style="padding:20px"></div>
+
+<h3 style="font-size: 25px;">Filters:</h3>
+<div class ="" style="padding:10px"></div>
+
+        <form method="get" action="@Url.Action("Index", "MostRecentHealth")">
+            <label for="minWeight">Min Weight:</label>
+            <input type="number" name="minWeight" id="minWeight" />
+
+            <label for="maxWeight">Max Weight:</label>
+            <input type="number" name="maxWeight" id="maxWeight" />
+
+            <label for="minAge">Min Age:</label>
+            <input type="number" name="minAge" id="minAge" />
+
+            <label for="maxAge">Max Age:</label>
+            <input type="number" name="maxAge" id="maxAge" />
+
+            <label for="isSmoker">Smoker: </label>
+            <input type="checkbox" name="isSmoker" id="isSmoker" value="true" />
+
+            <label for="isSmoker">Non-Smoker: </label>
+            <input type="checkbox" name="isSmoker" id="isNonSmoker" value="false" />
+
+
+            <button type="submit" style="background-color: #238cff; color: white;">Apply Filters</button>
+
+
+
+        </form>
+        </div>
+
+</div>

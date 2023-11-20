@@ -171,4 +171,49 @@ namespace WebApplication3.Models
         public string PatientEmail { get; set; }
     }
 
+    public class MostRecentHealthInfo
+    {
+        [Key]
+        public int appointment_id { get; set; }
+        public decimal weight_lbs { get; set; }
+        public int height_inches { get; set; }
+        public int heart_rate { get; set; }
+        public int systolic_pressure { get; set; }
+        public int diastolic_pressure { get; set; }
+        public decimal temperature_fahrenheit { get; set; }
+        public bool smoke_or_vape { get; set; }
+        public bool consume_alcohol { get; set; }
+        public bool allergies { get; set; }
+        public int nurse_id { get; set; }
+        public string gender { get; set; }
+        public int Age { get; set; }
+        public int patient_id { get; set; }
+    }
+
+    public class PatientPrescriptionView
+    {
+        [Key]
+        public int patient_id { get; set; }
+        public string patient_name { get; set; }
+        public string drug_name { get; set; }
+        public string dosage { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime date_prescription { get; set; }
+        public int age { get; set; }
+        public string gender { get; set; }
+    }
+
+    public class Prescriptions
+    {
+        [Key]
+        public int prescription_id { get; set; }
+        public int doctor_id { get; set; }
+        public int patient_id { get; set; }
+        public string drug_name { get; set; } = null!;
+        public string dosage { get; set; } = null!;
+        public int refills { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime date_prescription { get; set; }
+
+    }
 }
