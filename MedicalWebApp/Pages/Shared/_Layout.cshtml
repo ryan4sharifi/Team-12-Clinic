@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -22,6 +22,7 @@
                     <div class="bar2"></div>
                     <div class="bar3"></div>
                 </div>
+
                 <div class="navigation">
                     <ul>
                         <li>
@@ -33,10 +34,34 @@
                         <li>
                             <a href="@Url.Action("Index", "Our_Providers")" class="custom-link">Find Providers</a>
                         </li>
-   
 
+                        <!-- Dashboard Links for Different User Roles -->
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li>
+                                <a asp-page="/Dashboards/AdminDashboard">Admin Dashboard</a>
+                            </li>
+                        }
+                        @if (User.IsInRole("Doctor"))
+                        {
+                            <li>
+                                <a asp-page="/Dashboards/DoctorDashboard">Doctor Dashboard</a>
+                            </li>
+                        }
+                        @if (User.IsInRole("Nurse"))
+                        {
+                            <li>
+                                <a asp-page="/Dashboards/NurseDashboard">Nurse Dashboard</a>
+                            </li>
+                        }
+                        @if (User.IsInRole("Patient"))
+                        {
+                            <li>
+                                <a asp-page="/Dashboards/PatientDashboard">Patient Dashboard</a>
+                            </li>
+                        }
                     </ul>
-                    
+
                     <partial name="_LoginPartial" />
                 </div>
             </div>
