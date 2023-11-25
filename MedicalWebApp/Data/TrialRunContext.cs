@@ -27,6 +27,11 @@ namespace TrialRun.Data
 
         public DbSet<TrialRun.Models.PatientAppointmentII>? PatientAppointmentII { get; set; }
         public DbSet<TrialRun.Models.DoctorPrescriptions>? DoctorPrescriptions { get; set; }
+        public DbSet<TrialRun.Models.Specialities>? Specialities { get; set; }
+        public DbSet<TrialRun.Models.RevenueReport>? RevenueReport { get; set; }
+
+        
+
 
 
     }

@@ -1,0 +1,188 @@
+﻿@model IEnumerable<TrialRun.Models.RevenueReport>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style>
+
+    .custom-button {
+        max-width: 200px; /* Adjust the maximum width as needed */
+        margin: 0; /* Center the container */
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #FFFFFF;
+        color: #000000;
+    }
+
+
+    .table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 20px;
+    }
+
+        .table th, .table td {
+            border: 1px solid #DDDDDD;
+            padding: 8px;
+            text-align: left;
+            font-size: 15px;
+        }
+
+
+    thead {
+        background-color: #C8102E;
+        color: #FFFFFF;
+    }
+
+    th {
+        font-weight: bold;
+    }
+
+
+    tbody tr:nth-child(odd) {
+        background-color: #F2F2F2;
+    }
+
+    a {
+        color: #C8102E;
+        text-decoration: none;
+    }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+    label {
+        margin-bottom: 5px; /* Adjust the value as needed */
+        display: inline-block; /* Ensures the label and input are on the same line */
+    }
+
+    input[type="number"] {
+        margin-bottom: 5px; /* Adjust the value as needed */
+    }
+</style>
+
+<div style="padding-bottom: 20px;"></div>
+
+<div class="shadowed-wide-container">
+    <div class="container">
+
+
+<h1>Revenue Report</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Patient ID
+            </th>
+            <th>
+                Patient Name
+            </th>
+            <th>
+                Doctor Id
+            </th>
+            <th>
+                Doctor Name
+            </th>
+            <th>
+                Doctor Office
+            </th>
+            <th>
+                Appointment Date
+            </th>
+            <th>
+                Specialty Cost w/o Ins
+            </th>
+            <th>
+                Patient Charge
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.patient_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PatientLastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DoctorId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DoctorLastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DoctorOffice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AppointmentDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SpecialtyCost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PatientCharge)
+            </td>
+        </tr>
+}
+
+    <tfoot>
+        <tr>
+            <td colspan="6"></td>
+            <td>Total Revenue:</td>
+            <td>@ViewBag.TotalPatientCharge</td>
+            <td></td>
+        </tr>
+    </tfoot>
+    </tbody>
+</table>
+
+        <div class="" style="padding:20px"></div>
+
+        <h3 style="font-size: 25px;">Filters:</h3>
+
+<form asp-action="Index" method="get">
+    <div class="form-group">
+        <label for="selectedClassification">Specialty Classification:</label>
+        <select id="selectedClassification" name="selectedClassification" class="form-control">
+            <option value="">All</option>
+            @foreach (var classification in ViewBag.Classifications)
+            {
+                <option value="@classification">@classification</option>
+            }
+        </select>
+    </div>
+
+    <!-- Add dropdown for office location -->
+    <div class="form-group">
+        <label for="selectedOffice">Office Location:</label>
+        <select id="selectedOffice" name="selectedOffice" class="form-control">
+            <option value="">All</option>
+            @foreach (var office in ViewBag.Offices)
+            {
+                <option value="@office">@office</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="selectedDoctor">Doctor Name:</label>
+        @Html.DropDownList("selectedDoctor", (SelectList)ViewBag.Doctors, "All", new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        <label for="selectedInsurance">Patient Insurance Status:</label>
+        @Html.DropDownList("selectedInsurance", (SelectList)ViewBag.InsuranceOptions, new { @class = "form-control" })
+    </div>
+
+    <button type="submit" style="background-color: #238cff; color: white;">Apply Filters</button>
+</form>

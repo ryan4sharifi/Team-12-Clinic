@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MedicalWebApp.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace TrialRun.Models
 {
@@ -78,7 +79,33 @@ namespace TrialRun.Models
         public string DoctorLastName { get; set; }
         public string DoctorOffice { get; set; }
         public string PatientEmail { get; set; }
+        [DataType(DataType.Date)]
         public DateTime AppointmentDate { get; set; }
+        public int SpecialtyCost {get; set;}
+        public string Classification { get; set; }
+        public double InsuranceCopay { get; set;}
+        public double PatientCharge { get; set;} 
+        
+
+    }
+
+    public class RevenueReport
+    {
+        [Key]
+        public int AppointmentId { get; set; }
+        public int patient_id { get; set; }
+        public string PatientLastName { get; set; }
+        public int DoctorId { get; set; }
+        public string DoctorLastName { get; set; }
+        public string DoctorOffice { get; set; }
+        public string PatientEmail { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime AppointmentDate { get; set; }
+        public int SpecialtyCost { get; set; }
+        public string Classification { get; set; }
+        public double InsuranceCopay { get; set; }
+        public double PatientCharge { get; set; }
+
 
     }
 
@@ -148,6 +175,13 @@ namespace TrialRun.Models
         public string patient_email { get; set; }
 
 
+    }
+
+    public partial class Specialities
+    {
+        [Key]
+        public int speciality_id { get; set; }
+        public string classification { get; set; }
     }
 
 }
