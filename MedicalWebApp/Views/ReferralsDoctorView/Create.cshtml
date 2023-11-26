@@ -37,7 +37,7 @@
                 <span asp-validation-for="primary_doctor_id" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="patient_id" class="control-label">Doctor</label>
+                <label asp-for="patient_id" class="control-label">Patient</label>
                 <select asp-for="patient_id" asp-items="@(new SelectList(ViewBag.Patients, "Id", "FullName"))" class="form-control">
                     <option value="">Select Patient</option>
                 </select>
