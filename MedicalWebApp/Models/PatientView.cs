@@ -79,12 +79,7 @@ namespace TrialRun.Models
         public string DoctorLastName { get; set; }
         public string DoctorOffice { get; set; }
         public string PatientEmail { get; set; }
-        [DataType(DataType.Date)]
         public DateTime AppointmentDate { get; set; }
-        public int SpecialtyCost {get; set;}
-        public string Classification { get; set; }
-        public double InsuranceCopay { get; set;}
-        public double PatientCharge { get; set;} 
         
 
     }
