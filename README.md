@@ -3,6 +3,7 @@ Project Overview
 This Medical Clinic Web Application is developed using ASP.NET 6 with an MVC (Model-View-Controller) architecture. The project uses a Database-First approach with Microsoft SQL Server and employs ASP.NET Identity for user authentication. Our focus is on creating a seamless and efficient web application for managing various aspects of a medical clinic.
 
 Features
+
 User Authentication: Utilizes ASP.NET Identity for managing user authentication and authorization across different user roles.
 MVC Architecture: Adopts the MVC pattern for a clean separation of concerns, enhancing the maintainability and scalability of the application.
 Data Entry Forms: Facilitates data entry through forms designed to add, modify, and logically delete data, ensuring both usability and data integrity.
