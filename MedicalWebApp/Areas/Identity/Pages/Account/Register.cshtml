@@ -1,178 +1,62 @@
-﻿@page
+@page
 @model RegisterModel
 
 <style>
-    .center {
-        margin: 0;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        -ms-transform: translate(-50%, -50%);
-        transform: translate(-50%, -50%);
-        width: 80%;
-        max-width: 300px;
-        max-height: calc(100% - 200px); 
+    /* Your existing styles */
+    .center { /* ... */
     }
 
-    .form-container {
-        max-width: 600px; 
-        max-height: 100%; 
-        margin: auto; 
-        padding: 20px; 
-        border-radius: 8px; 
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
-        overflow: auto; 
+    .form-container { /* ... */
     }
-
 </style>
 
 <div class="center">
     <div class="login-form-container">
-    <h2>Registration Page</h2>
+        <h2>Patient Registration</h2>
 
-    <form method="post">
-        <div>
-            <label>Email</label>
-            <input asp-for="Input.Email" />
-            <span asp-validation-for="Input.Email"></span>
-        </div>
-        <div>
-            <label>Password</label>
-            <input asp-for="Input.Password" type="password" />
-            <span asp-validation-for="Input.Password"></span>
-        </div>
-        <div>
-            <label for="Role">Role</label>
-            <select asp-for="Role" asp-items="@(new SelectList((List<string>)ViewData["Roles"]))" onchange="displayRoleSpecificFields(this.value)">
-            </select>
-        </div>
+        <form method="post">
+            <div>
+                <label>Email</label>
+                <input asp-for="Input.Email" required />
+                <span asp-validation-for="Input.Email"></span>
+            </div>
+            <div>
+                <label>Password</label>
+                <input asp-for="Input.Password" type="password" required />
+                <span asp-validation-for="Input.Password"></span>
+            </div>
 
-        <!-- Admin Fields -->
-        <div id="AdminFields" style="display:none">
-            <h3>Admin Details</h3>
-            <label>First Name</label>
-            <input name="AdminFirstName" />
-            <label>Middle Initial</label>
-            <input name="AdminMiddleInitial" maxlength="1" />
-            <label>Last Name</label>
-            <input name="AdminLastName" />
-            <label>Office</label>
-            <input name="AdminOffice" />
-            <label>Date of Birth</label>
-            <input name="AdminDoB" type="date" />
-            <label>Phone</label>
-            <input name="AdminPhone" />
-        </div>
+            <!-- Patient Fields -->
+            <div id="PatientFields">
+                <h3>Patient Details</h3>
+                <label>First Name</label>
+                <input asp-for="Input.FirstName" required />
 
-        <!-- Doctor Fields -->
-        <div id="DoctorFields" style="display:none">
-            <h3>Doctor Details</h3>
-            <label>First Name</label>
-            <input name="DoctorFirstName" />
-            <label>Middle Initial</label>
-            <input name="DoctorMiddleInitial" maxlength="1" />
-            <label>Last Name</label>
-            <input name="DoctorLastName" />
+                <label>Middle Initial</label>
+                <input asp-for="Input.MiddleInitial" />
 
-                <label for="doctorOffice">Doctor's Office:</label>
-                <select name="doctorOffice" id="doctorOffice">
-                    <option value="Houston">Houston</option>
-                    <option value="Katy">Katy</option>
-                    <option value="Galveston">Galveston</option>
-                    <option value="MissouriCity">Missouri City</option>
-                    <option value="Pasadena">Pasadena</option>
-                    <option value="SugarLand">Sugarland</option>
-                </select>
+                <label>Last Name</label>
+                <input asp-for="Input.LastName" required />
 
+                <label>Address</label>
+                <input asp-for="Input.Address" required />
 
-            <label>Date of Birth</label>
-            <input name="DoctorDoB" type="date" />
-            <label>Phone</label>
-            <input name="DoctorPhone" />
-            <label>Specialty</label>
-            <select name="DoctorSpecialtyId" asp-items="Model.SpecialityItems"></select>
-            <select name="DoctorGender">
-                <option value="M">Male</option>
-                <option value="F">Female</option>
-                    <!-- ... -->
-            </select>
+                <label>Phone</label>
+                <input asp-for="Input.Phone" required />
 
-
-
-        </div>
-
-        <!-- Nurse Fields -->
-        <div id="NurseFields" style="display:none">
-            <h3>Nurse Details</h3>
-            <label>First Name</label>
-            <input name="NurseFirstName" />
-            <label>Middle Initial</label>
-            <input name="NurseMiddleInitial" maxlength="1" />
-            <label>Last Name</label>
-            <input name="NurseLastName" />
-
-                <label for="nurseOffice">Nurse's Office:</label>
-                <select name="nurseOffice" id="nurseOffice">
-                    <option value="Houston">Houston</option>
-                    <option value="Katy">Katy</option>
-                    <option value="Galveston">Galveston</option>
-                    <option value="MissouriCity">Missouri City</option>
-                    <option value="Pasadena">Pasadena</option>
-                    <option value="SugarLand">Sugarland</option>
-                </select>
-
-            <label>Date of Birth</label>
-            <input name="NurseDoB" type="date" />
-            <label>Phone</label>
-            <input name="NursePhone" />
-            <label>Gender</label>
-                <select name="NurseGender">
+                <label>Gender</label>
+                <select asp-for="Input.Gender" required>
                     <option value="M">Male</option>
                     <option value="F">Female</option>
+                    <!-- Other gender options as necessary -->
                 </select>
-        </div>
 
-        <!-- Patient Fields -->
-        <div id="PatientFields" style="display:none">
-            <h3>Patient Details</h3>
-            <label>First Name</label>
-            <input name="PatientFirstName" />
-            <label>Middle Initial</label>
-            <input name="PatientMiddleInitial" />
-            <label>Last Name</label>
-            <input name="PatientLastName" />
-            <label>Address</label>
-            <input name="PatientAddress" />
-            <label>Phone</label>
-            <input name="PatientPhone" />
-            <label>Gender</label>
-            <select name="PatientGender">
-                <option value="M">Male</option>
-                <option value="F">Female</option>
-                <!-- ... -->
-            </select>
-            <label>Date of Birth</label>
-            <input name="PatientDoB" type="date" />
-        </div>
+                <label>Date of Birth</label>
+                <input asp-for="Input.DoB" type="date" required />
+            </div>
 
-        <button type="submit">Register</button>
-    </form>
+            <button type="submit">Register</button>
+        </form>
     </div>
 </div>
-
-@section Scripts {
-    <script>
-        function displayRoleSpecificFields(role) {
-            const fields = ['Admin', 'Doctor', 'Nurse', 'Patient'];
-
-            fields.forEach(field => {
-                if (field === role) {
-                    document.getElementById(`${field}Fields`).style.display = "block";
-                } else {
-                    document.getElementById(`${field}Fields`).style.display = "none";
-                }
-            });
-        }
-    </script>
-}
 
