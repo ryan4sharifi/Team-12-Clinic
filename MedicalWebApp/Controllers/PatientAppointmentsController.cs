@@ -134,10 +134,10 @@ namespace TrialRun.Controllers
 
         private void PopulateDoctorsDropdown()
         {
-            ViewBag.Doctors = _context.Doctors
+            ViewBag.Doctors = _context.DoctorSpecialties
                 .OrderBy(d => d.last_name)
                 .ThenBy(d => d.first_name)
-                .Select(d => new { Id = d.doctor_id, FullName = $"{d.last_name}, {d.first_name}   {d.doctor_id}" })
+                .Select(d => new { Id = d.doctor_id, FullName = $"{d.last_name}, {d.first_name} ID{d.doctor_id}  [ {d.classification} ] " })
                 .ToList();
         }
 

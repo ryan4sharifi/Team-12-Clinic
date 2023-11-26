@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MedicalWebApp.Migrations;
+using System.ComponentModel.DataAnnotations;
 using System.Numerics;
 
 namespace med_test8.Models
@@ -59,6 +60,32 @@ namespace med_test8.Models
         public string email { get; set; }
         public string gender { get; set; }
     }
+
+    public class DoctorSpecialties
+    {
+        [Key]
+        public int doctor_id { get; set; }
+        public string first_name { get; set; }
+        public string middle_initial { get; set; }
+        public string last_name { get; set; }
+        public int specialty_id { get; set; }
+        public string office { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime DoB { get; set; }
+        public string phone { get; set; }
+        public string email { get; set; }
+        public string gender { get; set; }
+        public string classification { get; set; }
+    }
+
+    public class Specialities
+    {
+        [Key]
+        public int speciality_id { get; set; }
+        public string classification { get; set; }
+        public string cost { get; set; }
+    }
+
 
     public class Doctor_Details
     {

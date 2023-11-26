@@ -33,5 +33,8 @@ namespace WebApplication3.Data
         public DbSet<WebApplication3.Models.PatientPrescriptionView>? PatientPrescriptionView { get; set; }
         public DbSet<WebApplication3.Models.Prescriptions>? Prescriptions { get; set; }
 
+
+        
+
     }
 }
