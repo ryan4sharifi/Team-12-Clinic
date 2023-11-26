@@ -53,11 +53,6 @@
                     <span asp-validation-for="date_appointment" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="office_id" class="control-label">Office ID</label>
-                    <input asp-for="office_id" class="form-control" value="" />
-                    <span asp-validation-for="office_id" class="text-danger"></span>
-                </div>
-                <div class="form-group">
                     <input type="submit" value="Create" class="btn btn-primary" />
                 </div>
             </form>
@@ -73,4 +68,15 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    @if (TempData["ShowPopup"] != null && (bool)TempData["ShowPopup"])
+    {
+        <script>
+            $(document).ready(function () {
+                var message = '@TempData["PopupMessage"]';
+                var type = '@TempData["PopupType"]';
+                alert(message);
+            });
+        </script>
+    }
 }

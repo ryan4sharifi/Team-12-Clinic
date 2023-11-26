@@ -117,6 +117,16 @@ namespace med_test8.Models
         public string Classification { get; set; }
     }
 
+    public class Referrals
+    {
+        [Key]
+        public int referral_id { get; set; }
+        public int specialist_doctor_id { get; set; }
+        public int speciality_id { get; set; }
+        public DateTime referral_date { get; set; }
+        public int patient_id { get; set; }
+    }
+
 
 }
 

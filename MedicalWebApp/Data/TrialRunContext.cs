@@ -32,6 +32,11 @@ namespace TrialRun.Data
         public DbSet<TrialRun.Models.Notifications>? Notifications { get; set; }
         public DbSet<TrialRun.Models.Tests>? Tests { get; set; }
         public DbSet<TrialRun.Models.PatientNotifications>? PatientNotifications { get; set; }
+        public DbSet<TrialRun.Models.Referrals>? Referrals { get; set; }
+
+
+
+        
 
 
 

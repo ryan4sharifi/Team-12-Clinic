@@ -10,6 +10,8 @@ using med_test8.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Net.Mail;
 using System.Net;
+using Microsoft.Data.SqlClient;
+using TrialRun.Models;
 
 namespace med_test8.Controllers
 {
@@ -97,47 +99,70 @@ namespace med_test8.Controllers
             PopulateDoctorsDropdown();
             PopulatePatientsDropdown();
 
-            return View(new Appointments());
+            return View(new med_test8.Models.Appointments());
         }
 
         // POST: Appointment_SV/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind("doctor_id,patient_id,date_appointment,office_id")] Appointments newAppointment)
+        public async Task<ActionResult> Create([Bind("doctor_id,patient_id,date_appointment,office_id")] med_test8.Models.Appointments newAppointment)
         {
-            if (ModelState.IsValid)
-            {
-                // Check for existing appointments for the same doctor within 45 minutes of the new appointment
-                var existingAppointments = _context.Appointments
-                    .Where(a => a.doctor_id == newAppointment.doctor_id &&
-                                a.date_appointment >= newAppointment.date_appointment.AddMinutes(-45) &&
-                                a.date_appointment <= newAppointment.date_appointment.AddMinutes(45))
-                    .ToList();
 
-                if (existingAppointments.Any())
+            try
+            {
+                if (ModelState.IsValid)
                 {
-                    ModelState.AddModelError(string.Empty, "Another appointment with the same doctor is scheduled within 45 minutes of this time. Please try again.");
-                    PopulateDoctorsDropdown();
-                    PopulatePatientsDropdown();
+                    // Check for existing appointments for the same doctor within 45 minutes of the new appointment
+                    var existingAppointments = _context.Appointments
+                        .Where(a => a.doctor_id == newAppointment.doctor_id &&
+                                    a.date_appointment >= newAppointment.date_appointment.AddMinutes(-45) &&
+                                    a.date_appointment <= newAppointment.date_appointment.AddMinutes(45))
+                        .ToList();
+
+                    if (existingAppointments.Any())
+                    {
+                        ModelState.AddModelError(string.Empty, "Another appointment with the same doctor is scheduled within 45 minutes of this time. Please try again.");
+                        PopulateDoctorsDropdown();
+                        PopulatePatientsDropdown();
+                        return View(newAppointment);
+                    }
+
+                    _context.Add(newAppointment);
+                    await _context.SaveChangesAsync();
+
+                    // Send email to the customer
+                    // await SendAppointmentConfirmationEmail(newAppointment);
+
+                    return RedirectToAction("Index");
+                }
+                PopulateDoctorsDropdown();
+                PopulatePatientsDropdown();
+                return View(newAppointment);
+            }
+            catch (DbUpdateException ex)
+            {
+                // Handle the exception caused by the trigger
+                if (ex.InnerException is SqlException sqlException && sqlException.Number == 16)
+                {
+                    // The trigger raised a custom error, handle it as needed
+                    ModelState.AddModelError(string.Empty, sqlException.Message);
                     return View(newAppointment);
                 }
 
-                _context.Add(newAppointment);
-                await _context.SaveChangesAsync();
-
-                // Send email to the customer
-                // await SendAppointmentConfirmationEmail(newAppointment);
-
-                return RedirectToAction("Index");
+                // Handle other exceptions as needed
+                TempData["ShowPopup"] = true;
+                TempData["PopupMessage"] = "A referral is required to schedule with this doctor. Please contact your primary doctor to request one.";
+                TempData["PopupType"] = "error";
+                //ModelState.AddModelError(string.Empty, "An error occurred while saving the appointment.");
+                PopulatePatientsDropdown();
+                PopulateDoctorsDropdown();
+                return View(newAppointment);
             }
-            PopulateDoctorsDropdown();
-            PopulatePatientsDropdown();
-            return View(newAppointment);
         }
 
         
 
-        private async Task SendAppointmentConfirmationEmail(Appointments appointment)
+        private async Task SendAppointmentConfirmationEmail(med_test8.Models.Appointments appointment)
         {
             // Replace these with your actual email settings
             var smtpClient = new SmtpClient("smtp.gmail.com", 587)
@@ -182,7 +207,7 @@ namespace med_test8.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("appointment_id,patient_id,date_appointment,office_id,doctor_id")] Appointments Appointments)
+        public async Task<IActionResult> Edit(int id, [Bind("appointment_id,patient_id,date_appointment,office_id,doctor_id")] med_test8.Models.Appointments Appointments)
         {
             if (id != Appointments.appointment_id)
             {

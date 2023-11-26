@@ -129,7 +129,7 @@ namespace TrialRun.Models
         public string first_name { get; set; }
         public string middle_initial { get; set; }
         public string last_name { get; set; }
-        public int specialty_id { get; set; }
+        public int speciality_id { get; set; }
         public string office { get; set; }
         [DataType(DataType.Date)]
         public DateTime DoB { get; set; }
@@ -212,4 +212,13 @@ namespace TrialRun.Models
         public string patient_email { get; set; }
     }
 
+    public class Referrals
+    {
+        [Key]
+        public int referral_id { get; set; }
+        public int specialist_doctor_id { get; set; }
+        public int speciality_id { get; set; }
+        public DateTime referral_date { get; set; }
+        public int patient_id { get; set; }
+    }
 }

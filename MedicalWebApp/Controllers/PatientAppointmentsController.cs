@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using TrialRun.Data;
 using TrialRun.Models;
@@ -61,6 +62,55 @@ namespace TrialRun.Controllers
         // GET: PatientAppointments/Create
         public IActionResult Create()
         {
+            PopulatePatientsDropdown();
+            PopulateDoctorsDropdown();
+
+            return View(new Appointments());
+        }
+
+        // POST: PatientAppointments/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("AppointmentId,patient_id,doctor_id,date_appointment,office_id")] Appointments patientAppointment)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    // Your existing code to add the appointment
+                    _context.Add(patientAppointment);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+            catch (DbUpdateException ex)
+            {
+                // Handle the exception caused by the trigger
+                if (ex.InnerException is SqlException sqlException && sqlException.Number == 16)
+                {
+                    // The trigger raised a custom error, handle it as needed
+                    ModelState.AddModelError(string.Empty, sqlException.Message);
+                    return View(patientAppointment);
+                }
+
+                // Handle other exceptions as needed
+                TempData["ShowPopup"] = true;
+                TempData["PopupMessage"] = "A referral is required to schedule with this doctor. Please contact your primary doctor to request one.";
+                TempData["PopupType"] = "error";
+                //ModelState.AddModelError(string.Empty, "An error occurred while saving the appointment.");
+                PopulatePatientsDropdown();
+                PopulateDoctorsDropdown();
+                return View(patientAppointment);
+            }
+
+            // ModelState is not valid, so repopulate dropdowns and return to the view
+            PopulatePatientsDropdown();
+            PopulateDoctorsDropdown();
+            return View(patientAppointment);
+        }
+
+        private void PopulatePatientsDropdown()
+        {
             var loggedInUserEmail = User.FindFirstValue(ClaimTypes.Email);
 
             // Retrieve the patient whose email matches the currently logged-in user's email
@@ -80,30 +130,15 @@ namespace TrialRun.Controllers
                 // Handle the case where the currently logged-in user is not a patient
                 ViewBag.Patients = new List<object>();
             }
+        }
 
+        private void PopulateDoctorsDropdown()
+        {
             ViewBag.Doctors = _context.Doctors
                 .OrderBy(d => d.last_name)
                 .ThenBy(d => d.first_name)
                 .Select(d => new { Id = d.doctor_id, FullName = $"{d.last_name}, {d.first_name}   {d.doctor_id}" })
                 .ToList();
-
-            return View(new Appointments());
-        }
-
-        // POST: PatientAppointments/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AppointmentId,patient_id,doctor_id,date_appointment,office_id")] Appointments patientAppointment)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(patientAppointment);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(patientAppointment);
         }
 
         // GET: PatientAppointments/Edit/5
