@@ -32,6 +32,7 @@ namespace WebApplication3.Data
         public DbSet<WebApplication3.Models.MostRecentHealthInfo>? MostRecentHealthInfo { get; set; }
         public DbSet<WebApplication3.Models.PatientPrescriptionView>? PatientPrescriptionView { get; set; }
         public DbSet<WebApplication3.Models.Prescriptions>? Prescriptions { get; set; }
+        public DbSet<WebApplication3.Models.NewReferrals>? Referrals { get; set; }
 
 
         

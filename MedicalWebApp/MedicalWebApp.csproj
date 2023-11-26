@@ -19,6 +19,11 @@
     <None Include="Views\Appointment_SV\Details.cshtml" />
     <None Include="Views\Appointment_SV\Edit.cshtml" />
     <None Include="Views\Appointment_SV\Index.cshtml" />
+    <None Include="Views\NewReferrals\Create.cshtml" />
+    <None Include="Views\NewReferrals\Delete.cshtml" />
+    <None Include="Views\NewReferrals\Details.cshtml" />
+    <None Include="Views\NewReferrals\Edit.cshtml" />
+    <None Include="Views\NewReferrals\Index.cshtml" />
     <None Include="Views\PatientsAdminView\CreateAppt.cshtml" />
     <None Include="Views\Shared\Error.cshtml" />
     <None Include="Views\Shared\_Layout.cshtml" />
