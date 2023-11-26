@@ -5,92 +5,91 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using WebApplication3.Data;
-using WebApplication3.Models;
+using MedicalWebApp.Models;
 
-namespace WebApplication3.Controllers
+namespace MedicalWebApp.Controllers
 {
     public class NewReferralsController : Controller
     {
-        private readonly WebApplication3Context _context;
+        private readonly team12MainContext _context;
 
-        public NewReferralsController(WebApplication3Context context)
+        public NewReferralsController(team12MainContext context)
         {
             _context = context;
         }
 
-        // GET: Referrals
+        // GET: NewReferrals
         public async Task<IActionResult> Index()
         {
-              return _context.Referrals != null ? 
-                          View(await _context.Referrals.ToListAsync()) :
-                          Problem("Entity set 'WebApplication3Context.Referrals'  is null.");
+              return _context.ReferralView != null ? 
+                          View(await _context.ReferralView.ToListAsync()) :
+                          Problem("Entity set 'team12MainContext.ReferralView'  is null.");
         }
 
-        // GET: Referrals/Details/5
+        // GET: NewReferrals/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Referrals == null)
+            if (id == null || _context.ReferralView == null)
             {
                 return NotFound();
             }
 
-            var referrals = await _context.Referrals
+            var referralView = await _context.ReferralView
                 .FirstOrDefaultAsync(m => m.referral_id == id);
-            if (referrals == null)
+            if (referralView == null)
             {
                 return NotFound();
             }
 
-            return View(referrals);
+            return View(referralView);
         }
 
-        // GET: Referrals/Create
+        // GET: NewReferrals/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Referrals/Create
+        // POST: NewReferrals/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("referral_id,primary_doctor_id,specialist_doctor_id,speciality_id,referral_date,patient_id")] NewReferrals referrals)
+        public async Task<IActionResult> Create([Bind("referral_id,primary_doctor_name,specialist_doctor_name,patient_name,speciality_classification,referral_date")] ReferralView referralView)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(referrals);
+                _context.Add(referralView);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(referrals);
+            return View(referralView);
         }
 
-        // GET: Referrals/Edit/5
+        // GET: NewReferrals/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Referrals == null)
+            if (id == null || _context.ReferralView == null)
             {
                 return NotFound();
             }
 
-            var referrals = await _context.Referrals.FindAsync(id);
-            if (referrals == null)
+            var referralView = await _context.ReferralView.FindAsync(id);
+            if (referralView == null)
             {
                 return NotFound();
             }
-            return View(referrals);
+            return View(referralView);
         }
 
-        // POST: Referrals/Edit/5
+        // POST: NewReferrals/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("referral_id,primary_doctor_id,specialist_doctor_id,speciality_id,referral_date,patient_id")] NewReferrals referrals)
+        public async Task<IActionResult> Edit(int id, [Bind("referral_id,primary_doctor_name,specialist_doctor_name,patient_name,speciality_classification,referral_date")] ReferralView referralView)
         {
-            if (id != referrals.referral_id)
+            if (id != referralView.referral_id)
             {
                 return NotFound();
             }
@@ -99,12 +98,12 @@ namespace WebApplication3.Controllers
             {
                 try
                 {
-                    _context.Update(referrals);
+                    _context.Update(referralView);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ReferralsExists(referrals.referral_id))
+                    if (!ReferralViewExists(referralView.referral_id))
                     {
                         return NotFound();
                     }
@@ -115,49 +114,49 @@ namespace WebApplication3.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(referrals);
+            return View(referralView);
         }
 
-        // GET: Referrals/Delete/5
+        // GET: NewReferrals/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Referrals == null)
+            if (id == null || _context.ReferralView == null)
             {
                 return NotFound();
             }
 
-            var referrals = await _context.Referrals
+            var referralView = await _context.ReferralView
                 .FirstOrDefaultAsync(m => m.referral_id == id);
-            if (referrals == null)
+            if (referralView == null)
             {
                 return NotFound();
             }
 
-            return View(referrals);
+            return View(referralView);
         }
 
-        // POST: Referrals/Delete/5
+        // POST: NewReferrals/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Referrals == null)
+            if (_context.ReferralView == null)
             {
-                return Problem("Entity set 'WebApplication3Context.Referrals'  is null.");
+                return Problem("Entity set 'team12MainContext.ReferralView'  is null.");
             }
-            var referrals = await _context.Referrals.FindAsync(id);
-            if (referrals != null)
+            var referralView = await _context.ReferralView.FindAsync(id);
+            if (referralView != null)
             {
-                _context.Referrals.Remove(referrals);
+                _context.ReferralView.Remove(referralView);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ReferralsExists(int id)
+        private bool ReferralViewExists(int id)
         {
-          return (_context.Referrals?.Any(e => e.referral_id == id)).GetValueOrDefault();
+          return (_context.ReferralView?.Any(e => e.referral_id == id)).GetValueOrDefault();
         }
     }
 }

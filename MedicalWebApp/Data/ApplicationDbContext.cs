@@ -26,11 +26,11 @@ namespace med_test8.Data
         public DbSet<med_test8.Models.Referrals>? Referrals { get; set; }
         public DbSet<med_test8.Models.Specialities>? Specialities { get; set; }
         public DbSet<med_test8.Models.DoctorSpecialties>? DoctorSpecialties { get; set; }
+        public DbSet<med_test8.Models.ReferralView>? ReferralView { get; set; }
 
 
 
         
-
 
     }
 }

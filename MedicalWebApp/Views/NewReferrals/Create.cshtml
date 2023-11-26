@@ -1,4 +1,4 @@
-﻿@model WebApplication3.Models.NewReferrals
+﻿@model med_test8.Models.Referrals
 
 @{
     ViewData["Title"] = "Create";
@@ -12,11 +12,6 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="primary_doctor_id" class="control-label"></label>
-                <input asp-for="primary_doctor_id" class="form-control" />
-                <span asp-validation-for="primary_doctor_id" class="text-danger"></span>
-            </div>
             <div class="form-group">
                 <label asp-for="specialist_doctor_id" class="control-label"></label>
                 <input asp-for="specialist_doctor_id" class="form-control" />
@@ -49,5 +44,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

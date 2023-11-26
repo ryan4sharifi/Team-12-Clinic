@@ -1,0 +1,99 @@
+﻿@model med_test8.Models.Referrals
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<style>
+    .form-container {
+        max-width: 800px; /* Adjust the maximum width as needed */
+        margin: 0 auto; /* Center the container */
+    }
+
+    .buttons {
+        max-width: 200px; /* Adjust the maximum width as needed */
+        margin: 0; /* Center the container */
+    }
+
+</style>
+
+<div style="padding-bottom: 20px;"></div>
+
+<div class="shadowed-site-container">
+
+<h1>Create</h1>
+
+<h4>Referrals</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="primary_doctor_id" class="control-label">Doctor</label>
+                <select asp-for="primary_doctor_id" asp-items="@(new SelectList(ViewBag.Doctors, "Id", "FullName"))" class="form-control">
+                    <option value="">Select Doctor</option>
+                </select>
+                <span asp-validation-for="primary_doctor_id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="patient_id" class="control-label">Doctor</label>
+                <select asp-for="patient_id" asp-items="@(new SelectList(ViewBag.Patients, "Id", "FullName"))" class="form-control">
+                    <option value="">Select Patient</option>
+                </select>
+                <span asp-validation-for="patient_id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="specialist_doctor_id" class="control-label">Doctor</label>
+                <select asp-for="specialist_doctor_id" asp-items="@(new SelectList(ViewBag.DoctorSpecialties, "Id", "FullName"))" class="form-control" id="specialist_doctor_id">
+                    <option value="">Select Specialist</option>
+                </select>
+                <span asp-validation-for="specialist_doctor_id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="speciality_id" class="control-label"></label>
+                <input asp-for="speciality_id" id="speciality_id" class="form-control" readonly />
+                <span asp-validation-for="speciality_id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="referral_date" class="control-label"></label>
+                <input asp-for="referral_date" class="form-control" />
+                <span asp-validation-for="referral_date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        // Add an event listener to specialist_doctor_id dropdown
+        document.getElementById('specialist_doctor_id').addEventListener('change', function () {
+            // Get the selected value
+            var selectedSpecialistId = this.value;
+
+            // Make an AJAX request to fetch the specialty_id based on the selected specialist_doctor_id
+            $.ajax({
+                type: 'GET',
+                url: '/ReferralsDoctorView/GetSpecialtyId', // Replace YourController with the actual name of your controller
+                data: { specialistDoctorId: selectedSpecialistId },
+                success: function (result) {
+                    // Update the value of speciality_id input
+                    document.getElementById('speciality_id').value = result;
+                },
+                error: function (error) {
+                    console.error('Error fetching specialty_id:', error);
+                }
+            });
+        });
+    </script>
+}

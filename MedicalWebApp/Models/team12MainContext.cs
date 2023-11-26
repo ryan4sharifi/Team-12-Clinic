@@ -37,7 +37,11 @@ namespace MedicalWebApp.Models
         public virtual DbSet<Tests> Tests { get; set; } = null!;
         public virtual DbSet<Test> DoctorTests { get; set; } = null!;
         public virtual DbSet<DoctorsPatientList> DoctorsPatientList { get; set; } = null!;
+        public virtual DbSet<ReferralView> ReferralView { get; set; } 
 
+
+
+        
 
 
 

@@ -52,7 +52,7 @@ namespace med_test8.Models
         public string first_name { get; set; }
         public string middle_initial { get; set; }
         public string last_name { get; set; }
-        public int specialty_id { get; set; }
+        public int speciality_id { get; set; }
         public string office { get; set; }
         [DataType(DataType.Date)]
         public DateTime DoB { get; set; }
@@ -68,7 +68,7 @@ namespace med_test8.Models
         public string first_name { get; set; }
         public string middle_initial { get; set; }
         public string last_name { get; set; }
-        public int specialty_id { get; set; }
+        public int speciality_id { get; set; }
         public string office { get; set; }
         [DataType(DataType.Date)]
         public DateTime DoB { get; set; }
@@ -148,10 +148,22 @@ namespace med_test8.Models
     {
         [Key]
         public int referral_id { get; set; }
+        public int primary_doctor_id { get; set; }
         public int specialist_doctor_id { get; set; }
         public int speciality_id { get; set; }
         public DateTime referral_date { get; set; }
         public int patient_id { get; set; }
+    }
+
+    public class ReferralView
+    {
+        [Key]
+        public int referral_id { get; set; }
+        public string primary_doctor_name { get; set; }
+        public string specialist_doctor_name { get; set; }
+        public string patient_name { get; set; }
+        public string speciality_classification { get; set; }
+        public DateTime referral_date { get; set; }
     }
 
 
