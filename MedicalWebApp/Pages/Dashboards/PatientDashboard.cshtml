@@ -53,6 +53,18 @@
         /* Additional styling if needed */
     }
 
+    .popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+    }
+
 </style>
 
 
@@ -77,9 +89,58 @@
                 <button onclick="location.href='@Url.Action("Index", "PrescriptionsPatientView")'" class="custom-button" type="button">Prescriptions</button>
                <!-- <button onclick="location.href='@Url.Action("Index", "Prescriptions")'" class="custom-button" type="button">Prescriptions</button> -->
                 <button onclick="location.href='@Url.Action("Index", "PatientAppointments")'" class="custom-button" type="button">Appointments</button>
+                <button onclick="location.href='@Url.Action("Index", "NotificationsPatientView")'" class="custom-button" type="button">Messages</button>
                 <button onclick="window.location.href='/Dashboards/PatientDashboard'" class="custom-button">Patient Portal</button>
             </div>
             <div class="square"></div>
         </div>
     </main>
+</div>
+
+<script>
+    // Function to check for unread notifications
+    function checkNotifications() {
+        $.ajax({
+            url: '@Url.Action("CheckUnreadNotifications", "NotificationsPatientView")',
+            method: 'GET',
+            success: function (result) {
+                if (result.hasUnreadNotifications) {
+                    // Display pop-up
+                    $('.popup').show();
+                }
+            },
+            error: function (error) {
+                console.error('Error checking notifications:', error);
+            }
+        });
+    }
+
+    // Function to mark all unread notifications as read
+    function markAllAsReadAndNavigate() {
+        // Perform the logic to mark all as read (you need to implement this logic)
+        $.ajax({
+            url: '@Url.Action("MarkAllAsRead", "NotificationsPatientView")', // Replace with your actual controller action
+            method: 'POST',
+            success: function () {
+                // Navigate to the notifications screen
+                window.location.href = '@Url.Action("Index", "NotificationsPatientView")';
+            },
+            error: function (error) {
+                console.error('Error marking all as read:', error);
+            }
+        });
+    }
+
+    // Call the function on page load
+    $(document).ready(function () {
+        checkNotifications();
+    });
+</script>
+
+<!-- Existing HTML content -->
+<!-- New pop-up div -->
+<div class="popup">
+    <h3>New Unread Notifications!</h3>
+    <p>You have new unread messages. Click OK to view them.</p>
+    <button onclick="markAllAsReadAndNavigate()" class="custom-button" type="button">OK</button>
 </div>

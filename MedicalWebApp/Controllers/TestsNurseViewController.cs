@@ -104,6 +104,14 @@ namespace MedicalWebApp.Controllers
             {
                 return NotFound();
             }
+
+            // Populate the ViewBag with dropdown options
+            ViewBag.StatusOptions = new List<SelectListItem>
+    {
+        new SelectListItem { Text = "Waiting", Value = "waiting" },
+        new SelectListItem { Text = "Complete", Value = "complete" }
+    };
+
             return View(testDetails);
         }
 

@@ -184,4 +184,37 @@ namespace TrialRun.Models
         public string classification { get; set; }
     }
 
+    public class Tests
+    {
+        [Key]
+        public int test_id { get; set; }
+        public int patient_id { get; set; }
+        public int doctor_id { get; set; }
+        public DateTime date_test { get; set; }
+        public string status { get; set; }
+        public string description { get; set; }
+    }
+
+    public class Notifications
+    {
+        [Key]
+        public int notification_id { get; set; }
+        public int patient_id { get; set; }
+        public string message { get; set; }
+        public DateTime created_at { get; set; }
+        public bool is_read { get; set; }
+    }
+
+
+    public class PatientNotifications
+    {
+        [Key]
+        public int notification_id { get; set; }
+        public int patient_id { get; set; }
+        public string message { get; set; }
+        public DateTime created_at { get; set; }
+        public bool is_read { get; set; }
+        public string patient_email { get; set; }
+    }
+
 }

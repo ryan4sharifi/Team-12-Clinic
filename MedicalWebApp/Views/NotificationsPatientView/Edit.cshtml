@@ -1,0 +1,65 @@
+﻿@model TrialRun.Models.Notifications
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<style>
+    .form-container {
+        max-width: 600px; /* Adjust the maximum width as needed */
+        margin: 0 auto; /* Center the container */
+    }
+
+    .buttons {
+        max-width: 200px; /* Adjust the maximum width as needed */
+        margin: 0; /* Center the container */
+    }
+</style>
+
+<div style="padding-bottom: 20px;"></div>
+
+<div class="shadowed-site-container">
+
+<h1>Edit</h1>
+
+<h4>Notifications</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="notification_id" />
+            <div class="form-group">
+                <label asp-for="patient_id" class="control-label"></label>
+                <input asp-for="patient_id" class="form-control" style="background-color: #f0f0f0;" readonly />
+                <span asp-validation-for="patient_id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="message" class="control-label"></label>
+                <input asp-for="message" class="form-control" style="background-color: #f0f0f0;" readonly />
+                <span asp-validation-for="message" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="created_at" class="control-label"></label>
+                <input asp-for="created_at" class="form-control" style="background-color: #f0f0f0;" readonly />
+                <span asp-validation-for="created_at" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label"> Mark As Read
+                    <input class="form-check-input" asp-for="is_read" /> 
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
