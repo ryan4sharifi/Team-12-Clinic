@@ -1,0 +1,104 @@
+﻿@model IEnumerable<WebApplication3.Models.NewReferrals>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style>
+    .red-table {
+        border: 1px solid #ccc;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+        .red-table th, .red-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .red-table th {
+            background-color: #f2f2f2;
+        }
+
+        .red-table tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .red-table a {
+            color: white;
+        }
+
+            .red-table a.btn-warning {
+                background-color: #ffc107;
+                border-color: #ffc107;
+            }
+
+            .red-table a.btn-info {
+                background-color: #17a2b8;
+                border-color: #17a2b8;
+            }
+
+            .red-table a.btn-danger {
+                background-color: #dc3545;
+                border-color: #dc3545;
+            }
+</style>
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
+</p>
+
+<div class="table-responsive">
+    <table class="red-table table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.primary_doctor_id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.specialist_doctor_id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.speciality_id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.referral_date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.patient_id)
+                </th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.primary_doctor_id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.specialist_doctor_id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.speciality_id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.referral_date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.patient_id)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.referral_id" class="btn btn-warning">Edit</a>
+                        <a asp-action="Details" asp-route-id="@item.referral_id" class="btn btn-info">Details</a>
+                        <a asp-action="Delete" asp-route-id="@item.referral_id" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

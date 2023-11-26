@@ -1,10 +1,11 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using med_test8.Data;
 using TrialRun.Data;
 using WebApplication3.Data;
 using Microsoft.AspNetCore.Identity;
 using MedicalWebApp.Models;
+using MedicalWebApp.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -34,6 +35,8 @@ builder.Services.Configure<IdentityOptions>(options =>
 });
 
 builder.Services.AddRazorPages();
+builder.Services.AddDbContext<MedicalWebAppContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("MedicalWebAppContext") ?? throw new InvalidOperationException("Connection string 'MedicalWebAppContext' not found.")));
 
 var serviceProvider = builder.Services.BuildServiceProvider();
 using var scope = serviceProvider.CreateScope();
